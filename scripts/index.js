@@ -68,6 +68,19 @@ function solve() {
             return none;
         }
 
+        curnode = frontier.shift();
+
+        if(curnode.getState() == target) {
+            console.log("well done");
+        }
+        expolored.push(curnode.getState());
+
+        for(action in neighbours(curnode.getState())) {
+            if(!explored.includes()) {
+                
+            }
+        }
+
         
     }
 
