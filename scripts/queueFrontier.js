@@ -8,7 +8,7 @@ class QueueFrontier {
     }
 
     containsState(state) {
-        for(i = 0; this.frontier.length; i++) {
+        for(i = 0; i < this.frontier.length; i++) {
             if(this.frontier[0].getState() == state) {
                 return true;
             }
