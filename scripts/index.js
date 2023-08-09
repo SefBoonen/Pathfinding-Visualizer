@@ -61,7 +61,9 @@ function solve() {
     
     list = [];
     explored = [];
+    
 
+    while(true) {
         if(frontier.empty()) {
             console.log("empty");
             return null;
@@ -77,11 +79,13 @@ function solve() {
 
         actions = neighbours(curnode.getState());
 
-        for(i = 0; i < actions.length; i++) 
-            child = new Node(actions, curnode, curnode.getState());
-            frontier.add(child);
-            console.log(frontier.display());
+        for(i = 0; i < actions.length; i++) {
+            if(!explored.includes(actions[i]) && !frontier.containsState(actions[i])) {
+                child = new Node(actions[i], curnode, curnode.getState());
+                frontier.add(child);
+                console.log(frontier.display());
+            }
         }
-    
+    }
 }
 
