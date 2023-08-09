@@ -6,15 +6,29 @@ const width = 30;
 
 let table = "";
 
+const goal = [5, 15];
+const start = [0, 0];
+
+let field = [];
+
 document.addEventListener('DOMContentLoaded', () => {
     for(i = 0; i < height; i ++) {
+        field.push([]);
         table += "<tr>";
         for(j = 0; j < width; j++) {
+            if(i == goal[0] && j == goal[1]) {
+                field[i].push(1);
+            } else if (i == start[0] && j == start[1]) {
+                field[i].push(2);
+            } else {
+                field[i].push(0);
+            }
             table += `<td id="C${[i + "-" + j]}"></td>`;
         }
         table += "</tr>";
     }
     container.innerHTML = table;
+    console.log(field);
 });
 
 button.addEventListener('click', () => {
@@ -38,4 +52,23 @@ function neighbours(position) {
     }
 
     return moves;
+}
+
+function solve() {
+    start = new Node(start, none, none);
+
+    frontier = [];
+    frontier.add(start);
+
+    list = [];
+    explored = [];
+
+    while(true) {
+        if(!frontier.length) {
+            return none;
+        }
+
+        
+    }
+
 }
