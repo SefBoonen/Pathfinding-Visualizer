@@ -4,4 +4,16 @@ class Node {
         this.parent = parent;
         this.action = action;
     }
+
+    getState() {
+        return this.state;
+    }
+
+    getParent() {
+        return this.parent;
+    }
+
+    getAction() {
+        return this.action;
+    }
 }
