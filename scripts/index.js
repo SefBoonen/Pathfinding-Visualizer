@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     for(i = 0; i < height; i ++) {
         table += "<tr>";
         for(j = 0; j < width; j++) {
-            table += "<td></td>";
+            table += `<td id="C${[i + "-" + j]}"></td>`;
         }
         table += "</tr>";
     }
@@ -37,5 +37,5 @@ function neighbours(position) {
         moves.push([position[0] - 1, position[1]]);
     }
 
-    return moves
+    return moves;
 }
