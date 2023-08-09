@@ -17,12 +17,12 @@ class QueueFrontier {
     }
 
     empty() {
-        return this.frontier.length == 0
+        return this.frontier.length == 0;
     }
 
     remove() {
         if(!this.frontier.length) {
-            return none;
+            return null;
         } else {
             return this.frontier.shift();
         }

@@ -28,11 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
         table += "</tr>";
     }
     container.innerHTML = table;
-    console.log(field);
 });
 
 button.addEventListener('click', () => {
-    console.log(neighbours([7,11]));
+    solve();
 });
 
 function neighbours(position) {
@@ -55,33 +54,34 @@ function neighbours(position) {
 }
 
 function solve() {
-    start = new Node(start, none, none);
+    let startnode = new Node(start, null, null);
 
-    frontier = [];
-    frontier.add(start);
-
+    frontier = new QueueFrontier();
+    frontier.add(startnode);
+    
     list = [];
     explored = [];
 
-    while(true) {
-        if(!frontier.length) {
-            return none;
+        if(frontier.empty()) {
+            console.log("empty");
+            return null;
         }
 
-        curnode = frontier.shift();
+        curnode = frontier.remove();
 
-        if(curnode.getState() == target) {
+        if(curnode.getState() == goal) {
             console.log("well done");
         }
-        expolored.push(curnode.getState());
 
-        for(action in neighbours(curnode.getState())) {
-            if(!explored.includes()) {
-                
-            }
+        explored.push(curnode.getState());
+
+        actions = neighbours(curnode.getState());
+
+        for(i = 0; i < actions.length; i++) 
+            child = new Node(actions, curnode, curnode.getState());
+            frontier.add(child);
+            console.log(frontier.display());
         }
-
-        
-    }
-
+    
 }
+
