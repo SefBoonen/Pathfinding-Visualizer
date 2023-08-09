@@ -27,5 +27,9 @@ class QueueFrontier {
             return this.frontier.shift();
         }
     }
+
+    display() {
+        return this.frontier;
+    }
     
 }
