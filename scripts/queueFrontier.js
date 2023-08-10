@@ -29,7 +29,11 @@ class QueueFrontier {
     }
 
     display() {
-        return this.frontier;
+        console.log(JSON.stringify(this.frontier));
+    }
+
+    logLength() {
+        console.log(this.frontier.length);
     }
  
 }

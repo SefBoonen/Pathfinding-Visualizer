@@ -1,5 +1,6 @@
 const container = document.getElementById("container");
 const button = document.getElementById("test");
+const buttontest = document.getElementById("test2");
 
 const height = 10;
 const width = 30;
@@ -30,7 +31,14 @@ document.addEventListener('DOMContentLoaded', () => {
     container.innerHTML = table;
 });
 
+
+
 button.addEventListener('click', () => {
+    solve();
+});
+
+buttontest.addEventListener('click', () => {
+
 });
 
 function neighbours(position) {
@@ -52,15 +60,12 @@ function neighbours(position) {
     return moves;
 }
 
-function solve() {
-    let startnode = new Node(start, null, null);
-
-    frontier = new QueueFrontier();
-    frontier.add(startnode);
+async function solve() {
+    let frontier = new QueueFrontier();
+    frontier.add(new Node(start, null, null));
     
     list = [];
     explored = [];
-    
 
     while(true) {
         if(frontier.empty()) {
@@ -74,17 +79,26 @@ function solve() {
             console.log("well done");
         }
 
+        document.getElementById(`C${curnode.getState()[0]}-${curnode.getState()[1]}`).style.backgroundColor = "red";
+
         explored.push(curnode.getState());
 
         actions = neighbours(curnode.getState());
+        console.log(actions)
+        console.log(actions[0])
+
+        await wait(100);
 
         for(i = 0; i < actions.length; i++) {
-            if(!explored.includes(actions[i]) && !frontier.containsState(actions[i])) {
+            if(!arrContains(explored, actions[i]) && !frontier.containsState(actions[i])) {
+                
                 child = new Node(actions[i], curnode, curnode.getState());
                 frontier.add(child);
-                console.log(frontier.display());
+                frontier.display();
+                
             }
         }
+        frontier.logLength();
     }
 }
 
@@ -96,5 +110,9 @@ function arrContains(array, element) {
         }
     }
     return false;
+}
+
+function wait(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
