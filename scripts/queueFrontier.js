@@ -8,8 +8,10 @@ class QueueFrontier {
     }
 
     containsState(state) {
+        console.log(`state = ${this.frontier[0].getState()}`)
         for(i = 0; i < this.frontier.length; i++) {
-            if(this.frontier[0].getState() == state) {
+            console.log(`currstate = ${this.frontier[i].getState()}`)
+            if(this.frontier[i].getState() == state) {
                 return true;
             }
         }
@@ -31,5 +33,5 @@ class QueueFrontier {
     display() {
         return this.frontier;
     }
-    
+ 
 }
