@@ -29,6 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
         table += "</tr>";
     }
     container.innerHTML = table;
+
+    document.getElementById(`C${start[0]}-${start[1]}`).style.cssText += "background-color: green !important";
+    document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText += "background-color: yellow !important";
 });
 
 
@@ -89,7 +92,7 @@ async function solve() {
             return null;
         }
 
-        document.getElementById(`C${curnode.getState()[0]}-${curnode.getState()[1]}`).style.backgroundColor = "red";
+        document.getElementById(`C${curnode.getState()[0]}-${curnode.getState()[1]}`).style.cssText += "background-color: red";
         explored.push(curnode.getState());
 
         actions = neighbours(curnode.getState());
