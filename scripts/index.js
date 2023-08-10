@@ -1,5 +1,5 @@
 const container = document.getElementById("container");
-const button = document.getElementById("solve");
+const bSolve = document.getElementById("solve");
 
 const height = 10;
 const width = 30;
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText += "background-color: yellow !important";
 });
 
-button.addEventListener('click', () => {
+bSolve.addEventListener('click', () => {
     solve();
 });
 
@@ -65,15 +65,12 @@ async function solve() {
 
     while(true) {
         if(frontier.empty()) {
-            console.log("empty");
             return null;
         }
 
         curnode = frontier.remove();
-        console.log(`curstate ${curnode.getState()}`);
 
         if(JSON.stringify(curnode.getState()) == JSON.stringify(goal)) {
-            console.log("well done");
             return null;
         }
 
