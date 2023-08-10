@@ -1,6 +1,5 @@
 const container = document.getElementById("container");
-const button = document.getElementById("test");
-const buttontest = document.getElementById("test2");
+const button = document.getElementById("solve");
 
 const height = 10;
 const width = 30;
@@ -34,22 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText += "background-color: yellow !important";
 });
 
-
-
 button.addEventListener('click', () => {
     solve();
-});
-
-buttontest.addEventListener('click', () => {
-    let explored = [];
-
-    explored.push([0,0])
-    explored.push([0,1])
-    explored.push([1,1])
-
-    console.log(JSON.stringify(explored));
-
-    console.log(arrContains(explored, [0,0]));
 });
 
 function neighbours(position) {
@@ -96,19 +81,15 @@ async function solve() {
         explored.push(curnode.getState());
 
         actions = neighbours(curnode.getState());
-        console.log(`neigbours actions ${JSON.stringify(actions)}`);
-        console.log(`explored ${JSON.stringify(explored)}`);
 
         await wait(0);
 
         for(let i = 0; i < actions.length; i++) {
-            console.log(i);
             if(!arrContains(explored, actions[i]) && !frontier.containsState(actions[i])) {
                 child = new Node(actions[i], curnode, curnode.getState());
                 frontier.add(child);
             }
         }
-        frontier.display();
     }
 }
 
