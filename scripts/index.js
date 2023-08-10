@@ -31,7 +31,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 button.addEventListener('click', () => {
-    solve();
 });
 
 function neighbours(position) {
@@ -87,5 +86,15 @@ function solve() {
             }
         }
     }
+}
+
+
+function arrContains(array, element) {
+    for(i = 0; i < array.length; i++) {
+        if(JSON.stringify(array[i]) == JSON.stringify(element)) {
+            return true;
+        }
+    }
+    return false;
 }
 
