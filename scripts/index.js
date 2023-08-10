@@ -84,8 +84,9 @@ async function solve() {
         curnode = frontier.remove();
         console.log(`curstate ${curnode.getState()}`);
 
-        if(curnode.getState() == goal) {
+        if(JSON.stringify(curnode.getState()) == JSON.stringify(goal)) {
             console.log("well done");
+            return null;
         }
 
         document.getElementById(`C${curnode.getState()[0]}-${curnode.getState()[1]}`).style.backgroundColor = "red";
@@ -95,7 +96,7 @@ async function solve() {
         console.log(`neigbours actions ${JSON.stringify(actions)}`);
         console.log(`explored ${JSON.stringify(explored)}`);
 
-        await wait(100);
+        await wait(0);
 
         for(let i = 0; i < actions.length; i++) {
             console.log(i);
