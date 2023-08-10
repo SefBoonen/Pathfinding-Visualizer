@@ -29,7 +29,12 @@ class QueueFrontier {
     }
 
     display() {
-        console.log(JSON.stringify(this.frontier));
+        let print = "states in frontier ";
+        for(i = 0; i < this.frontier.length; i++) {
+            print += JSON.stringify(this.frontier[i].getState());
+        }
+
+        console.log(print);
     }
 
     logLength() {

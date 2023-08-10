@@ -80,25 +80,20 @@ async function solve() {
         }
 
         document.getElementById(`C${curnode.getState()[0]}-${curnode.getState()[1]}`).style.backgroundColor = "red";
-
         explored.push(curnode.getState());
 
         actions = neighbours(curnode.getState());
-        console.log(actions)
-        console.log(actions[0])
+        console.log(JSON.stringify(actions));
 
-        await wait(100);
 
         for(i = 0; i < actions.length; i++) {
             if(!arrContains(explored, actions[i]) && !frontier.containsState(actions[i])) {
-                
                 child = new Node(actions[i], curnode, curnode.getState());
                 frontier.add(child);
-                frontier.display();
-                
             }
         }
-        frontier.logLength();
+
+        frontier.display();
     }
 }
 
