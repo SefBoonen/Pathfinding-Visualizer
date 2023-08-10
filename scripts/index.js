@@ -13,10 +13,10 @@ const start = [0, 0];
 let field = [];
 
 document.addEventListener('DOMContentLoaded', () => {
-    for(i = 0; i < height; i ++) {
+    for(let i = 0; i < height; i ++) {
         field.push([]);
         table += "<tr>";
-        for(j = 0; j < width; j++) {
+        for(let j = 0; j < width; j++) {
             if(i == goal[0] && j == goal[1]) {
                 field[i].push(1);
             } else if (i == start[0] && j == start[1]) {
@@ -38,7 +38,15 @@ button.addEventListener('click', () => {
 });
 
 buttontest.addEventListener('click', () => {
+    let explored = [];
 
+    explored.push([0,0])
+    explored.push([0,1])
+    explored.push([1,1])
+
+    console.log(JSON.stringify(explored));
+
+    console.log(arrContains(explored, [0,0]));
 });
 
 function neighbours(position) {
@@ -74,6 +82,7 @@ async function solve() {
         }
 
         curnode = frontier.remove();
+        console.log(`curstate ${curnode.getState()}`);
 
         if(curnode.getState() == goal) {
             console.log("well done");
@@ -83,23 +92,25 @@ async function solve() {
         explored.push(curnode.getState());
 
         actions = neighbours(curnode.getState());
-        console.log(JSON.stringify(actions));
+        console.log(`neigbours actions ${JSON.stringify(actions)}`);
+        console.log(`explored ${JSON.stringify(explored)}`);
 
+        await wait(100);
 
-        for(i = 0; i < actions.length; i++) {
+        for(let i = 0; i < actions.length; i++) {
+            console.log(i);
             if(!arrContains(explored, actions[i]) && !frontier.containsState(actions[i])) {
                 child = new Node(actions[i], curnode, curnode.getState());
                 frontier.add(child);
             }
         }
-
         frontier.display();
     }
 }
 
 
 function arrContains(array, element) {
-    for(i = 0; i < array.length; i++) {
+    for(let i = 0; i < array.length; i++) {
         if(JSON.stringify(array[i]) == JSON.stringify(element)) {
             return true;
         }

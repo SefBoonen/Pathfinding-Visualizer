@@ -8,7 +8,7 @@ class QueueFrontier {
     }
 
     containsState(state) {
-        for(i = 0; i < this.frontier.length; i++) {
+        for(let i = 0; i < this.frontier.length; i++) {
             if(JSON.stringify(this.frontier[i].getState()) == JSON.stringify(state)) {
                 return true;
             }
@@ -30,7 +30,7 @@ class QueueFrontier {
 
     display() {
         let print = "states in frontier ";
-        for(i = 0; i < this.frontier.length; i++) {
+        for(let i = 0; i < this.frontier.length; i++) {
             print += JSON.stringify(this.frontier[i].getState());
         }
 
