@@ -1,6 +1,9 @@
 const container = document.getElementById("container");
 const bSolve = document.getElementById("solve");
 
+sSpeed = document.getElementById("speed");
+speedNum = document.getElementById("speednum");
+
 const height = 10;
 const width = 30;
 
@@ -11,7 +14,9 @@ const start = [0, 0];
 
 let field = [];
 
-document.addEventListener('DOMContentLoaded', () => {
+sSpeed.addEventListener()
+
+document.addEventListener("DOMContentLoaded", () => {
     for(let i = 0; i < height; i ++) {
         field.push([]);
         table += "<tr>";
@@ -33,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText += "background-color: yellow !important";
 });
 
-bSolve.addEventListener('click', () => {
+bSolve.addEventListener("click", () => {
     solve();
 });
 
