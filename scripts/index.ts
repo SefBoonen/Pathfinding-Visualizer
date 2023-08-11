@@ -1,18 +1,19 @@
-const container = document.getElementById("container");
-const bSolve = document.getElementById("solve");
+const container = document.getElementById("container")!;
+const bSolve = document.getElementById("solve")!;
+const sSpeed = document.getElementById("speed")!;
+const speedNum = document.getElementById("speednum")!;
 
-const sSpeed = document.getElementById("speed");
-const speedNum = document.getElementById("speednum");
+const height: number = 10;
+const width: number = 30;
 
-const height = 10;
-const width = 30;
+let table: string = "";
 
-let table = "";
+let sSpeedValue = (<HTMLInputElement>sSpeed).value;
 
-const goal = [5, 15];
-const start = [0, 0];
+const goal: number[] = [5, 15];
+const start: number[] = [0, 0];
 
-let field = [];
+let field: number[][] = [];
 
 document.addEventListener("DOMContentLoaded", () => {
     for(let i = 0; i < height; i ++) {
@@ -32,20 +33,20 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     container.innerHTML = table;
 
-    document.getElementById(`C${start[0]}-${start[1]}`).style.cssText += "background-color: green !important";
-    document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText += "background-color: yellow !important";
+    document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText += "background-color: green !important";
+    document.getElementById(`C${goal[0]}-${goal[1]}`)!.style.cssText += "background-color: yellow !important";
 });
 
 sSpeed.addEventListener("input", () => {
-    speedNum.innerHTML = sSpeed.value;
+    speedNum.innerHTML = sSpeedValue;
 });
 
 bSolve.addEventListener("click", () => {
-    solve(sSpeed.value);
+    solve(parseInt(sSpeedValue));
 });
 
-function neighbours(position: Array<number>) {
-    let moves = [];
+function neighbours(position: number[]) {
+    let moves:number[][] = [];
 
     if(position[1] - 1 >= 0) {
         moves.push([position[0], position[1] - 1]);
@@ -63,34 +64,35 @@ function neighbours(position: Array<number>) {
     return moves;
 }
 
-async function solve(delay) {
+async function solve(delay: number) {
     let frontier = new QueueFrontier();
-    frontier.add(new Node(start, null, null));
+    frontier.add(new Nodes(start, null, null));
     
     let list = [];
-    let explored = [];
+    let explored: number[][] = [];
 
     while(true) {
         if(frontier.empty()) {
             return null;
         }
 
-        curnode = frontier.remove();
+        let curnode: any = frontier.remove();
 
         if(JSON.stringify(curnode.getState()) == JSON.stringify(goal)) {
             return null;
         }
 
-        document.getElementById(`C${curnode.getState()[0]}-${curnode.getState()[1]}`).style.cssText += "background-color: red";
+        document.getElementById(`C${curnode.getState()[0]}-${curnode.getState()[1]}`)!.style.cssText += "background-color: red";
+
         explored.push(curnode.getState());
 
-        actions = neighbours(curnode.getState());
+        let actions = neighbours(curnode.getState());
 
         await wait(delay);
 
         for(let i = 0; i < actions.length; i++) {
             if(!arrContains(explored, actions[i]) && !frontier.containsState(actions[i])) {
-                child = new Node(actions[i], curnode, curnode.getState());
+                let child = new Nodes(actions[i], curnode, curnode.getState());
                 frontier.add(child);
             }
         }
@@ -98,7 +100,7 @@ async function solve(delay) {
 }
 
 
-function arrContains(array, element) {
+function arrContains(array: any[], element: any) {
     for(let i = 0; i < array.length; i++) {
         if(JSON.stringify(array[i]) == JSON.stringify(element)) {
             return true;
@@ -107,7 +109,7 @@ function arrContains(array, element) {
     return false;
 }
 
-function wait(ms) {
+function wait(ms: number) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 

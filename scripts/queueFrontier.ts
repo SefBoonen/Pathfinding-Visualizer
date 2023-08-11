@@ -5,11 +5,11 @@ class QueueFrontier {
         this.frontier = [];
     }
 
-    add(node) {
+    add(node: Nodes) {
         this.frontier.push(node);
     }
 
-    containsState(state) {
+    containsState(state: number[]) {
         for(let i = 0; i < this.frontier.length; i++) {
             if(JSON.stringify(this.frontier[i].getState()) == JSON.stringify(state)) {
                 return true;
@@ -24,7 +24,7 @@ class QueueFrontier {
 
     remove() {
         if(!this.frontier.length) {
-            return null;
+            return undefined;
         } else {
             return this.frontier.shift();
         }
