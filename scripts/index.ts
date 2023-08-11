@@ -46,7 +46,7 @@ bSolve.addEventListener("click", () => {
 });
 
 function neighbours(position: number[]) {
-    let moves:number[][] = [];
+    let moves: number[][] = [];
 
     if(position[1] - 1 >= 0) {
         moves.push([position[0], position[1] - 1]);
