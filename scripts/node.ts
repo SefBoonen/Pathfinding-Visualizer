@@ -1,5 +1,9 @@
-class Node {
-    constructor(state, parent, action) {
+class Nodes {
+    state: any;
+    parent: Nodes;
+    action: any;
+
+    constructor(state: any, parent: Nodes, action: any) {
         this.state = state;
         this.parent = parent;
         this.action = action;

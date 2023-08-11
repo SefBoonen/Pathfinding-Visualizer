@@ -1,8 +1,8 @@
 const container = document.getElementById("container");
 const bSolve = document.getElementById("solve");
 
-sSpeed = document.getElementById("speed");
-speedNum = document.getElementById("speednum");
+const sSpeed = document.getElementById("speed");
+const speedNum = document.getElementById("speednum");
 
 const height = 10;
 const width = 30;
@@ -44,7 +44,7 @@ bSolve.addEventListener("click", () => {
     solve(sSpeed.value);
 });
 
-function neighbours(position) {
+function neighbours(position: Array<number>) {
     let moves = [];
 
     if(position[1] - 1 >= 0) {
@@ -67,8 +67,8 @@ async function solve(delay) {
     let frontier = new QueueFrontier();
     frontier.add(new Node(start, null, null));
     
-    list = [];
-    explored = [];
+    let list = [];
+    let explored = [];
 
     while(true) {
         if(frontier.empty()) {

@@ -1,4 +1,6 @@
 class QueueFrontier {
+    frontier: Nodes[];
+
     constructor() {
         this.frontier = [];
     }
