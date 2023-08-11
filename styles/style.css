@@ -3,3 +3,12 @@ td {
     height: 50px;
     width: 50px;
 }
+
+.selectionbar {
+    background-color: gray;
+    padding: 10px 10px;
+}
+
+body {
+    margin: 0;
+}
