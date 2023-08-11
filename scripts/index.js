@@ -9,9 +9,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 const container = document.getElementById("container");
+if (!container)
+    throw new Error("Container not found");
 const bSolve = document.getElementById("solve");
+if (!bSolve)
+    throw new Error("Solve button not found");
 const sSpeed = document.getElementById("speed");
+if (!sSpeed)
+    throw new Error("Speed slider not found");
 const speedNum = document.getElementById("speednum");
+if (!speedNum)
+    throw new Error("Speed number element not found");
 const height = 10;
 const width = 30;
 let table = "";
