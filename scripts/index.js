@@ -14,8 +14,6 @@ const start = [0, 0];
 
 let field = [];
 
-sSpeed.addEventListener()
-
 document.addEventListener("DOMContentLoaded", () => {
     for(let i = 0; i < height; i ++) {
         field.push([]);
@@ -38,8 +36,12 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText += "background-color: yellow !important";
 });
 
+sSpeed.addEventListener("input", () => {
+    speedNum.innerHTML = sSpeed.value;
+});
+
 bSolve.addEventListener("click", () => {
-    solve();
+    solve(sSpeed.value);
 });
 
 function neighbours(position) {
@@ -61,7 +63,7 @@ function neighbours(position) {
     return moves;
 }
 
-async function solve() {
+async function solve(delay) {
     let frontier = new QueueFrontier();
     frontier.add(new Node(start, null, null));
     
@@ -84,7 +86,7 @@ async function solve() {
 
         actions = neighbours(curnode.getState());
 
-        await wait(0);
+        await wait(delay);
 
         for(let i = 0; i < actions.length; i++) {
             if(!arrContains(explored, actions[i]) && !frontier.containsState(actions[i])) {
