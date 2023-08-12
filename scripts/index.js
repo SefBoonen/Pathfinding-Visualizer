@@ -29,9 +29,9 @@ if (!bSetGoal)
 const bSetStart = document.getElementById("setstart");
 if (!bSetStart)
     throw new Error("Set start button not found");
-const finishc = "#FFFFFF", startc = "#FFFFFF", buttonc = "", exploredc = "#3b9aed";
-const height = 20;
-const width = 40;
+const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "", exploredc = "#3b9aed";
+const height = 15;
+const width = 30;
 let screenWidth = screen.width;
 let table = "";
 let sSpeedValue = sSpeed.value;
@@ -88,8 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
         table += "</tr>";
     }
     container.innerHTML = table;
-    document.getElementById(`C${start[0]}-${start[1]}`).style.cssText += `border: solid 1px #ffffff;`;
-    document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText += `border: solid 1px #ffffff`;
+    document.getElementById(`C${start[0]}-${start[1]}`).style.cssText += `background-color: ${startc}; border: solid 1px #3b9aed;`;
+    document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText += `background-color: ${finishc}; border: solid 1px #3b9aed;`;
 });
 sSpeed.addEventListener("input", () => {
     speedNum.innerHTML = sSpeedValue;

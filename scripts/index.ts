@@ -13,10 +13,10 @@ if(!bSetGoal) throw new Error("Set goal button not found");
 const bSetStart = document.getElementById("setstart");
 if(!bSetStart) throw new Error("Set start button not found");
 
-const finishc = "#FFFFFF", startc = "#FFFFFF", buttonc = "", exploredc = "#3b9aed";
+const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "", exploredc = "#3b9aed";
 
-const height: number = 20;
-const width: number = 40;
+const height: number = 15;
+const width: number = 30;
 
 let screenWidth = screen.width;
 
@@ -80,8 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     container.innerHTML = table;
 
-    document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText += `border: solid 1px #ffffff;`;
-    document.getElementById(`C${goal[0]}-${goal[1]}`)!.style.cssText += `border: solid 1px #ffffff`;
+    document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText += `background-color: ${startc}; border: solid 1px #3b9aed;`;
+    document.getElementById(`C${goal[0]}-${goal[1]}`)!.style.cssText += `background-color: ${finishc}; border: solid 1px #3b9aed;`;
 });
 
 sSpeed.addEventListener("input", () => {

@@ -9,11 +9,25 @@ td:hover {
 }
 
 button {
-    background-color: #D3D3D3;
+    background-color: rgb(32, 33, 36);
+    color: #FFFFFF;
+    border: 0;
+    border-radius: 20px;
+    border: 1px solid #3c4043;
+    height: 40px;
+    font-size: 14px;
+}
+
+span {
+    margin: 0 14px;
+}
+
+button:hover {
+    background-color: rgb(48, 49, 52);
 }
 
 .selectionbar {
-    background-color: rgb(48, 49, 52);
+    background-color: rgb(32, 33, 36);
     padding: 10px 10px;
     display: flex;
     justify-content: space-between;
@@ -29,7 +43,6 @@ body {
 
 table {
     border-spacing: 0;
-    border-collapse: collapse;
     height: 100%;
 }
 
