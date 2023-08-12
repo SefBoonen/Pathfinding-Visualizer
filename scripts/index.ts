@@ -28,7 +28,7 @@ container.addEventListener("click", function(e) {
         return;
     }
     const row = cell.parentElement;
-    console.log(cell.id, (<HTMLTableRowElement>row!).rowIndex, cell.cellIndex)
+    console.log(cell.id, (<HTMLTableRowElement>row).rowIndex, cell.cellIndex)
 });
 
 document.addEventListener("DOMContentLoaded", () => {
