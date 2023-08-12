@@ -23,6 +23,12 @@ if (!speedNum)
 const menuPathfinding = document.getElementById("pathfinding-algorithm");
 if (!menuPathfinding)
     throw new Error("Pathfinding menu not found");
+const bSetGoal = document.getElementById("setgoal");
+if (!bSetGoal)
+    throw new Error("Set goal button not found");
+const bSetStart = document.getElementById("setstart");
+if (!bSetStart)
+    throw new Error("Set start button not found");
 const height = 10;
 const width = 30;
 let table = "";
@@ -30,14 +36,36 @@ let sSpeedValue = sSpeed.value;
 let menuPathfindingValue = menuPathfinding.value;
 const goal = [5, 15];
 const start = [0, 0];
+let setGoal = false;
+let setStart = false;
 let field = [];
-container.addEventListener("click", function (e) {
+container.addEventListener("click", (e) => {
     const cell = e.target.closest("td");
     if (!cell) {
         return;
     }
     const row = cell.parentElement;
     console.log(cell.id, row.rowIndex, cell.cellIndex);
+});
+bSetStart.addEventListener("click", () => {
+    if (setStart) {
+        bSetStart.style.backgroundColor = "";
+        setStart = false;
+    }
+    else {
+        bSetStart.style.backgroundColor = "red";
+        setStart = true;
+    }
+});
+bSetGoal.addEventListener("click", () => {
+    if (setGoal) {
+        bSetGoal.style.backgroundColor = "";
+        setGoal = false;
+    }
+    else {
+        bSetGoal.style.backgroundColor = "red";
+        setGoal = true;
+    }
 });
 document.addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < height; i++) {

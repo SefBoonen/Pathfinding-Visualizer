@@ -8,6 +8,10 @@ const speedNum = document.getElementById("speednum");
 if(!speedNum) throw new Error("Speed number element not found");
 const menuPathfinding = document.getElementById("pathfinding-algorithm");
 if(!menuPathfinding) throw new Error("Pathfinding menu not found");
+const bSetGoal = document.getElementById("setgoal");
+if(!bSetGoal) throw new Error("Set goal button not found");
+const bSetStart = document.getElementById("setstart");
+if(!bSetStart) throw new Error("Set start button not found");
 
 const height: number = 10;
 const width: number = 30;
@@ -20,15 +24,38 @@ let menuPathfindingValue = (<HTMLInputElement>menuPathfinding).value;
 const goal: number[] = [5, 15];
 const start: number[] = [0, 0];
 
+let setGoal: boolean = false;
+let setStart: boolean = false;
+
 let field: number[][] = [];
 
-container.addEventListener("click", function(e) {
+container.addEventListener("click", (e) => {
     const cell = (<Element>e.target).closest("td");
     if(!cell) {
         return;
     }
     const row = cell.parentElement;
-    console.log(cell.id, (<HTMLTableRowElement>row).rowIndex, cell.cellIndex)
+    console.log(cell.id, (<HTMLTableRowElement>row).rowIndex, cell.cellIndex);
+});
+
+bSetStart.addEventListener("click", () => {
+    if(setStart) {
+        bSetStart.style.backgroundColor = "";
+        setStart = false;
+    } else {
+        bSetStart.style.backgroundColor = "red";
+        setStart = true;
+    }
+});
+
+bSetGoal.addEventListener("click", () => {
+    if(setGoal) {
+        bSetGoal.style.backgroundColor = "";
+        setGoal = false;
+    } else {
+        bSetGoal.style.backgroundColor = "red";
+        setGoal = true;
+    }
 });
 
 document.addEventListener("DOMContentLoaded", () => {
