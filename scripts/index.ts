@@ -13,8 +13,8 @@ if(!bSetGoal) throw new Error("Set goal button not found");
 const bSetStart = document.getElementById("setstart");
 if(!bSetStart) throw new Error("Set start button not found");
 
-const height: number = 10;
-const width: number = 30;
+const height: number = 20;
+const width: number = 40;
 
 let screenWidth = screen.width;
 
@@ -45,7 +45,7 @@ bSetStart.addEventListener("click", () => {
         bSetStart.style.backgroundColor = "";
         setStart = false;
     } else {
-        bSetStart.style.backgroundColor = "red";
+        bSetStart.style.backgroundColor = "#708be26e";
         setStart = true;
     }
 });
@@ -55,7 +55,7 @@ bSetGoal.addEventListener("click", () => {
         bSetGoal.style.backgroundColor = "";
         setGoal = false;
     } else {
-        bSetGoal.style.backgroundColor = "red";
+        bSetGoal.style.backgroundColor = "#708be26e";
         setGoal = true;
     }
 });
@@ -133,7 +133,7 @@ async function solve(delay: number) {
             return null;
         }
 
-        document.getElementById(`C${curnode.getState()[0]}-${curnode.getState()[1]}`)!.style.cssText += "background-color: red";
+        document.getElementById(`C${curnode.getState()[0]}-${curnode.getState()[1]}`)!.style.cssText += "background-color: #708be26e";
 
         explored.push(curnode.getState());
 

@@ -1,15 +1,15 @@
 td{
     background-color: #FFFFFF;
     padding: 0;
-    border: solid 1px red;
+    border: solid 1px #708be26e;
 }
 
 td:hover {
-    background-color: #b1ccbd80;
+    background-color: #b1ccbd80 !important;
 }
 
 .selectionbar {
-    background-color: #FBEEC1;
+    background-color: #9c988a;
     padding: 10px 10px;
 }
 
@@ -17,19 +17,15 @@ body {
     flex-direction: column;
     margin: 0;
     height: 100%;
+    display: flex;
 }
 
 table {
     border-spacing: 0;
     border-collapse: collapse;
-    width: 100%;
-    height: 90%;
+    height: 100%;
 }
 
 html {
     height: 100%;
-}
-
-body {
-    height:100%
 }

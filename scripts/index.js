@@ -31,6 +31,7 @@ if (!bSetStart)
     throw new Error("Set start button not found");
 const height = 20;
 const width = 40;
+let screenWidth = screen.width;
 let table = "";
 let sSpeedValue = sSpeed.value;
 let menuPathfindingValue = menuPathfinding.value;
@@ -53,7 +54,7 @@ bSetStart.addEventListener("click", () => {
         setStart = false;
     }
     else {
-        bSetStart.style.backgroundColor = "red";
+        bSetStart.style.backgroundColor = "#708be26e";
         setStart = true;
     }
 });
@@ -63,7 +64,7 @@ bSetGoal.addEventListener("click", () => {
         setGoal = false;
     }
     else {
-        bSetGoal.style.backgroundColor = "red";
+        bSetGoal.style.backgroundColor = "#708be26e";
         setGoal = true;
     }
 });
@@ -131,7 +132,7 @@ function solve(delay) {
             if (JSON.stringify(curnode.getState()) == JSON.stringify(goal)) {
                 return null;
             }
-            document.getElementById(`C${curnode.getState()[0]}-${curnode.getState()[1]}`).style.cssText += "background-color: red";
+            document.getElementById(`C${curnode.getState()[0]}-${curnode.getState()[1]}`).style.cssText += "background-color: #708be26e";
             explored.push(curnode.getState());
             let actions = neighbours(curnode.getState());
             yield wait(delay);
