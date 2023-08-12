@@ -9,8 +9,10 @@ td:hover {
 }
 
 .selectionbar {
-    background-color: #9c988a;
+    background-color: #39395f;
     padding: 10px 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
 body {
