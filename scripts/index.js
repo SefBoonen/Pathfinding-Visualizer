@@ -31,6 +31,14 @@ let menuPathfindingValue = menuPathfinding.value;
 const goal = [5, 15];
 const start = [0, 0];
 let field = [];
+container.addEventListener("click", function (e) {
+    const cell = e.target.closest("td");
+    if (!cell) {
+        return;
+    }
+    const row = cell.parentElement;
+    console.log(cell.id, row.rowIndex, cell.cellIndex);
+});
 document.addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < height; i++) {
         field.push([]);
