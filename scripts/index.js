@@ -29,6 +29,7 @@ if (!bSetGoal)
 const bSetStart = document.getElementById("setstart");
 if (!bSetStart)
     throw new Error("Set start button not found");
+const finishc = "#9B59B6", startc = "#FFD700", buttonc = "", exploredc = "#0074D9";
 const height = 20;
 const width = 40;
 let screenWidth = screen.width;
@@ -54,7 +55,7 @@ bSetStart.addEventListener("click", () => {
         setStart = false;
     }
     else {
-        bSetStart.style.backgroundColor = "#708be26e";
+        bSetStart.style.backgroundColor = buttonc;
         setStart = true;
     }
 });
@@ -64,7 +65,7 @@ bSetGoal.addEventListener("click", () => {
         setGoal = false;
     }
     else {
-        bSetGoal.style.backgroundColor = "#708be26e";
+        bSetGoal.style.backgroundColor = buttonc;
         setGoal = true;
     }
 });
@@ -87,8 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
         table += "</tr>";
     }
     container.innerHTML = table;
-    document.getElementById(`C${start[0]}-${start[1]}`).style.cssText += "background-color: green !important";
-    document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText += "background-color: yellow !important";
+    document.getElementById(`C${start[0]}-${start[1]}`).style.cssText += `background-color: ${startc} !important`;
+    document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText += `background-color: ${finishc} !important`;
 });
 sSpeed.addEventListener("input", () => {
     speedNum.innerHTML = sSpeedValue;
@@ -132,7 +133,7 @@ function solve(delay) {
             if (JSON.stringify(curnode.getState()) == JSON.stringify(goal)) {
                 return null;
             }
-            document.getElementById(`C${curnode.getState()[0]}-${curnode.getState()[1]}`).style.cssText += "background-color: #708be26e";
+            document.getElementById(`C${curnode.getState()[0]}-${curnode.getState()[1]}`).style.cssText += `background-color: ${exploredc}`;
             explored.push(curnode.getState());
             let actions = neighbours(curnode.getState());
             yield wait(delay);

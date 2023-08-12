@@ -1,5 +1,5 @@
 td{
-    background-color: #FFFFFF;
+    background-color: #D3D3D3;
     padding: 0;
     border: solid 1px #708be26e;
 }
@@ -8,8 +8,12 @@ td:hover {
     background-color: #b1ccbd80 !important;
 }
 
+button {
+    background-color: #0074D9;
+}
+
 .selectionbar {
-    background-color: #39395f;
+    background-color: #D3D3D3;
     padding: 10px 10px;
     display: flex;
     justify-content: space-between;
@@ -20,6 +24,7 @@ body {
     margin: 0;
     height: 100%;
     display: flex;
+    background-color: #F5F5F5;
 }
 
 table {
