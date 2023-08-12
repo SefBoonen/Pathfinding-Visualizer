@@ -1,7 +1,11 @@
 td {
-    background-color: aquamarine;
+    background-color: #b1ccbd;
     height: 50px;
     width: 50px;
+}
+
+td:hover {
+    background-color: #b1ccbd80;
 }
 
 .selectionbar {
