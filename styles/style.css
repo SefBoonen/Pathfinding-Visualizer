@@ -1,7 +1,7 @@
-td {
-    background-color: #b1ccbd;
-    height: 50px;
-    width: 50px;
+td{
+    background-color: #FFFFFF;
+    padding: 0;
+    border: solid 1px red;
 }
 
 td:hover {
@@ -9,10 +9,27 @@ td:hover {
 }
 
 .selectionbar {
-    background-color: gray;
+    background-color: #FBEEC1;
     padding: 10px 10px;
 }
 
 body {
+    flex-direction: column;
     margin: 0;
+    height: 100%;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 100%;
+    height: 90%;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height:100%
 }

@@ -16,16 +16,18 @@ if(!bSetStart) throw new Error("Set start button not found");
 const height: number = 10;
 const width: number = 30;
 
-let table: string = "";
+let screenWidth = screen.width;
+
+let table = "";
 
 let sSpeedValue = (<HTMLInputElement>sSpeed).value;
 let menuPathfindingValue = (<HTMLInputElement>menuPathfinding).value;
 
-const goal: number[] = [5, 15];
-const start: number[] = [0, 0];
+const goal = [5, 15];
+const start = [0, 0];
 
-let setGoal: boolean = false;
-let setStart: boolean = false;
+let setGoal = false;
+let setStart = false;
 
 let field: number[][] = [];
 

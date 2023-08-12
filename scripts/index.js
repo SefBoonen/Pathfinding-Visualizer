@@ -29,8 +29,8 @@ if (!bSetGoal)
 const bSetStart = document.getElementById("setstart");
 if (!bSetStart)
     throw new Error("Set start button not found");
-const height = 10;
-const width = 30;
+const height = 20;
+const width = 40;
 let table = "";
 let sSpeedValue = sSpeed.value;
 let menuPathfindingValue = menuPathfinding.value;
