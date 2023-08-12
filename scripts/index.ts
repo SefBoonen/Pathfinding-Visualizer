@@ -6,6 +6,8 @@ const sSpeed = document.getElementById("speed");
 if(!sSpeed) throw new Error("Speed slider not found");
 const speedNum = document.getElementById("speednum");
 if(!speedNum) throw new Error("Speed number element not found");
+const menuPathfinding = document.getElementById("pathfinding-algorithm");
+if(!menuPathfinding) throw new Error("Pathfinding menu not found");
 
 const height: number = 10;
 const width: number = 30;
@@ -13,6 +15,7 @@ const width: number = 30;
 let table: string = "";
 
 let sSpeedValue = (<HTMLInputElement>sSpeed).value;
+let menuPathfindingValue = (<HTMLInputElement>menuPathfinding).value;
 
 const goal: number[] = [5, 15];
 const start: number[] = [0, 0];
@@ -70,6 +73,12 @@ function neighbours(position: number[]) {
 
 async function solve(delay: number) {
     let frontier = new QueueFrontier();
+    if(menuPathfindingValue == "bfs") {
+        frontier = new QueueFrontier();
+    } else if(menuPathfindingValue == "dfs") {
+        frontier = new StackFrontier();
+    }
+    
     frontier.add(new Nodes(start, null, null));
     
     let list = [];

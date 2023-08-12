@@ -20,10 +20,14 @@ if (!sSpeed)
 const speedNum = document.getElementById("speednum");
 if (!speedNum)
     throw new Error("Speed number element not found");
+const menuPathfinding = document.getElementById("pathfinding-algorithm");
+if (!menuPathfinding)
+    throw new Error("Pathfinding menu not found");
 const height = 10;
 const width = 30;
 let table = "";
 let sSpeedValue = sSpeed.value;
+let menuPathfindingValue = menuPathfinding.value;
 const goal = [5, 15];
 const start = [0, 0];
 let field = [];
@@ -74,6 +78,12 @@ function neighbours(position) {
 function solve(delay) {
     return __awaiter(this, void 0, void 0, function* () {
         let frontier = new QueueFrontier();
+        if (menuPathfindingValue == "bfs") {
+            frontier = new QueueFrontier();
+        }
+        else if (menuPathfindingValue == "dfs") {
+            frontier = new StackFrontier();
+        }
         frontier.add(new Nodes(start, null, null));
         let list = [];
         let explored = [];
