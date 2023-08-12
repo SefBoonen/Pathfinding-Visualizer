@@ -1,7 +1,7 @@
 td{
-    background-color: #D3D3D3;
+    background-color: rgb(32, 33, 36);
     padding: 0;
-    border: solid 1px #708be26e;
+    border: solid 1px rgb(38, 39, 49);
 }
 
 td:hover {
@@ -9,11 +9,11 @@ td:hover {
 }
 
 button {
-    background-color: #0074D9;
+    background-color: #D3D3D3;
 }
 
 .selectionbar {
-    background-color: #D3D3D3;
+    background-color: rgb(48, 49, 52);
     padding: 10px 10px;
     display: flex;
     justify-content: space-between;

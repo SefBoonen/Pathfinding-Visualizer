@@ -13,7 +13,7 @@ if(!bSetGoal) throw new Error("Set goal button not found");
 const bSetStart = document.getElementById("setstart");
 if(!bSetStart) throw new Error("Set start button not found");
 
-const finishc = "#9B59B6", startc = "#FFD700", buttonc = "", exploredc = "#0074D9";
+const finishc = "#FFFFFF", startc = "#FFFFFF", buttonc = "", exploredc = "#3b9aed";
 
 const height: number = 20;
 const width: number = 40;
@@ -80,8 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     container.innerHTML = table;
 
-    document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText += `background-color: ${startc} !important`;
-    document.getElementById(`C${goal[0]}-${goal[1]}`)!.style.cssText += `background-color: ${finishc} !important`;
+    document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText += `border: solid 1px #ffffff;`;
+    document.getElementById(`C${goal[0]}-${goal[1]}`)!.style.cssText += `border: solid 1px #ffffff`;
 });
 
 sSpeed.addEventListener("input", () => {
@@ -135,7 +135,7 @@ async function solve(delay: number) {
             return null;
         }
 
-        document.getElementById(`C${curnode.getState()[0]}-${curnode.getState()[1]}`)!.style.cssText += `background-color: ${exploredc}`;
+        document.getElementById(`C${curnode.getState()[0]}-${curnode.getState()[1]}`)!.style.cssText += `background-color: ${exploredc}; border: solid 1px rgba(38, 39, 49, 0.2);`;
 
         explored.push(curnode.getState());
 
