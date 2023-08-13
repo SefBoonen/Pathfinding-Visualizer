@@ -31,9 +31,18 @@ let setGoal = false;
 let setStart = false;
 let addWalls = false;
 let stopBool = false;
+let placewalls = false;
 
 let walls: number[][] = [];
 let field: number[][] = [];
+
+container.addEventListener("mousedown", () => {
+    placewalls = true;
+});
+
+document.addEventListener("mouseup", () => {
+    placewalls = false;
+});
 
 container.addEventListener("mouseover", (e) => {
     console.log("works")
@@ -53,10 +62,12 @@ container.addEventListener("mouseover", (e) => {
         start[1] = cell.cellIndex;
         document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
     } else if (addWalls) {
-        wall[0] = (<HTMLTableRowElement>row).rowIndex;
-        wall[1] = cell.cellIndex;
-        walls.push([wall[0], wall[1]]);
-        document.getElementById(`C${wall[0]}-${wall[1]}`)!.style.cssText = `background-color: ${wallc} !important; border: 0px !important;`;
+        if(placewalls) {
+            wall[0] = (<HTMLTableRowElement>row).rowIndex;
+            wall[1] = cell.cellIndex;
+            walls.push([wall[0], wall[1]]);
+            document.getElementById(`C${wall[0]}-${wall[1]}`)!.style.cssText = `background-color: ${wallc} !important; border: 0px !important;`;
+        }
     }
 });
 
