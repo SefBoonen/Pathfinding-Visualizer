@@ -30,8 +30,8 @@ const bSetStart = document.getElementById("setstart");
 if (!bSetStart)
     throw new Error("Set start button not found");
 const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "", exploredc = "#3b9aed";
-const height = 15;
-const width = 30;
+const height = 30;
+const width = 60;
 let screenWidth = screen.width;
 let table = "";
 let sSpeedValue = sSpeed.value;

@@ -15,8 +15,8 @@ if(!bSetStart) throw new Error("Set start button not found");
 
 const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "", exploredc = "#3b9aed";
 
-const height: number = 15;
-const width: number = 30;
+const height: number = 30;
+const width: number = 60;
 
 let screenWidth = screen.width;
 
