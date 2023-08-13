@@ -29,6 +29,7 @@ if (!bAddWalls)
 const bStop = document.getElementById("stop");
 if (!bStop)
     throw new Error("Stop button not found");
+let tds;
 const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "rgb(57, 68, 87)", exploredc = "#3b9aed", startborderc = "#00ff00", finishborderc = "yellow", wallc = "white";
 const height = 30;
 const width = 60;
@@ -44,6 +45,7 @@ let stopBool = false;
 let walls = [];
 let field = [];
 container.addEventListener("click", (e) => {
+    console.log("works");
     const cell = e.target.closest("td");
     if (!cell) {
         return;
@@ -154,6 +156,19 @@ document.addEventListener("DOMContentLoaded", () => {
             table += `<td id="C${[i + "-" + j]}"></td>`;
         }
         table += "</tr>";
+    }
+    tds = document.getElementsByTagName("td");
+    if (!tds)
+        throw new Error("tds not found");
+    console.log(tds);
+    for (let i = 0; tds.length; i++) {
+        console.log(tds[i]);
+        tds[i].onmouseover = function () {
+            console.log("workstd");
+        };
+        tds[i].onmouseout = function () {
+            console.log("workstd");
+        };
     }
     container.innerHTML = table;
     document.getElementById(`C${start[0]}-${start[1]}`).style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
