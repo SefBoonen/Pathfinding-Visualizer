@@ -9,7 +9,7 @@ if(!bSetGoal) throw new Error("Set goal button not found");
 const bSetStart = document.getElementById("setstart");
 if(!bSetStart) throw new Error("Set start button not found");
 
-const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "", exploredc = "#3b9aed";
+const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "rgb(57, 68, 87)", exploredc = "#3b9aed", startborderc = "#00ff00", finishborderc = "yellow";
 
 const height: number = 30;
 const width: number = 60;
@@ -33,6 +33,17 @@ container.addEventListener("click", (e) => {
     }
     const row = cell.parentElement;
     console.log(cell.id, (<HTMLTableRowElement>row).rowIndex, cell.cellIndex);
+    if(setGoal) {
+        document.getElementById(`C${goal[0]}-${goal[1]}`)!.style.cssText = "";
+        goal[0] = (<HTMLTableRowElement>row).rowIndex;
+        goal[1] = cell.cellIndex;
+        document.getElementById(`C${goal[0]}-${goal[1]}`)!.style.cssText += `background-color: ${finishc}; border: solid 1px ${finishborderc};`;
+    } else if (setStart) {
+        document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText = "";
+        start[0] = (<HTMLTableRowElement>row).rowIndex;
+        start[1] = cell.cellIndex;
+        document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
+    }
 });
 
 bSetStart.addEventListener("click", () => {
@@ -73,8 +84,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     container.innerHTML = table;
 
-    document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText += `background-color: ${startc}; border: solid 1px #00ff00;`;
-    document.getElementById(`C${goal[0]}-${goal[1]}`)!.style.cssText += `background-color: ${finishc}; border: solid 1px yellow;`;
+    document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
+    document.getElementById(`C${goal[0]}-${goal[1]}`)!.style.cssText += `background-color: ${finishc}; border: solid 1px ${finishborderc};`;
 });
 
 bSolve.addEventListener("click", () => {
