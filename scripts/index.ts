@@ -25,6 +25,7 @@ const start = [14, 14];
 
 let setGoal = false;
 let setStart = false;
+let addWalls = false;
 
 let field: number[][] = [];
 
@@ -52,11 +53,16 @@ bSetStart.addEventListener("click", () => {
     if(setStart) {
         bSetStart.style.backgroundColor = "";
         setStart = false;
-    } else if (setGoal && !setStart){
+    } else if (setGoal && !setStart && !addWalls){
         bSetStart.style.backgroundColor = buttonc;
         setStart = true;
         bSetGoal.style.backgroundColor = "";
         setGoal = false;
+    } else if (!setGoal && !setStart && addWalls){
+        bSetStart.style.backgroundColor = buttonc;
+        setStart = true;
+        bAddWalls.style.backgroundColor = "";
+        addWalls = false;
     } else {
         bSetStart.style.backgroundColor = buttonc;
         setStart = true;
@@ -67,14 +73,39 @@ bSetGoal.addEventListener("click", () => {
     if(setGoal) {
         bSetGoal.style.backgroundColor = "";
         setGoal = false;
-    } else if (setStart && !setGoal){
+    } else if (setStart && !setGoal && !addWalls){
         bSetGoal.style.backgroundColor = buttonc;
         setGoal = true;
         bSetStart.style.backgroundColor = "";
         setStart = false;
+    } else if (!setStart && !setGoal && addWalls){
+        bSetGoal.style.backgroundColor = buttonc;
+        setGoal = true;
+        bAddWalls.style.backgroundColor = "";
+        addWalls = false;
     } else {
         bSetGoal.style.backgroundColor = buttonc;
         setGoal = true;
+    }
+});
+
+bAddWalls.addEventListener("click", () => {
+    if(addWalls) {
+        bAddWalls.style.backgroundColor = "";
+        addWalls = false;
+    } else if (setStart && !setGoal && !addWalls){
+        bAddWalls.style.backgroundColor = buttonc;
+        addWalls = true;
+        bSetStart.style.backgroundColor = "";
+        setStart = false;
+    } else if (!setStart && setGoal && !addWalls){
+        bAddWalls.style.backgroundColor = buttonc;
+        addWalls = true;
+        bSetGoal.style.backgroundColor = "";
+        setGoal = false;
+    } else {
+        bAddWalls.style.backgroundColor = buttonc;
+        addWalls = true;
     }
 });
 

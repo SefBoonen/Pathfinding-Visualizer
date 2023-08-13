@@ -23,6 +23,9 @@ if (!bSetGoal)
 const bSetStart = document.getElementById("setstart");
 if (!bSetStart)
     throw new Error("Set start button not found");
+const bAddWalls = document.getElementById("addwalls");
+if (!bAddWalls)
+    throw new Error("Add walls button not found");
 const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "rgb(57, 68, 87)", exploredc = "#3b9aed", startborderc = "#00ff00", finishborderc = "yellow";
 const height = 30;
 const width = 60;
@@ -32,6 +35,7 @@ const goal = [14, 44];
 const start = [14, 14];
 let setGoal = false;
 let setStart = false;
+let addWalls = false;
 let field = [];
 container.addEventListener("click", (e) => {
     const cell = e.target.closest("td");
@@ -58,11 +62,17 @@ bSetStart.addEventListener("click", () => {
         bSetStart.style.backgroundColor = "";
         setStart = false;
     }
-    else if (setGoal && !setStart) {
+    else if (setGoal && !setStart && !addWalls) {
         bSetStart.style.backgroundColor = buttonc;
         setStart = true;
         bSetGoal.style.backgroundColor = "";
         setGoal = false;
+    }
+    else if (!setGoal && !setStart && addWalls) {
+        bSetStart.style.backgroundColor = buttonc;
+        setStart = true;
+        bAddWalls.style.backgroundColor = "";
+        addWalls = false;
     }
     else {
         bSetStart.style.backgroundColor = buttonc;
@@ -74,15 +84,43 @@ bSetGoal.addEventListener("click", () => {
         bSetGoal.style.backgroundColor = "";
         setGoal = false;
     }
-    else if (setStart && !setGoal) {
+    else if (setStart && !setGoal && !addWalls) {
         bSetGoal.style.backgroundColor = buttonc;
         setGoal = true;
         bSetStart.style.backgroundColor = "";
         setStart = false;
     }
+    else if (!setStart && !setGoal && addWalls) {
+        bSetGoal.style.backgroundColor = buttonc;
+        setGoal = true;
+        bAddWalls.style.backgroundColor = "";
+        addWalls = false;
+    }
     else {
         bSetGoal.style.backgroundColor = buttonc;
         setGoal = true;
+    }
+});
+bAddWalls.addEventListener("click", () => {
+    if (addWalls) {
+        bAddWalls.style.backgroundColor = "";
+        addWalls = false;
+    }
+    else if (setStart && !setGoal && !addWalls) {
+        bAddWalls.style.backgroundColor = buttonc;
+        addWalls = true;
+        bSetStart.style.backgroundColor = "";
+        setStart = false;
+    }
+    else if (!setStart && setGoal && !addWalls) {
+        bAddWalls.style.backgroundColor = buttonc;
+        addWalls = true;
+        bSetGoal.style.backgroundColor = "";
+        setGoal = false;
+    }
+    else {
+        bAddWalls.style.backgroundColor = buttonc;
+        addWalls = true;
     }
 });
 document.addEventListener("DOMContentLoaded", () => {
