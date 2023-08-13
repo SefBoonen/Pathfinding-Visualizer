@@ -58,6 +58,12 @@ bSetStart.addEventListener("click", () => {
         bSetStart.style.backgroundColor = "";
         setStart = false;
     }
+    else if (setGoal && !setStart) {
+        bSetStart.style.backgroundColor = buttonc;
+        setStart = true;
+        bSetGoal.style.backgroundColor = "";
+        setGoal = false;
+    }
     else {
         bSetStart.style.backgroundColor = buttonc;
         setStart = true;
@@ -67,6 +73,12 @@ bSetGoal.addEventListener("click", () => {
     if (setGoal) {
         bSetGoal.style.backgroundColor = "";
         setGoal = false;
+    }
+    else if (setStart && !setGoal) {
+        bSetGoal.style.backgroundColor = buttonc;
+        setGoal = true;
+        bSetStart.style.backgroundColor = "";
+        setStart = false;
     }
     else {
         bSetGoal.style.backgroundColor = buttonc;
