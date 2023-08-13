@@ -14,12 +14,6 @@ if (!container)
 const bSolve = document.getElementById("solve");
 if (!bSolve)
     throw new Error("Solve button not found");
-const sSpeed = document.getElementById("speed");
-if (!sSpeed)
-    throw new Error("Speed slider not found");
-const speedNum = document.getElementById("speednum");
-if (!speedNum)
-    throw new Error("Speed number element not found");
 const menuPathfinding = document.getElementById("pathfinding-algorithm");
 if (!menuPathfinding)
     throw new Error("Pathfinding menu not found");
@@ -91,10 +85,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText += `background-color: ${finishc}; border: solid 1px yellow;`;
 });
 sSpeed.addEventListener("input", () => {
-    speedNum.innerHTML = sSpeedValue;
+    speedNum.innerHTML = sSpeed.value;
 });
 bSolve.addEventListener("click", () => {
-    solve(parseInt(sSpeedValue));
+    solve();
 });
 function neighbours(position) {
     let moves = [];
@@ -112,7 +106,7 @@ function neighbours(position) {
     }
     return moves;
 }
-function solve(delay) {
+function solve() {
     return __awaiter(this, void 0, void 0, function* () {
         let frontier = new QueueFrontier();
         if (menuPathfinding.value == "bfs") {
@@ -135,7 +129,7 @@ function solve(delay) {
             document.getElementById(`C${curnode.getState()[0]}-${curnode.getState()[1]}`).style.cssText += `background-color: ${exploredc}; border: solid 1px rgba(38, 39, 49, 0.2);`;
             explored.push(curnode.getState());
             let actions = neighbours(curnode.getState());
-            yield wait(delay);
+            yield wait(0);
             for (let i = 0; i < actions.length; i++) {
                 if (!arrContains(explored, actions[i]) && !frontier.containsState(actions[i])) {
                     let child = new Nodes(actions[i], curnode, curnode.getState());
