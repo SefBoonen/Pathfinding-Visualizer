@@ -37,6 +37,7 @@ const wall = [0, 0];
 let setGoal = false;
 let setStart = false;
 let addWalls = false;
+let walls = [];
 let field = [];
 container.addEventListener("click", (e) => {
     const cell = e.target.closest("td");
@@ -60,6 +61,7 @@ container.addEventListener("click", (e) => {
     else if (addWalls) {
         wall[0] = row.rowIndex;
         wall[1] = cell.cellIndex;
+        walls.push([wall[0], wall[1]]);
         document.getElementById(`C${wall[0]}-${wall[1]}`).style.cssText = `background-color: ${wallc} !important; border: 0px !important;`;
     }
 });
@@ -130,7 +132,6 @@ bAddWalls.addEventListener("click", () => {
     }
 });
 document.addEventListener("DOMContentLoaded", () => {
-    console.log('loaded');
     for (let i = 0; i < height; i++) {
         field.push([]);
         table += "<tr>";
@@ -158,16 +159,24 @@ bSolve.addEventListener("click", () => {
 function neighbours(position) {
     let moves = [];
     if (position[1] - 1 >= 0) {
-        moves.push([position[0], position[1] - 1]);
+        if (!arrContains(walls, [position[0], position[1] - 1])) {
+            moves.push([position[0], position[1] - 1]);
+        }
     }
     if (position[1] + 1 < width) {
-        moves.push([position[0], position[1] + 1]);
+        if (!arrContains(walls, [position[0], position[1] + 1])) {
+            moves.push([position[0], position[1] + 1]);
+        }
     }
     if (position[0] + 1 < height) {
-        moves.push([position[0] + 1, position[1]]);
+        if (!arrContains(walls, [position[0] + 1, position[1]])) {
+            moves.push([position[0] + 1, position[1]]);
+        }
     }
     if (position[0] - 1 >= 0) {
-        moves.push([position[0] - 1, position[1]]);
+        if (!arrContains(walls, [position[0] - 1, position[1]])) {
+            moves.push([position[0] - 1, position[1]]);
+        }
     }
     return moves;
 }

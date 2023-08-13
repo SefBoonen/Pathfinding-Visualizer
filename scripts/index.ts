@@ -28,6 +28,7 @@ let setGoal = false;
 let setStart = false;
 let addWalls = false;
 
+let walls: number[][] = [];
 let field: number[][] = [];
 
 container.addEventListener("click", (e) => {
@@ -50,6 +51,7 @@ container.addEventListener("click", (e) => {
     } else if (addWalls) {
         wall[0] = (<HTMLTableRowElement>row).rowIndex;
         wall[1] = cell.cellIndex;
+        walls.push([wall[0], wall[1]]);
         document.getElementById(`C${wall[0]}-${wall[1]}`)!.style.cssText = `background-color: ${wallc} !important; border: 0px !important;`;
     }
 });
@@ -144,16 +146,24 @@ function neighbours(position: number[]) {
     let moves: number[][] = [];
 
     if(position[1] - 1 >= 0) {
-        moves.push([position[0], position[1] - 1]);
+        if(!arrContains(walls, [position[0], position[1] - 1])) {
+            moves.push([position[0], position[1] - 1]);
+        }
     }
     if(position[1] + 1 < width) {
-        moves.push([position[0], position[1] + 1]);
+        if(!arrContains(walls, [position[0], position[1] + 1])) {
+            moves.push([position[0], position[1] + 1]);
+        }
     }
     if(position[0] + 1 < height) {
-        moves.push([position[0] + 1, position[1]]);
+        if(!arrContains(walls, [position[0] + 1, position[1]])) {
+            moves.push([position[0] + 1, position[1]]);
+        }  
     }
     if(position[0] - 1 >= 0) {
-        moves.push([position[0] - 1, position[1]]);
+        if(!arrContains(walls, [position[0] - 1, position[1]])) {
+            moves.push([position[0] - 1, position[1]]);
+        }
     }
 
     return moves;
