@@ -18,8 +18,8 @@ let screenWidth = screen.width;
 
 let table = "";
 
-const goal = [14, 14];
-const start = [14, 44];
+const goal = [14, 44];
+const start = [14, 14];
 
 let setGoal = false;
 let setStart = false;
