@@ -18,8 +18,6 @@ let screenWidth = screen.width;
 
 let table = "";
 
-let sSpeedValue = (<HTMLInputElement>sSpeed).value;
-
 const goal = [5, 15];
 const start = [0, 0];
 
@@ -77,10 +75,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText += `background-color: ${startc}; border: solid 1px #00ff00;`;
     document.getElementById(`C${goal[0]}-${goal[1]}`)!.style.cssText += `background-color: ${finishc}; border: solid 1px yellow;`;
-});
-
-sSpeed.addEventListener("input", () => {
-    speedNum.innerHTML = (<HTMLInputElement>sSpeed).value;
 });
 
 bSolve.addEventListener("click", () => {
