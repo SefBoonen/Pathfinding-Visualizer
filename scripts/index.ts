@@ -10,6 +10,8 @@ const bSetStart = document.getElementById("setstart");
 if(!bSetStart) throw new Error("Set start button not found");
 const bAddWalls = document.getElementById("addwalls");
 if(!bAddWalls) throw new Error("Add walls button not found");
+const bStop = document.getElementById("stop");
+if(!bStop) throw new Error("Stop button not found");
 
 const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "rgb(57, 68, 87)", exploredc = "#3b9aed", startborderc = "#00ff00", finishborderc = "yellow", wallc = "white";
 
@@ -27,6 +29,7 @@ const wall = [0, 0];
 let setGoal = false;
 let setStart = false;
 let addWalls = false;
+let stopBool = false;
 
 let walls: number[][] = [];
 let field: number[][] = [];
@@ -53,6 +56,10 @@ container.addEventListener("click", (e) => {
         walls.push([wall[0], wall[1]]);
         document.getElementById(`C${wall[0]}-${wall[1]}`)!.style.cssText = `background-color: ${wallc} !important; border: 0px !important;`;
     }
+});
+
+bStop.addEventListener("click", () => {
+    stopBool = true;
 });
 
 bSetStart.addEventListener("click", () => {
@@ -182,6 +189,10 @@ async function solve() {
     let explored: number[][] = [];
 
     while(true) {
+        if(stopBool) {
+            stopBool = false;
+            return;
+        }
         if(frontier.empty()) {
             return null;
         }
