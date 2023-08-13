@@ -37,7 +37,6 @@ container.addEventListener("click", (e) => {
         return;
     }
     const row = cell.parentElement;
-    console.log(cell.id, (<HTMLTableRowElement>row).rowIndex, cell.cellIndex);
     if(setGoal) {
         document.getElementById(`C${goal[0]}-${goal[1]}`)!.style.cssText = "";
         goal[0] = (<HTMLTableRowElement>row).rowIndex;
@@ -51,8 +50,15 @@ container.addEventListener("click", (e) => {
     } else if (addWalls) {
         wall[0] = (<HTMLTableRowElement>row).rowIndex;
         wall[1] = cell.cellIndex;
-        walls.push([wall[0], wall[1]]);
-        document.getElementById(`C${wall[0]}-${wall[1]}`)!.style.cssText = `background-color: ${wallc} !important; border: 0px !important;`;
+        if(arrContains(walls, wall)) {
+            console.log(`removed wall ${wall}`)
+            document.getElementById(`C${wall[0]}-${wall[1]}`)!.style.cssText = "";
+            walls.splice(walls.indexOf(wall), 1);
+        } else if (!arrContains(walls, wall)) {
+            walls.push(wall);
+            console.log(`walls are ${JSON.stringify(walls)}`)
+            document.getElementById(`C${wall[0]}-${wall[1]}`)!.style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
+        }
     }
 });
 
