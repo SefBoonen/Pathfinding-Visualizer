@@ -44,7 +44,7 @@ let addWalls = false;
 let stopBool = false;
 let walls = [];
 let field = [];
-container.addEventListener("click", (e) => {
+container.addEventListener("mouseover", (e) => {
     console.log("works");
     const cell = e.target.closest("td");
     if (!cell) {
@@ -161,15 +161,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!tds)
         throw new Error("tds not found");
     console.log(tds);
-    for (let i = 0; tds.length; i++) {
-        console.log(tds[i]);
-        tds[i].onmouseover = function () {
-            console.log("workstd");
-        };
-        tds[i].onmouseout = function () {
-            console.log("workstd");
-        };
-    }
     container.innerHTML = table;
     document.getElementById(`C${start[0]}-${start[1]}`).style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
     document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText += `background-color: ${finishc}; border: solid 1px ${finishborderc};`;
