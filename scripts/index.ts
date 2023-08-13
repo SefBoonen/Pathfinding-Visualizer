@@ -37,7 +37,6 @@ container.addEventListener("click", (e) => {
         return;
     }
     const row = cell.parentElement;
-    console.log(cell.id, (<HTMLTableRowElement>row).rowIndex, cell.cellIndex);
     if(setGoal) {
         document.getElementById(`C${goal[0]}-${goal[1]}`)!.style.cssText = "";
         goal[0] = (<HTMLTableRowElement>row).rowIndex;
