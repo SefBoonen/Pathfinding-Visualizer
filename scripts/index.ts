@@ -12,7 +12,6 @@ const bAddWalls = document.getElementById("addwalls");
 if(!bAddWalls) throw new Error("Add walls button not found");
 const bStop = document.getElementById("stop");
 if(!bStop) throw new Error("Stop button not found");
-let tds: HTMLCollectionOf<HTMLTableCellElement>;
 
 const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "rgb(57, 68, 87)", exploredc = "#3b9aed", startborderc = "#00ff00", finishborderc = "yellow", wallc = "white";
 
@@ -150,11 +149,7 @@ document.addEventListener("DOMContentLoaded", () => {
             table += `<td id="C${[i + "-" + j]}"></td>`;
         }
         table += "</tr>";
-    }
-    tds = document.getElementsByTagName("td");
-    if(!tds) throw new Error("tds not found");
-    console.log(tds);
-    
+    }  
     container.innerHTML = table;
 
     document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
