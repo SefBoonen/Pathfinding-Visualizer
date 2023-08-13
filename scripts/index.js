@@ -29,13 +29,14 @@ if (!bSetGoal)
 const bSetStart = document.getElementById("setstart");
 if (!bSetStart)
     throw new Error("Set start button not found");
-const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "rgb(57, 68, 87)", exploredc = "#3b9aed";
+const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "", exploredc = "#3b9aed";
 const height = 30;
 const width = 60;
 let screenWidth = screen.width;
 let table = "";
-const goal = [14, 44];
-const start = [14, 14];
+let sSpeedValue = sSpeed.value;
+const goal = [5, 15];
+const start = [0, 0];
 let setGoal = false;
 let setStart = false;
 let field = [];
@@ -90,10 +91,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText += `background-color: ${finishc}; border: solid 1px yellow;`;
 });
 sSpeed.addEventListener("input", () => {
-    speedNum.innerHTML = sSpeed.value;
+    speedNum.innerHTML = sSpeedValue;
 });
 bSolve.addEventListener("click", () => {
-    solve(parseInt(sSpeed.value));
+    solve(parseInt(sSpeedValue));
 });
 function neighbours(position) {
     let moves = [];
