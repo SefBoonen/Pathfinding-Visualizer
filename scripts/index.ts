@@ -8,6 +8,8 @@ const bSetGoal = document.getElementById("setgoal");
 if(!bSetGoal) throw new Error("Set goal button not found");
 const bSetStart = document.getElementById("setstart");
 if(!bSetStart) throw new Error("Set start button not found");
+const bAddWalls = document.getElementById("addwalls");
+if(!bAddWalls) throw new Error("Add walls button not found");
 
 const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "rgb(57, 68, 87)", exploredc = "#3b9aed", startborderc = "#00ff00", finishborderc = "yellow";
 
