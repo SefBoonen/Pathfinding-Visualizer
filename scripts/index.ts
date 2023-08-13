@@ -22,6 +22,7 @@ let table = "";
 
 const goal = [14, 44];
 const start = [14, 14];
+const wall = [0, 0];
 
 let setGoal = false;
 let setStart = false;
@@ -43,6 +44,11 @@ container.addEventListener("click", (e) => {
         document.getElementById(`C${goal[0]}-${goal[1]}`)!.style.cssText += `background-color: ${finishc}; border: solid 1px ${finishborderc};`;
     } else if (setStart) {
         document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText = "";
+        start[0] = (<HTMLTableRowElement>row).rowIndex;
+        start[1] = cell.cellIndex;
+        document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
+    } else if (addWalls) {
+        document.getElementById(`C${wall[0]}-${wall[1]}`)!.style.cssText = "";
         start[0] = (<HTMLTableRowElement>row).rowIndex;
         start[1] = cell.cellIndex;
         document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
