@@ -234,3 +234,9 @@ function wait(ms: number) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function setButtons(bool: boolean) {
+    bAddWalls.disabled = bool;
+    bSolve.disabled = bool;
+    bSetStart.disabled = bool;
+    bSetGoal.disabled = bool;
+}
