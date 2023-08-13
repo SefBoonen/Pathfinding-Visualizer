@@ -50,7 +50,7 @@ container.addEventListener("click", (e) => {
     } else if (addWalls) {
         wall[0] = (<HTMLTableRowElement>row).rowIndex;
         wall[1] = cell.cellIndex;
-        document.getElementById(`C${wall[0]}-${wall[1]}`)!.style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
+        document.getElementById(`C${wall[0]}-${wall[1]}`)!.style.cssText = `background-color: ${wallc} !important; border: 0px !important;`;
     }
 });
 

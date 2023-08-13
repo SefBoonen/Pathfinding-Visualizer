@@ -60,7 +60,7 @@ container.addEventListener("click", (e) => {
     else if (addWalls) {
         wall[0] = row.rowIndex;
         wall[1] = cell.cellIndex;
-        document.getElementById(`C${wall[0]}-${wall[1]}`).style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
+        document.getElementById(`C${wall[0]}-${wall[1]}`).style.cssText = `background-color: ${wallc} !important; border: 0px !important;`;
     }
 });
 bSetStart.addEventListener("click", () => {
@@ -130,6 +130,7 @@ bAddWalls.addEventListener("click", () => {
     }
 });
 document.addEventListener("DOMContentLoaded", () => {
+    console.log('loaded');
     for (let i = 0; i < height; i++) {
         field.push([]);
         table += "<tr>";
