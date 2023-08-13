@@ -11,7 +11,7 @@ if(!bSetStart) throw new Error("Set start button not found");
 const bAddWalls = document.getElementById("addwalls");
 if(!bAddWalls) throw new Error("Add walls button not found");
 
-const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "rgb(57, 68, 87)", exploredc = "#3b9aed", startborderc = "#00ff00", finishborderc = "yellow";
+const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "rgb(57, 68, 87)", exploredc = "#3b9aed", startborderc = "#00ff00", finishborderc = "yellow", wallc = "white";
 
 const height: number = 30;
 const width: number = 60;
@@ -48,10 +48,9 @@ container.addEventListener("click", (e) => {
         start[1] = cell.cellIndex;
         document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
     } else if (addWalls) {
-        document.getElementById(`C${wall[0]}-${wall[1]}`)!.style.cssText = "";
-        start[0] = (<HTMLTableRowElement>row).rowIndex;
-        start[1] = cell.cellIndex;
-        document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
+        wall[0] = (<HTMLTableRowElement>row).rowIndex;
+        wall[1] = cell.cellIndex;
+        document.getElementById(`C${wall[0]}-${wall[1]}`)!.style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
     }
 });
 

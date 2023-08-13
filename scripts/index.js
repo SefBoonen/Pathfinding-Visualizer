@@ -26,13 +26,14 @@ if (!bSetStart)
 const bAddWalls = document.getElementById("addwalls");
 if (!bAddWalls)
     throw new Error("Add walls button not found");
-const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "rgb(57, 68, 87)", exploredc = "#3b9aed", startborderc = "#00ff00", finishborderc = "yellow";
+const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "rgb(57, 68, 87)", exploredc = "#3b9aed", startborderc = "#00ff00", finishborderc = "yellow", wallc = "white";
 const height = 30;
 const width = 60;
 let screenWidth = screen.width;
 let table = "";
 const goal = [14, 44];
 const start = [14, 14];
+const wall = [0, 0];
 let setGoal = false;
 let setStart = false;
 let addWalls = false;
@@ -55,6 +56,11 @@ container.addEventListener("click", (e) => {
         start[0] = row.rowIndex;
         start[1] = cell.cellIndex;
         document.getElementById(`C${start[0]}-${start[1]}`).style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
+    }
+    else if (addWalls) {
+        wall[0] = row.rowIndex;
+        wall[1] = cell.cellIndex;
+        document.getElementById(`C${wall[0]}-${wall[1]}`).style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
     }
 });
 bSetStart.addEventListener("click", () => {
