@@ -1,31 +1,27 @@
+"use strict";
 class QueueFrontier {
-    frontier: Nodes[];
-
     constructor() {
         this.frontier = [];
     }
-
-    add(node: Nodes) {
+    add(node) {
         this.frontier.push(node);
     }
-
-    containsState(state: number[]) {
-        for(let i = 0; i < this.frontier.length; i++) {
-            if(JSON.stringify(this.frontier[i].getState()) == JSON.stringify(state)) {
+    containsState(state) {
+        for (let i = 0; i < this.frontier.length; i++) {
+            if (JSON.stringify(this.frontier[i].getState()) == JSON.stringify(state)) {
                 return true;
             }
         }
         return false;
     }
-
     empty() {
         return this.frontier.length == 0;
     }
-
     remove() {
-        if(!this.frontier.length) {
+        if (!this.frontier.length) {
             return undefined;
-        } else {
+        }
+        else {
             return this.frontier.shift();
         }
     }
