@@ -35,7 +35,6 @@ const width = 30;
 let screenWidth = screen.width;
 let table = "";
 let sSpeedValue = sSpeed.value;
-let menuPathfindingValue = menuPathfinding.value;
 const goal = [5, 15];
 const start = [0, 0];
 let setGoal = false;
@@ -88,8 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
         table += "</tr>";
     }
     container.innerHTML = table;
-    document.getElementById(`C${start[0]}-${start[1]}`).style.cssText += `background-color: ${startc}; border: solid 1px #3b9aed;`;
-    document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText += `background-color: ${finishc}; border: solid 1px #3b9aed;`;
+    document.getElementById(`C${start[0]}-${start[1]}`).style.cssText += `background-color: ${startc}; border: solid 1px #00ff00;`;
+    document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText += `background-color: ${finishc}; border: solid 1px yellow;`;
 });
 sSpeed.addEventListener("input", () => {
     speedNum.innerHTML = sSpeedValue;
@@ -116,10 +115,10 @@ function neighbours(position) {
 function solve(delay) {
     return __awaiter(this, void 0, void 0, function* () {
         let frontier = new QueueFrontier();
-        if (menuPathfindingValue == "bfs") {
+        if (menuPathfinding.value == "bfs") {
             frontier = new QueueFrontier();
         }
-        else if (menuPathfindingValue == "dfs") {
+        else if (menuPathfinding.value == "dfs") {
             frontier = new StackFrontier();
         }
         frontier.add(new Nodes(start, null, null));
