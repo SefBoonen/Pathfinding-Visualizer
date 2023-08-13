@@ -8,6 +8,10 @@ td:hover {
     background-color: #b1ccbd80 !important;
 }
 
+* {
+    font-family: sans-serif, Helvetica;
+}
+
 button {
     background-color: rgb(32, 33, 36);
     color: #FFFFFF;
@@ -20,6 +24,13 @@ button {
 
 span {
     margin: 0 14px;
+}
+
+select {
+    background-color: rgb(32, 33, 36);
+    color: #ffffff;
+    border: solid 1px rgb(38, 39, 49);
+    border-radius: 10px;
 }
 
 button:hover {
