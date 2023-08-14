@@ -34,38 +34,79 @@ const height = 30;
 const width = 60;
 let screenWidth = screen.width;
 let table = "";
-const goal = [14, 44];
-const start = [14, 14];
+let goal = [14, 44];
+let start = [14, 14];
 const wall = [0, 0];
 let setGoal = false;
 let setStart = false;
 let addWalls = false;
 let stopBool = false;
-let walls = [];
+let placeWalls = false;
+let removeWalls = false;
 let field = [];
+document.addEventListener("contextmenu", event => event.preventDefault());
+container.ondragstart = function () { return false; };
+container.addEventListener("mousedown", (e) => {
+    if (e.buttons == 1) {
+        placeWalls = true;
+    }
+    else if (e.buttons == 2) {
+        removeWalls = true;
+    }
+});
+document.addEventListener("mouseup", (e) => {
+    if (e.button == 0) {
+        placeWalls = false;
+        console.log("mouseup");
+    }
+    else if (e.button == 2) {
+        removeWalls = false;
+    }
+});
+container.addEventListener("mouseover", (e) => {
+    const cell = e.target.closest("td");
+    if (!cell) {
+        return;
+    }
+    const row = cell.parentElement;
+    const clickPos = [row.rowIndex, cell.cellIndex];
+    if (addWalls) {
+        if (placeWalls && field[clickPos[0]][clickPos[1]] == 0) {
+            field[clickPos[0]][clickPos[1]] = 3;
+            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
+        }
+        else if (removeWalls && field[clickPos[0]][clickPos[1]] == 3) {
+            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText = "";
+            field[clickPos[0]][clickPos[1]] = 0;
+        }
+    }
+});
 container.addEventListener("click", (e) => {
     const cell = e.target.closest("td");
     if (!cell) {
         return;
     }
     const row = cell.parentElement;
+    const clickPos = [row.rowIndex, cell.cellIndex];
     if (setGoal) {
         document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText = "";
-        goal[0] = row.rowIndex;
-        goal[1] = cell.cellIndex;
+        goal = clickPos;
         document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText += `background-color: ${finishc}; border: solid 1px ${finishborderc};`;
     }
     else if (setStart) {
         document.getElementById(`C${start[0]}-${start[1]}`).style.cssText = "";
-        start[0] = row.rowIndex;
-        start[1] = cell.cellIndex;
+        start = clickPos;
         document.getElementById(`C${start[0]}-${start[1]}`).style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
     }
     else if (addWalls) {
-        wall[0] = row.rowIndex;
-        wall[1] = cell.cellIndex;
-        walls.push([wall[0], wall[1]]);
-        document.getElementById(`C${wall[0]}-${wall[1]}`).style.cssText = `background-color: ${wallc} !important; border: 0px !important;`;
+        if (field[clickPos[0]][clickPos[1]] == 0) {
+            field[clickPos[0]][clickPos[1]] = 3;
+            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
+        }
+        else if (field[clickPos[0]][clickPos[1]] == 3) {
+            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText = "";
+            field[clickPos[0]][clickPos[1]] = 0;
+        }
     }
 });
 bStop.addEventListener("click", () => {
@@ -165,22 +206,22 @@ bSolve.addEventListener("click", () => {
 function neighbours(position) {
     let moves = [];
     if (position[1] - 1 >= 0) {
-        if (!arrContains(walls, [position[0], position[1] - 1])) {
+        if (field[position[0]][position[1] - 1] != 3) {
             moves.push([position[0], position[1] - 1]);
         }
     }
     if (position[1] + 1 < width) {
-        if (!arrContains(walls, [position[0], position[1] + 1])) {
+        if (field[position[0]][position[1] + 1] != 3) {
             moves.push([position[0], position[1] + 1]);
         }
     }
     if (position[0] + 1 < height) {
-        if (!arrContains(walls, [position[0] + 1, position[1]])) {
+        if (field[position[0] + 1][position[1]] != 3) {
             moves.push([position[0] + 1, position[1]]);
         }
     }
     if (position[0] - 1 >= 0) {
-        if (!arrContains(walls, [position[0] - 1, position[1]])) {
+        if (field[position[0] - 1][position[1]] != 3) {
             moves.push([position[0] - 1, position[1]]);
         }
     }
