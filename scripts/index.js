@@ -41,14 +41,14 @@ let setGoal = false;
 let setStart = false;
 let addWalls = false;
 let stopBool = false;
-let placewalls = false;
+let placeWalls = false;
 let walls = [];
 let field = [];
 container.addEventListener("mousedown", () => {
-    placewalls = true;
+    placeWalls = true;
 });
 document.addEventListener("mouseup", () => {
-    placewalls = false;
+    placeWalls = false;
 });
 container.addEventListener("mouseover", (e) => {
     console.log("works");
@@ -69,13 +69,15 @@ container.addEventListener("mouseover", (e) => {
         document.getElementById(`C${start[0]}-${start[1]}`).style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
     }
     else if (addWalls) {
-        if (field[clickPos[0]][clickPos[1]] == 3) {
-            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText = "";
-            field[clickPos[0]][clickPos[1]] = 0;
-        }
-        else {
-            field[clickPos[0]][clickPos[1]] = 3;
-            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
+        if (placeWalls) {
+            if (field[clickPos[0]][clickPos[1]] == 3) {
+                document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText = "";
+                field[clickPos[0]][clickPos[1]] = 0;
+            }
+            else {
+                field[clickPos[0]][clickPos[1]] = 3;
+                document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
+            }
         }
     }
 });
