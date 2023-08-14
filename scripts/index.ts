@@ -44,7 +44,6 @@ document.addEventListener("mouseup", () => {
 });
 
 container.addEventListener("mouseover", (e) => {
-    console.log("works")
     const cell = (<Element>e.target).closest("td");
     if(!cell) {
         return;

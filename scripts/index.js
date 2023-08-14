@@ -51,7 +51,6 @@ document.addEventListener("mouseup", () => {
     placeWalls = false;
 });
 container.addEventListener("mouseover", (e) => {
-    console.log("works");
     const cell = e.target.closest("td");
     if (!cell) {
         return;
