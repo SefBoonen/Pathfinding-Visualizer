@@ -98,21 +98,19 @@ container.addEventListener("click", (e) => {
     }
     const row = cell.parentElement;
     const clickPos = [row.rowIndex, cell.cellIndex];
-    if (setGoal) {
+    if (setGoal && field[clickPos[0]][clickPos[1]] == 0) {
         document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText = "";
         goal = clickPos;
         document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText += `background-color: ${finishc}; border: solid 1px ${finishborderc};`;
     }
-    else if (setStart) {
+    else if (setStart && field[clickPos[0]][clickPos[1]] == 0) {
         document.getElementById(`C${start[0]}-${start[1]}`).style.cssText = "";
         start = clickPos;
         document.getElementById(`C${start[0]}-${start[1]}`).style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
     }
-    else if (addWalls) {
-        if (field[clickPos[0]][clickPos[1]] == 0) {
-            field[clickPos[0]][clickPos[1]] = 3;
-            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
-        }
+    else if (addWalls && field[clickPos[0]][clickPos[1]] == 0) {
+        field[clickPos[0]][clickPos[1]] = 3;
+        document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
     }
 });
 bStop.addEventListener("click", () => {
