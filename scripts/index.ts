@@ -65,7 +65,6 @@ document.addEventListener("mouseup", (e) => {
     } else if (e.button == 2) {
         removeWalls = false;
     }
-    
 });
 
 container.addEventListener("mouseover", (e) => {
