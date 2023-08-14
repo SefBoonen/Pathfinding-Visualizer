@@ -31,8 +31,8 @@ const height = 30;
 const width = 60;
 let screenWidth = screen.width;
 let table = "";
-const goal = [14, 44];
-const start = [14, 14];
+let goal = [14, 44];
+let start = [14, 14];
 const wall = [0, 0];
 let setGoal = false;
 let setStart = false;
@@ -45,33 +45,34 @@ container.addEventListener("click", (e) => {
         return;
     }
     const row = cell.parentElement;
+    const clickPos = [row.rowIndex, cell.cellIndex];
     console.log(`row ${JSON.stringify(row.rowIndex)} column ${JSON.stringify(cell.cellIndex)}`);
     if (setGoal) {
         document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText = "";
-        goal[0] = row.rowIndex;
-        goal[1] = cell.cellIndex;
+        goal = clickPos;
         document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText += `background-color: ${finishc}; border: solid 1px ${finishborderc};`;
     }
     else if (setStart) {
         document.getElementById(`C${start[0]}-${start[1]}`).style.cssText = "";
-        start[0] = row.rowIndex;
-        start[1] = cell.cellIndex;
+        start = clickPos;
         document.getElementById(`C${start[0]}-${start[1]}`).style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
     }
     else if (addWalls) {
         //wall[0] = (<HTMLTableRowElement>row).rowIndex;
         //wall[1] = cell.cellIndex;
         //console.log(`walls are before ${JSON.stringify(walls)}`)
-        //console.log(`wall to be mutated ${JSON.stringify(wall)}`)
-        if (arrContains(walls, [row.rowIndex, cell.cellIndex])) {
-            //console.log(`removed wall ${wall}`);
-            document.getElementById(`C${row.rowIndex}-${cell.cellIndex}`).style.cssText = "";
-            //console.log(walls.splice(walls.indexOf(wall), 1));
+        //console.log(`wall to be mutated ${JSON.stringify(clickPos)}`)
+        if (field[clickPos[0]][clickPos[1]] == 3) {
+            //console.log(`removed wall ${clickPos}`);
+            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText = "";
+            //walls.splice(walls.indexOf(clickPos), 1);
+            field[clickPos[0]][clickPos[1]] = 0;
         }
         else {
-            walls.push(wall);
+            field[clickPos[0]][clickPos[1]] = 3;
+            //walls.push(clickPos);
             //console.log(`walls are  after${JSON.stringify(walls)}`)
-            document.getElementById(`C${row.rowIndex}-${cell.cellIndex}`).style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
+            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
         }
     }
 });
