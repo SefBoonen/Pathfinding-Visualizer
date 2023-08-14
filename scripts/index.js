@@ -58,7 +58,7 @@ container.addEventListener("mousedown", (e) => {
     }
     else if (e.buttons == 2) {
         removeWalls = true;
-        if (field[clickPos[0]][clickPos[1]] == 3) {
+        if (field[clickPos[0]][clickPos[1]] == 3 && addWalls) {
             document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText = "";
             field[clickPos[0]][clickPos[1]] = 0;
         }
