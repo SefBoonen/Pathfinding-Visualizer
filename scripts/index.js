@@ -42,13 +42,26 @@ let setStart = false;
 let addWalls = false;
 let stopBool = false;
 let placeWalls = false;
+let removeWalls = false;
 let walls = [];
 let field = [];
-container.addEventListener("mousedown", () => {
-    placeWalls = true;
+document.addEventListener("contextmenu", event => event.preventDefault());
+container.addEventListener("mousedown", (e) => {
+    if (e.buttons == 1) {
+        placeWalls = true;
+    }
+    else if (e.buttons == 2) {
+        removeWalls = true;
+    }
 });
-document.addEventListener("mouseup", () => {
-    placeWalls = false;
+document.addEventListener("mouseup", (e) => {
+    if (e.button == 0) {
+        placeWalls = false;
+        console.log("mouseup");
+    }
+    else if (e.button == 2) {
+        removeWalls = false;
+    }
 });
 container.addEventListener("mouseover", (e) => {
     const cell = e.target.closest("td");
@@ -68,15 +81,13 @@ container.addEventListener("mouseover", (e) => {
         document.getElementById(`C${start[0]}-${start[1]}`).style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
     }
     else if (addWalls) {
-        if (placeWalls) {
-            if (field[clickPos[0]][clickPos[1]] == 3) {
-                document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText = "";
-                field[clickPos[0]][clickPos[1]] = 0;
-            }
-            else {
-                field[clickPos[0]][clickPos[1]] = 3;
-                document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
-            }
+        if (placeWalls && field[clickPos[0]][clickPos[1]] == 0) {
+            field[clickPos[0]][clickPos[1]] = 3;
+            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
+        }
+        else if (removeWalls && field[clickPos[0]][clickPos[1]] == 3) {
+            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText = "";
+            field[clickPos[0]][clickPos[1]] = 0;
         }
     }
 });
@@ -177,22 +188,22 @@ bSolve.addEventListener("click", () => {
 function neighbours(position) {
     let moves = [];
     if (position[1] - 1 >= 0) {
-        if (!arrContains(walls, [position[0], position[1] - 1])) {
+        if (field[position[0]][position[1] - 1] != 3) {
             moves.push([position[0], position[1] - 1]);
         }
     }
     if (position[1] + 1 < width) {
-        if (!arrContains(walls, [position[0], position[1] + 1])) {
+        if (field[position[0]][position[1] + 1] != 3) {
             moves.push([position[0], position[1] + 1]);
         }
     }
     if (position[0] + 1 < height) {
-        if (!arrContains(walls, [position[0] + 1, position[1]])) {
+        if (field[position[0] + 1][position[1]] != 3) {
             moves.push([position[0] + 1, position[1]]);
         }
     }
     if (position[0] - 1 >= 0) {
-        if (!arrContains(walls, [position[0] - 1, position[1]])) {
+        if (field[position[0] - 1][position[1]] != 3) {
             moves.push([position[0] - 1, position[1]]);
         }
     }
