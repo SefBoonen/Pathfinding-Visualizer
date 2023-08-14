@@ -296,4 +296,5 @@ function setButtons(bool: boolean) {
     (<HTMLButtonElement>bSolve).disabled = bool;
     (<HTMLButtonElement>bSetStart).disabled = bool;
     (<HTMLButtonElement>bSetGoal).disabled = bool;
+    (<HTMLButtonElement>menuPathfinding).disabled = bool;
 }

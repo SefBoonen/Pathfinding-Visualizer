@@ -284,4 +284,5 @@ function setButtons(bool) {
     bSolve.disabled = bool;
     bSetStart.disabled = bool;
     bSetGoal.disabled = bool;
+    menuPathfinding.disabled = bool;
 }

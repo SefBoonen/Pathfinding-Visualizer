@@ -59,3 +59,13 @@ table {
 html {
     height: 100%;
 }
+
+button:disabled{
+    color: black;
+    background-color: rgb(32, 33, 36);
+}
+
+select:disabled {
+    color: black;
+    background-color: rgb(32, 33, 36);
+}
