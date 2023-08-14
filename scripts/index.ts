@@ -33,7 +33,6 @@ let stopBool = false;
 let placeWalls = false;
 let removeWalls = false;
 
-let walls: number[][] = [];
 let field: number[][] = [];
 
 document.addEventListener("contextmenu", event => event.preventDefault());

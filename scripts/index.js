@@ -43,7 +43,6 @@ let addWalls = false;
 let stopBool = false;
 let placeWalls = false;
 let removeWalls = false;
-let walls = [];
 let field = [];
 document.addEventListener("contextmenu", event => event.preventDefault());
 container.addEventListener("mousedown", (e) => {
