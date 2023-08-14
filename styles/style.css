@@ -11,11 +11,21 @@ td:hover {
 button {
     background-color: rgb(32, 33, 36);
     color: #FFFFFF;
-    border: 0;
     border-radius: 20px;
     border: 1px solid #3c4043;
     height: 40px;
     font-size: 14px;
+}
+
+select {
+    background-color: rgb(32, 33, 36);
+    border: 1px solid #3c4043;
+    border-radius: 10px;
+    color: #ffffff;
+}
+
+select:hover {
+    background-color: rgb(48, 49, 52);
 }
 
 span {
