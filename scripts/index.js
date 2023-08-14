@@ -45,6 +45,7 @@ let placeWalls = false;
 let removeWalls = false;
 let field = [];
 document.addEventListener("contextmenu", event => event.preventDefault());
+container.ondragstart = function () { return false; };
 container.addEventListener("mousedown", (e) => {
     if (e.buttons == 1) {
         placeWalls = true;

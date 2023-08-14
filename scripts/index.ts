@@ -36,6 +36,7 @@ let removeWalls = false;
 let field: number[][] = [];
 
 document.addEventListener("contextmenu", event => event.preventDefault());
+container.ondragstart = function() { return false; };
 
 container.addEventListener("mousedown", (e) => {
     if(e.buttons == 1) {
