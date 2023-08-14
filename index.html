@@ -12,17 +12,23 @@
     </head>
     <body>
         <div class="selectionbar">
-            <button id="solve">
-                <span>Solve</span>
+            <button id="setstart">
+                <span>Set Start</span>
             </button>
-
+            <button id="setgoal">
+                <span>Set Goal</span>
+            </button>
+            <button id="addwalls">
+                <span>Add walls</span>
+            </button>
             <select name="pathfinding-algorithm" id="pathfinding-algorithm">
                 <option value="dfs">Depth-first search</option>
                 <option value="bfs">Breadth-first search</option>
             </select>
-            <button id="setgoal"><span>Set Goal</span></button>
-            <button id="setstart"><span>Set Start</span></button>
-            <button id="addwalls"><span>Add walls</span></button>
+            <button id="solve">
+                <span>Solve</span>
+            </button>
+            <button id="stop"><span>Stop</span></button>
         </div>
         <table>
             <tbody id="container">

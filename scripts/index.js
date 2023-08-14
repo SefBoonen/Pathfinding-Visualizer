@@ -26,6 +26,9 @@ if (!bSetStart)
 const bAddWalls = document.getElementById("addwalls");
 if (!bAddWalls)
     throw new Error("Add walls button not found");
+const bStop = document.getElementById("stop");
+if (!bStop)
+    throw new Error("Stop button not found");
 const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "rgb(57, 68, 87)", exploredc = "#3b9aed", startborderc = "#00ff00", finishborderc = "yellow", wallc = "white";
 const height = 5;
 const width = 10;
@@ -37,32 +40,81 @@ const wall = [0, 0];
 let setGoal = false;
 let setStart = false;
 let addWalls = false;
-let walls = [];
+let stopBool = false;
+let placeWalls = false;
+let removeWalls = false;
 let field = [];
+document.addEventListener("contextmenu", event => event.preventDefault());
+container.ondragstart = function () { return false; };
+container.addEventListener("mousedown", (e) => {
+    const cell = e.target.closest("td");
+    if (!cell) {
+        return;
+    }
+    const row = cell.parentElement;
+    const clickPos = [row.rowIndex, cell.cellIndex];
+    if (e.buttons == 1) {
+        placeWalls = true;
+    }
+    else if (e.buttons == 2) {
+        removeWalls = true;
+        if (field[clickPos[0]][clickPos[1]] == 3 && addWalls) {
+            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText = "";
+            field[clickPos[0]][clickPos[1]] = 0;
+        }
+    }
+});
+document.addEventListener("mouseup", (e) => {
+    if (e.button == 0) {
+        placeWalls = false;
+        console.log("mouseup");
+    }
+    else if (e.button == 2) {
+        removeWalls = false;
+    }
+});
+container.addEventListener("mouseover", (e) => {
+    const cell = e.target.closest("td");
+    if (!cell) {
+        return;
+    }
+    const row = cell.parentElement;
+    const clickPos = [row.rowIndex, cell.cellIndex];
+    if (addWalls) {
+        if (placeWalls && field[clickPos[0]][clickPos[1]] == 0) {
+            field[clickPos[0]][clickPos[1]] = 3;
+            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
+        }
+        else if (removeWalls && field[clickPos[0]][clickPos[1]] == 3) {
+            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText = "";
+            field[clickPos[0]][clickPos[1]] = 0;
+        }
+    }
+});
 container.addEventListener("click", (e) => {
     const cell = e.target.closest("td");
     if (!cell) {
         return;
     }
     const row = cell.parentElement;
-    if (setGoal) {
+    const clickPos = [row.rowIndex, cell.cellIndex];
+    if (setGoal && field[clickPos[0]][clickPos[1]] == 0) {
         document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText = "";
-        goal[0] = row.rowIndex;
-        goal[1] = cell.cellIndex;
+        goal = clickPos;
         document.getElementById(`C${goal[0]}-${goal[1]}`).style.cssText += `background-color: ${finishc}; border: solid 1px ${finishborderc};`;
     }
-    else if (setStart) {
+    else if (setStart && field[clickPos[0]][clickPos[1]] == 0) {
         document.getElementById(`C${start[0]}-${start[1]}`).style.cssText = "";
-        start[0] = row.rowIndex;
-        start[1] = cell.cellIndex;
+        start = clickPos;
         document.getElementById(`C${start[0]}-${start[1]}`).style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
     }
-    else if (addWalls) {
-        wall[0] = row.rowIndex;
-        wall[1] = cell.cellIndex;
-        walls.push([wall[0], wall[1]]);
-        document.getElementById(`C${wall[0]}-${wall[1]}`).style.cssText = `background-color: ${wallc} !important; border: solid 1px rgba(38, 39, 49, 0);`;
+    else if (addWalls && field[clickPos[0]][clickPos[1]] == 0) {
+        field[clickPos[0]][clickPos[1]] = 3;
+        document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
     }
+});
+bStop.addEventListener("click", () => {
+    stopBool = true;
 });
 bSetStart.addEventListener("click", () => {
     if (setStart) {
@@ -158,22 +210,22 @@ bSolve.addEventListener("click", () => {
 function neighbours(position) {
     let moves = [];
     if (position[1] - 1 >= 0) {
-        if (!arrContains(walls, [position[0], position[1] - 1])) {
+        if (field[position[0]][position[1] - 1] != 3) {
             moves.push([position[0], position[1] - 1]);
         }
     }
     if (position[1] + 1 < width) {
-        if (!arrContains(walls, [position[0], position[1] + 1])) {
+        if (field[position[0]][position[1] + 1] != 3) {
             moves.push([position[0], position[1] + 1]);
         }
     }
     if (position[0] + 1 < height) {
-        if (!arrContains(walls, [position[0] + 1, position[1]])) {
+        if (field[position[0] + 1][position[1]] != 3) {
             moves.push([position[0] + 1, position[1]]);
         }
     }
     if (position[0] - 1 >= 0) {
-        if (!arrContains(walls, [position[0] - 1, position[1]])) {
+        if (field[position[0] - 1][position[1]] != 3) {
             moves.push([position[0] - 1, position[1]]);
         }
     }
@@ -181,6 +233,7 @@ function neighbours(position) {
 }
 function solve() {
     return __awaiter(this, void 0, void 0, function* () {
+        setButtons(true);
         let frontier = new QueueFrontier();
         if (menuPathfinding.value == "bfs") {
             frontier = new QueueFrontier();
@@ -192,11 +245,18 @@ function solve() {
         let list = [];
         let explored = [];
         while (true) {
+            if (stopBool) {
+                stopBool = false;
+                setButtons(false);
+                return;
+            }
             if (frontier.empty()) {
+                setButtons(false);
                 return null;
             }
             let curnode = frontier.remove();
             if (JSON.stringify(curnode.getState()) == JSON.stringify(goal)) {
+                setButtons(false);
                 return null;
             }
             document.getElementById(`C${curnode.getState()[0]}-${curnode.getState()[1]}`).style.cssText += `background-color: ${exploredc}; border: solid 1px rgba(38, 39, 49, 0.2);`;
@@ -222,4 +282,11 @@ function arrContains(array, element) {
 }
 function wait(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+function setButtons(bool) {
+    bAddWalls.disabled = bool;
+    bSolve.disabled = bool;
+    bSetStart.disabled = bool;
+    bSetGoal.disabled = bool;
+    menuPathfinding.disabled = bool;
 }
