@@ -37,6 +37,7 @@ container.addEventListener("click", (e) => {
         return;
     }
     const row = cell.parentElement;
+    console.log(`row ${JSON.stringify((<HTMLTableRowElement>row).rowIndex)} column ${JSON.stringify(cell.cellIndex)}`);
     if(setGoal) {
         document.getElementById(`C${goal[0]}-${goal[1]}`)!.style.cssText = "";
         goal[0] = (<HTMLTableRowElement>row).rowIndex;
@@ -48,18 +49,18 @@ container.addEventListener("click", (e) => {
         start[1] = cell.cellIndex;
         document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
     } else if (addWalls) {
-        wall[0] = (<HTMLTableRowElement>row).rowIndex;
-        wall[1] = cell.cellIndex;
-        console.log(`walls are before ${JSON.stringify(walls)}`)
-        console.log(`wall to be mutated ${JSON.stringify(wall)}`)
-        if(arrContains(walls, [wall[0], wall[1]])) {
-            console.log(`removed wall ${wall}`)
-            document.getElementById(`C${wall[0]}-${wall[1]}`)!.style.cssText = "";
-
+        //wall[0] = (<HTMLTableRowElement>row).rowIndex;
+        //wall[1] = cell.cellIndex;
+        //console.log(`walls are before ${JSON.stringify(walls)}`)
+        //console.log(`wall to be mutated ${JSON.stringify(wall)}`)
+        if(arrContains(walls, [(<HTMLTableRowElement>row).rowIndex, cell.cellIndex])) {
+            //console.log(`removed wall ${wall}`);
+            document.getElementById(`C${(<HTMLTableRowElement>row).rowIndex}-${cell.cellIndex}`)!.style.cssText = "";
+            //console.log(walls.splice(walls.indexOf(wall), 1));
         } else {
             walls.push(wall);
-            console.log(`walls are  after${JSON.stringify(walls)}`)
-            document.getElementById(`C${wall[0]}-${wall[1]}`)!.style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
+            //console.log(`walls are  after${JSON.stringify(walls)}`)
+            document.getElementById(`C${(<HTMLTableRowElement>row).rowIndex}-${cell.cellIndex}`)!.style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
         }
     }
 });
