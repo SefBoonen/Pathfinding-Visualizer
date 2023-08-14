@@ -60,12 +60,12 @@ html {
     height: 100%;
 }
 
-button:disabled{
+button:disabled, button[disabled]{
     color: black;
     background-color: rgb(32, 33, 36);
 }
 
-select:disabled {
+select:disabled, select[disabled]{
     color: black;
     background-color: rgb(32, 33, 36);
 }
