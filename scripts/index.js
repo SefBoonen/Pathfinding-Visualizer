@@ -47,11 +47,21 @@ let field = [];
 document.addEventListener("contextmenu", event => event.preventDefault());
 container.ondragstart = function () { return false; };
 container.addEventListener("mousedown", (e) => {
+    const cell = e.target.closest("td");
+    if (!cell) {
+        return;
+    }
+    const row = cell.parentElement;
+    const clickPos = [row.rowIndex, cell.cellIndex];
     if (e.buttons == 1) {
         placeWalls = true;
     }
     else if (e.buttons == 2) {
         removeWalls = true;
+        if (field[clickPos[0]][clickPos[1]] == 3) {
+            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText = "";
+            field[clickPos[0]][clickPos[1]] = 0;
+        }
     }
 });
 document.addEventListener("mouseup", (e) => {
@@ -102,10 +112,6 @@ container.addEventListener("click", (e) => {
         if (field[clickPos[0]][clickPos[1]] == 0) {
             field[clickPos[0]][clickPos[1]] = 3;
             document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
-        }
-        else if (field[clickPos[0]][clickPos[1]] == 3) {
-            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText = "";
-            field[clickPos[0]][clickPos[1]] = 0;
         }
     }
 });
