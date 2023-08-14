@@ -61,11 +61,11 @@ html {
 }
 
 button:disabled, button[disabled]{
-    color: black;
+    color: rgb(47, 47, 48);
     background-color: rgb(32, 33, 36);
 }
 
 select:disabled, select[disabled]{
-    color: black;
+    color: rgb(47, 47, 48);
     background-color: rgb(32, 33, 36);
 }
