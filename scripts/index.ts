@@ -22,8 +22,8 @@ let screenWidth = screen.width;
 
 let table = "";
 
-const goal = [0, 2];
-const start = [0, 0];
+let goal = [0, 2];
+let start = [0, 0];
 const wall = [0, 0];
 
 let setGoal = false;
@@ -79,7 +79,7 @@ container.addEventListener("mouseover", (e) => {
     if (addWalls) {
         if(placeWalls && field[clickPos[0]][clickPos[1]] == 0) {
             field[clickPos[0]][clickPos[1]] = 3;
-            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`)!.style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
+            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`)!.style.cssText += `background-color: ${wallc} !important; border: solid 1px rgba(1, 1, 1, 0);`;
 
         } else if (removeWalls && field[clickPos[0]][clickPos[1]] == 3) {
             document.getElementById(`C${clickPos[0]}-${clickPos[1]}`)!.style.cssText = "";
@@ -110,7 +110,7 @@ container.addEventListener("click", (e) => {
 
     } else if (addWalls && field[clickPos[0]][clickPos[1]] == 0) {
         field[clickPos[0]][clickPos[1]] = 3;
-        document.getElementById(`C${clickPos[0]}-${clickPos[1]}`)!.style.cssText += `background-color: ${wallc} !important; border: 0px !important;`;
+        document.getElementById(`C${clickPos[0]}-${clickPos[1]}`)!.style.cssText += `background-color: ${wallc} !important; border: solid 1px rgba(1, 1, 1, 0);`;
     }
 });
 
