@@ -79,7 +79,7 @@ container.addEventListener("mouseover", (e) => {
     if (addWalls) {
         if(placeWalls && field[clickPos[0]][clickPos[1]] == 0) {
             field[clickPos[0]][clickPos[1]] = 3;
-            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`)!.style.cssText += `background-color: ${wallc} !important; border: solid 1px rgba(1, 1, 1, 0);`;
+            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`)!.style.cssText = `background-color: ${wallc} !important; border: solid 1px rgba(1, 1, 1, 0s);`;
 
         } else if (removeWalls && field[clickPos[0]][clickPos[1]] == 3) {
             document.getElementById(`C${clickPos[0]}-${clickPos[1]}`)!.style.cssText = "";
@@ -101,16 +101,16 @@ container.addEventListener("click", (e) => {
     if(setGoal && field[clickPos[0]][clickPos[1]] == 0) {
         document.getElementById(`C${goal[0]}-${goal[1]}`)!.style.cssText = "";
         goal = clickPos;
-        document.getElementById(`C${goal[0]}-${goal[1]}`)!.style.cssText += `background-color: ${finishc}; border: solid 1px ${finishborderc};`;
+        document.getElementById(`C${goal[0]}-${goal[1]}`)!.style.cssText = `background-color: ${finishc}; border: solid 1px ${finishborderc};`;
 
     } else if (setStart && field[clickPos[0]][clickPos[1]] == 0) {
         document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText = "";
         start = clickPos;
-        document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
+        document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText = `background-color: ${startc}; border: solid 1px ${startborderc};`;
 
     } else if (addWalls && field[clickPos[0]][clickPos[1]] == 0) {
         field[clickPos[0]][clickPos[1]] = 3;
-        document.getElementById(`C${clickPos[0]}-${clickPos[1]}`)!.style.cssText += `background-color: ${wallc} !important; border: solid 1px rgba(1, 1, 1, 0);`;
+        document.getElementById(`C${clickPos[0]}-${clickPos[1]}`)!.style.cssText = `background-color: ${wallc} !important; border: solid 1px rgba(1, 1, 1, 0);`;
     }
 });
 
@@ -196,8 +196,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }  
     container.innerHTML = table;
 
-    document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText += `background-color: ${startc}; border: solid 1px ${startborderc};`;
-    document.getElementById(`C${goal[0]}-${goal[1]}`)!.style.cssText += `background-color: ${finishc}; border: solid 1px ${finishborderc};`;
+    document.getElementById(`C${start[0]}-${start[1]}`)!.style.cssText = `background-color: ${startc}; border: solid 1px ${startborderc};`;
+    document.getElementById(`C${goal[0]}-${goal[1]}`)!.style.cssText = `background-color: ${finishc}; border: solid 1px ${finishborderc};`;
 });
 
 bSolve.addEventListener("click", () => {
