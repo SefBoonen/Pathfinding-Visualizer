@@ -15,15 +15,15 @@ if(!bStop) throw new Error("Stop button not found");
 
 const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "rgb(57, 68, 87)", exploredc = "#3b9aed", startborderc = "#00ff00", finishborderc = "yellow", wallc = "white";
 
-const height: number = 5;
-const width: number = 10;
+const height: number = 30;
+const width: number = 60;
 
 let screenWidth = screen.width;
 
 let table = "";
 
-let goal = [0, 2];
-let start = [0, 0];
+let goal = [14, 44];
+let start = [14, 14];
 const wall = [0, 0];
 
 let setGoal = false;
