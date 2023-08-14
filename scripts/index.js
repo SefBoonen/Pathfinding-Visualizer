@@ -188,6 +188,7 @@ function neighbours(position) {
 }
 function solve() {
     return __awaiter(this, void 0, void 0, function* () {
+        setButtons(true);
         let frontier = new QueueFrontier();
         if (menuPathfinding.value == "bfs") {
             frontier = new QueueFrontier();
@@ -201,13 +202,16 @@ function solve() {
         while (true) {
             if (stopBool) {
                 stopBool = false;
+                setButtons(false);
                 return;
             }
             if (frontier.empty()) {
+                setButtons(false);
                 return null;
             }
             let curnode = frontier.remove();
             if (JSON.stringify(curnode.getState()) == JSON.stringify(goal)) {
+                setButtons(false);
                 return null;
             }
             document.getElementById(`C${curnode.getState()[0]}-${curnode.getState()[1]}`).style.cssText += `background-color: ${exploredc}; border: solid 1px rgba(38, 39, 49, 0.2);`;
@@ -233,4 +237,10 @@ function arrContains(array, element) {
 }
 function wait(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+function setButtons(bool) {
+    bAddWalls.disabled = bool;
+    bSolve.disabled = bool;
+    bSetStart.disabled = bool;
+    bSetGoal.disabled = bool;
 }

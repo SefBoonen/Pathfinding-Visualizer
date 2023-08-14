@@ -176,6 +176,7 @@ function neighbours(position: number[]) {
 }
 
 async function solve() {
+    setButtons(true);
     let frontier = new QueueFrontier();
     if((<HTMLInputElement>menuPathfinding).value == "bfs") {
         frontier = new QueueFrontier();
@@ -191,15 +192,18 @@ async function solve() {
     while(true) {
         if(stopBool) {
             stopBool = false;
+            setButtons(false);
             return;
         }
         if(frontier.empty()) {
+            setButtons(false);
             return null;
         }
 
         let curnode: any = frontier.remove();
 
         if(JSON.stringify(curnode.getState()) == JSON.stringify(goal)) {
+            setButtons(false);
             return null;
         }
 
@@ -235,8 +239,8 @@ function wait(ms: number) {
 }
 
 function setButtons(bool: boolean) {
-    bAddWalls.disabled = bool;
-    bSolve.disabled = bool;
-    bSetStart.disabled = bool;
-    bSetGoal.disabled = bool;
+    (<HTMLButtonElement>bAddWalls).disabled = bool;
+    (<HTMLButtonElement>bSolve).disabled = bool;
+    (<HTMLButtonElement>bSetStart).disabled = bool;
+    (<HTMLButtonElement>bSetGoal).disabled = bool;
 }
