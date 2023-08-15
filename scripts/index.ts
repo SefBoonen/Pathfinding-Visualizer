@@ -23,6 +23,7 @@ wallc = "white";
 
 const height: number = 30;
 const width: number = 60;
+// 0 = blank space, 1 = goal, 2 = start, 3 = wall
 let field: number[][] = [];
 
 let table = "";
@@ -37,9 +38,13 @@ let stopBool = false;
 let placeWalls = false;
 let removeWalls = false;
 
-document.addEventListener("contextmenu", event => event.preventDefault());
+document.addEventListener("contextmenu", (event) => {
+    event.preventDefault()
+});
 
-container.ondragstart = function() { return false; };
+container.addEventListener("dragstart", function() {
+    return false;
+});
 
 container.addEventListener("mousedown", (e) => {
     const cell = (<Element>e.target).closest("td");
