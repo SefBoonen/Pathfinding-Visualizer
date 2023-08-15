@@ -34,9 +34,9 @@ document.addEventListener("contextmenu", (event) => {
     event.preventDefault()
 });
 
-container.addEventListener("dragstart", function() {
+container.onmousedown = function() {
     return false;
-});
+}
 
 container.addEventListener("mousedown", (e) => {
     const cell = (<Element>e.target).closest("td");

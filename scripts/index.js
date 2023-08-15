@@ -45,9 +45,9 @@ let removeWalls = false;
 document.addEventListener("contextmenu", (event) => {
     event.preventDefault();
 });
-container.addEventListener("dragstart", function () {
+container.onmousedown = function () {
     return false;
-});
+};
 container.addEventListener("mousedown", (e) => {
     const cell = e.target.closest("td");
     if (!cell) {
