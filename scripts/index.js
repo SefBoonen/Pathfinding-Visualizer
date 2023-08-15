@@ -33,8 +33,8 @@ const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "rgb(57
 const height = 30;
 const width = 60;
 let table = "";
-let goal = [14, 44];
-let start = [14, 14];
+let goal = [Math.floor(height / 2), Math.floor(width * 0.75)];
+let start = [Math.floor(height / 2), Math.floor(width * 0.25)];
 let setGoal = false;
 let setStart = false;
 let addWalls = false;
