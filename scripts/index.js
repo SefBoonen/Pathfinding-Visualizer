@@ -248,6 +248,7 @@ function solve() {
         let explored = [];
         while (true) {
             if (stopBool) {
+                clearExplored();
                 stopBool = false;
                 setButtonsDisabled(false);
                 return;
@@ -290,4 +291,10 @@ function setButtonsDisabled(bool) {
     bSetStart.disabled = bool;
     bSetGoal.disabled = bool;
     menuPathfinding.disabled = bool;
+}
+function clearExplored() {
+    let explored = document.querySelectorAll(".explored");
+    for (let i = 0; i < explored.length; i++) {
+        explored[i].classList.remove("explored");
+    }
 }

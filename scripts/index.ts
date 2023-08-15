@@ -247,13 +247,13 @@ async function solve() {
 
     while(true) {
         if(stopBool) {
+            clearExplored();
             stopBool = false;
             setButtonsDisabled(false);
             return;
         }
         if(frontier.empty()) {
             setButtonsDisabled(false);
-            
             return null;
         }
 
@@ -299,4 +299,12 @@ function setButtonsDisabled(bool: boolean) {
     (<HTMLButtonElement>bSetStart).disabled = bool;
     (<HTMLButtonElement>bSetGoal).disabled = bool;
     (<HTMLButtonElement>menuPathfinding).disabled = bool;
+}
+
+function clearExplored() {
+    let explored = document.querySelectorAll(".explored");
+
+    for(let i = 0; i < explored.length; i++) {
+        explored[i].classList.remove("explored");
+    }
 }
