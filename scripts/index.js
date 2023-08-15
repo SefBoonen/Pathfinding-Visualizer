@@ -30,8 +30,8 @@ const bStop = document.getElementById("stop");
 if (!bStop)
     throw new Error("Stop button not found");
 const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "rgb(57, 68, 87)", exploredc = "#3b9aed", startborderc = "#00ff00", finishborderc = "yellow", wallc = "white";
-const height = 30;
-const width = 60;
+const height = Math.floor(window.innerHeight / 30);
+const width = Math.floor(window.innerWidth / 30);
 // 0 = blank space, 1 = goal, 2 = start, 3 = wall
 let field = [];
 let table = "";

@@ -21,8 +21,8 @@ startborderc = "#00ff00",
 finishborderc = "yellow", 
 wallc = "white";
 
-const height: number = 30;
-const width: number = 60;
+const height: number = Math.floor(window.innerHeight / 30);
+const width: number = Math.floor(window.innerWidth / 30);
 // 0 = blank space, 1 = goal, 2 = start, 3 = wall
 let field: number[][] = [];
 
