@@ -318,3 +318,7 @@ function addFS() {
     document.getElementById(`C${start[0]}-${start[1]}`)!.className = "startcell";
     document.getElementById(`C${goal[0]}-${goal[1]}`)!.className = "finishcell";
 }
+
+function manhattanDistance(point1: number[], point2: number[]) {
+    return [Math.abs(point1[0] - point2[1]), Math.abs(point1[0] - point2[1])]
+}
