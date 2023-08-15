@@ -55,6 +55,10 @@ container.addEventListener("mousedown", (e) => {
     const clickPos = [row.rowIndex, cell.cellIndex];
     if (e.buttons == 1) {
         placeWalls = true;
+        if (addWalls && field[clickPos[0]][clickPos[1]] == 0) {
+            field[clickPos[0]][clickPos[1]] = 3;
+            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText = `background-color: ${wallc} !important; border: solid 1px rgba(1, 1, 1, 0)`;
+        }
     }
     else if (e.buttons == 2) {
         removeWalls = true;
@@ -83,7 +87,7 @@ container.addEventListener("mouseover", (e) => {
     if (addWalls) {
         if (placeWalls && field[clickPos[0]][clickPos[1]] == 0) {
             field[clickPos[0]][clickPos[1]] = 3;
-            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText = `background-color: ${wallc} !important; border: solid 1px rgba(1, 1, 1, 0s);`;
+            document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText = `background-color: ${wallc} !important; border: solid 1px rgba(1, 1, 1, 0)`;
         }
         else if (removeWalls && field[clickPos[0]][clickPos[1]] == 3) {
             document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText = "";
@@ -107,10 +111,6 @@ container.addEventListener("click", (e) => {
         document.getElementById(`C${start[0]}-${start[1]}`).style.cssText = "";
         start = clickPos;
         document.getElementById(`C${start[0]}-${start[1]}`).style.cssText = `background-color: ${startc}; border: solid 1px ${startborderc};`;
-    }
-    else if (addWalls && field[clickPos[0]][clickPos[1]] == 0) {
-        field[clickPos[0]][clickPos[1]] = 3;
-        document.getElementById(`C${clickPos[0]}-${clickPos[1]}`).style.cssText = `background-color: ${wallc} !important; border: solid 1px rgba(1, 1, 1, 0);`;
     }
 });
 bStop.addEventListener("click", () => {
