@@ -249,6 +249,7 @@ function solve() {
         while (true) {
             if (stopBool) {
                 clearExplored();
+                addFS();
                 stopBool = false;
                 setButtonsDisabled(false);
                 return;
@@ -291,10 +292,18 @@ function setButtonsDisabled(bool) {
     bSetStart.disabled = bool;
     bSetGoal.disabled = bool;
     menuPathfinding.disabled = bool;
+    setGoal = false;
+    setStart = false;
+    bSetGoal.className = "";
+    bSetStart.className = "";
 }
 function clearExplored() {
     let explored = document.querySelectorAll(".explored");
     for (let i = 0; i < explored.length; i++) {
         explored[i].classList.remove("explored");
     }
+}
+function addFS() {
+    document.getElementById(`C${start[0]}-${start[1]}`).className = "startcell";
+    document.getElementById(`C${goal[0]}-${goal[1]}`).className = "finishcell";
 }
