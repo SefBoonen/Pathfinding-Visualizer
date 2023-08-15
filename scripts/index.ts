@@ -298,7 +298,6 @@ function wait(ms: number) {
 }
 
 function setButtonsDisabled(bool: boolean) {
-    (<HTMLButtonElement>bAddWalls).disabled = bool;
     (<HTMLButtonElement>bSolve).disabled = bool;
     (<HTMLButtonElement>bSetStart).disabled = bool;
     (<HTMLButtonElement>bSetGoal).disabled = bool;
