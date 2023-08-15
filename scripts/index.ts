@@ -13,18 +13,21 @@ if(!bAddWalls) throw new Error("Add walls button not found");
 const bStop = document.getElementById("stop");
 if(!bStop) throw new Error("Stop button not found");
 
-const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "rgb(57, 68, 87)", exploredc = "#3b9aed", startborderc = "#00ff00", finishborderc = "yellow", wallc = "white";
+const finishc = "rgb(48, 49, 52)", 
+startc = "rgb(48, 49, 52)", 
+buttonc = "rgb(57, 68, 87)", 
+exploredc = "#3b9aed", 
+startborderc = "#00ff00", 
+finishborderc = "yellow", 
+wallc = "white";
 
 const height: number = 30;
 const width: number = 60;
-
-let screenWidth = screen.width;
 
 let table = "";
 
 let goal = [14, 44];
 let start = [14, 14];
-const wall = [0, 0];
 
 let setGoal = false;
 let setStart = false;
@@ -36,6 +39,7 @@ let removeWalls = false;
 let field: number[][] = [];
 
 document.addEventListener("contextmenu", event => event.preventDefault());
+
 container.ondragstart = function() { return false; };
 
 container.addEventListener("mousedown", (e) => {
@@ -232,7 +236,7 @@ function neighbours(position: number[]) {
 }
 
 async function solve() {
-    setButtons(true);
+    setButtonsDisabled(true);
     let frontier = new QueueFrontier();
     if((<HTMLInputElement>menuPathfinding).value == "bfs") {
         frontier = new QueueFrontier();
@@ -248,11 +252,11 @@ async function solve() {
     while(true) {
         if(stopBool) {
             stopBool = false;
-            setButtons(false);
+            setButtonsDisabled(false);
             return;
         }
         if(frontier.empty()) {
-            setButtons(false);
+            setButtonsDisabled(false);
             
             return null;
         }
@@ -260,7 +264,7 @@ async function solve() {
         let curnode: any = frontier.remove();
 
         if(JSON.stringify(curnode.state) == JSON.stringify(goal)) {
-            setButtons(false);
+            setButtonsDisabled(false);
             return null;
         }
 
@@ -281,7 +285,6 @@ async function solve() {
     }
 }
 
-
 function arrContains(array: any[], element: any) {
     for(let i = 0; i < array.length; i++) {
         if(JSON.stringify(array[i]) == JSON.stringify(element)) {
@@ -295,7 +298,7 @@ function wait(ms: number) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function setButtons(bool: boolean) {
+function setButtonsDisabled(bool: boolean) {
     (<HTMLButtonElement>bAddWalls).disabled = bool;
     (<HTMLButtonElement>bSolve).disabled = bool;
     (<HTMLButtonElement>bSetStart).disabled = bool;
