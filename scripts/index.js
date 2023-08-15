@@ -232,7 +232,7 @@ function neighbours(position) {
             moves.push([position[0] - 1, position[1]]);
         }
     }
-    return moves;
+    return randomiseArray(moves);
 }
 function solve() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -291,4 +291,15 @@ function setButtonsDisabled(bool) {
     bSetStart.disabled = bool;
     bSetGoal.disabled = bool;
     menuPathfinding.disabled = bool;
+}
+function randomiseArray(array) {
+    let currentIndex = array.length, randomIndex;
+    while (currentIndex != 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]
+        ];
+    }
+    return array;
 }
