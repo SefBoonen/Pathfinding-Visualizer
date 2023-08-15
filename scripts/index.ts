@@ -23,6 +23,7 @@ wallc = "white";
 
 const height: number = 30;
 const width: number = 60;
+let field: number[][] = [];
 
 let table = "";
 
@@ -35,8 +36,6 @@ let addWalls = false;
 let stopBool = false;
 let placeWalls = false;
 let removeWalls = false;
-
-let field: number[][] = [];
 
 document.addEventListener("contextmenu", event => event.preventDefault());
 

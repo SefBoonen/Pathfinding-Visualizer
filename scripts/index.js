@@ -32,6 +32,7 @@ if (!bStop)
 const finishc = "rgb(48, 49, 52)", startc = "rgb(48, 49, 52)", buttonc = "rgb(57, 68, 87)", exploredc = "#3b9aed", startborderc = "#00ff00", finishborderc = "yellow", wallc = "white";
 const height = 30;
 const width = 60;
+let field = [];
 let table = "";
 let goal = [Math.floor(height / 2), Math.floor(width * 0.75)];
 let start = [Math.floor(height / 2), Math.floor(width * 0.25)];
@@ -41,7 +42,6 @@ let addWalls = false;
 let stopBool = false;
 let placeWalls = false;
 let removeWalls = false;
-let field = [];
 document.addEventListener("contextmenu", event => event.preventDefault());
 container.ondragstart = function () { return false; };
 container.addEventListener("mousedown", (e) => {
