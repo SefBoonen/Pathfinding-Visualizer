@@ -3,10 +3,6 @@
     border: solid 1px rgba(38, 39, 49, 0.2);
 }
 
-.activated-button {
-    background-color: rgb(57, 68, 87) !important;
-}
-
 .startcell {
     background-color: rgb(48, 49, 52);
     border: solid 1px #00ff00;

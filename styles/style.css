@@ -35,6 +35,10 @@ button:disabled, button[disabled]{
     background-color: rgb(32, 33, 36);
 }
 
+.activated-button {
+    background-color: rgb(57, 68, 87) !important;
+}
+
 select {
     background-color: rgb(32, 33, 36);
     border: 1px solid #3c4043;
