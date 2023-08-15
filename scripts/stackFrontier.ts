@@ -11,7 +11,7 @@ class StackFrontier {
 
     containsState(state: number[]) {
         for(let i = 0; i < this.frontier.length; i++) {
-            if(JSON.stringify(this.frontier[i].getState()) == JSON.stringify(state)) {
+            if(JSON.stringify(this.frontier[i].state) == JSON.stringify(state)) {
                 return true;
             }
         }

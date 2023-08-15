@@ -259,22 +259,22 @@ async function solve() {
 
         let curnode: any = frontier.remove();
 
-        if(JSON.stringify(curnode.getState()) == JSON.stringify(goal)) {
+        if(JSON.stringify(curnode.state) == JSON.stringify(goal)) {
             setButtons(false);
             return null;
         }
 
-        document.getElementById(`C${curnode.getState()[0]}-${curnode.getState()[1]}`)!.style.cssText += `background-color: ${exploredc}; border: solid 1px rgba(38, 39, 49, 0.2);`;
+        document.getElementById(`C${curnode.state[0]}-${curnode.state[1]}`)!.style.cssText += `background-color: ${exploredc}; border: solid 1px rgba(38, 39, 49, 0.2);`;
 
-        explored.push(curnode.getState());
+        explored.push(curnode.state);
 
-        let actions = neighbours(curnode.getState());
+        let actions = neighbours(curnode.state);
 
         await wait(0);
 
         for(let i = 0; i < actions.length; i++) {
             if(!arrContains(explored, actions[i]) && !frontier.containsState(actions[i])) {
-                let child = new Nodes(actions[i], curnode, curnode.getState());
+                let child = new Nodes(actions[i], curnode, curnode.state);
                 frontier.add(child);
             }
         }
