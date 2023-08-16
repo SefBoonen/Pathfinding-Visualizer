@@ -246,6 +246,9 @@ function solve() {
         else if (menuPathfinding.value == "dfs") {
             frontier = new StackFrontier();
         }
+        else if (menuPathfinding.value == "gbfs") {
+            frontier = new GreedyFrontier(goal);
+        }
         frontier.add(new Nodes(start, null, null));
         let list = [];
         let explored = [];
@@ -323,4 +326,7 @@ function clearNotFound() {
     for (let i = 0; i < notfound.length; i++) {
         notfound[i].classList.remove("notfound");
     }
+}
+function manhattanDistance(point1, point2) {
+    return Math.abs(point1[0] - point2[0]) + Math.abs(point1[1] - point2[1]);
 }

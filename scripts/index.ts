@@ -241,6 +241,8 @@ async function solve() {
         frontier = new QueueFrontier();
     } else if((<HTMLInputElement>menuPathfinding).value == "dfs") {
         frontier = new StackFrontier();
+    } else if((<HTMLInputElement>menuPathfinding).value == "gbfs") {
+        frontier = new GreedyFrontier(goal);
     }
     
     frontier.add(new Nodes(start, null, null));
@@ -322,6 +324,10 @@ function clearExplored() {
 function addFS() {
     document.getElementById(`C${start[0]}-${start[1]}`)!.className = "startcell";
     document.getElementById(`C${goal[0]}-${goal[1]}`)!.className = "finishcell";
+}
+
+function manhattanDistance(point1: number[], point2: number[]) {
+    return Math.abs(point1[0] - point2[0]) + Math.abs(point1[1] - point2[1]);
 }
 
 function turnExploredRed() {
