@@ -255,6 +255,7 @@ function solve() {
                 return;
             }
             if (frontier.empty()) {
+                turnExploredRed();
                 setButtonsDisabled(false);
                 return null;
             }
@@ -307,4 +308,10 @@ function clearExplored() {
 function addFS() {
     document.getElementById(`C${start[0]}-${start[1]}`).className = "startcell";
     document.getElementById(`C${goal[0]}-${goal[1]}`).className = "finishcell";
+}
+function turnExploredRed() {
+    let explored = document.querySelectorAll(".explored");
+    for (let i = 0; i < explored.length; i++) {
+        explored[i].className = "notfound";
+    }
 }

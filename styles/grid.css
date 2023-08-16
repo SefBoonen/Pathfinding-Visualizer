@@ -3,6 +3,11 @@
     border: solid 1px rgba(38, 39, 49, 0.2);
 }
 
+.notfound {
+    background-color: #FF0000;
+    border: solid 1px rgba(38, 39, 49, 0.1);
+}
+
 .startcell {
     background-color: rgb(48, 49, 52);
     border: solid 1px #00ff00;
