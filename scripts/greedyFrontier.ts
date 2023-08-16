@@ -28,7 +28,11 @@ class GreedyFrontier {
         if(!this.frontier.length) {
             return undefined;
         } else {
-            return this.frontier.shift();
+            let lowest = [];
+            let lowestManhattanDistance = Infinity;
+            for(let i = 0; i < this.frontier.length; i++) {
+
+            }
         }
     }
 }
