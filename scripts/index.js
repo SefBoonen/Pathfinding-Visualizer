@@ -264,16 +264,18 @@ function solve() {
             let curnode = frontier.remove();
             if (JSON.stringify(curnode.state) == JSON.stringify(goal)) {
                 setButtonsDisabled(false);
+                curnode = curnode.parent;
                 while (curnode.parent != null) {
                     list.push(curnode.state);
                     document.getElementById(`C${curnode.state[0]}-${curnode.state[1]}`).className = "found";
                     curnode = curnode.parent;
                 }
-                document.getElementById(`C${curnode.state[0]}-${curnode.state[1]}`).className = "found";
                 return null;
             }
             field[curnode.state[0]][curnode.state[1]] = 4;
-            document.getElementById(`C${curnode.state[0]}-${curnode.state[1]}`).className = "explored";
+            if (curnode.parent != null) {
+                document.getElementById(`C${curnode.state[0]}-${curnode.state[1]}`).className = "explored";
+            }
             explored.push(curnode.state);
             let actions = neighbours(curnode.state);
             yield wait(0);
