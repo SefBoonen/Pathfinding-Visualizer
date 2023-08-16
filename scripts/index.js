@@ -26,9 +26,9 @@ if (!bSetStart)
 const bAddWalls = document.getElementById("addwalls");
 if (!bAddWalls)
     throw new Error("Add walls button not found");
-const bStop = document.getElementById("stop");
-if (!bStop)
-    throw new Error("Stop button not found");
+const bReset = document.getElementById("reset");
+if (!bReset)
+    throw new Error("Reset button not found");
 const height = Math.floor(window.innerHeight / 30);
 const width = Math.floor(window.innerWidth / 30);
 // 0 = blank space, 1 = goal, 2 = start, 3 = wall, 4 = explored
@@ -115,8 +115,11 @@ container.addEventListener("click", (e) => {
         document.getElementById(`C${start[0]}-${start[1]}`).className = "startcell";
     }
 });
-bStop.addEventListener("click", () => {
+bReset.addEventListener("click", () => {
     stopBool = true;
+    clearExplored();
+    addFS();
+    clearNotFound();
 });
 bSetStart.addEventListener("click", () => {
     if (setStart) {
@@ -313,5 +316,11 @@ function turnExploredRed() {
     let explored = document.querySelectorAll(".explored");
     for (let i = 0; i < explored.length; i++) {
         explored[i].className = "notfound";
+    }
+}
+function clearNotFound() {
+    let notfound = document.querySelectorAll(".notfound");
+    for (let i = 0; i < notfound.length; i++) {
+        notfound[i].classList.remove("notfound");
     }
 }
