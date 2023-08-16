@@ -31,7 +31,7 @@ if (!bStop)
     throw new Error("Stop button not found");
 const height = Math.floor(window.innerHeight / 30);
 const width = Math.floor(window.innerWidth / 30);
-// 0 = blank space, 1 = goal, 2 = start, 3 = wall
+// 0 = blank space, 1 = goal, 2 = start, 3 = wall, 4 = explored
 let field = [];
 let table = "";
 let goal = [Math.floor(height / 2), Math.floor(width * 0.75)];
@@ -263,6 +263,7 @@ function solve() {
                 setButtonsDisabled(false);
                 return null;
             }
+            field[curnode.state[0]][curnode.state[1]] = 4;
             document.getElementById(`C${curnode.state[0]}-${curnode.state[1]}`).className = "explored";
             explored.push(curnode.state);
             let actions = neighbours(curnode.state);

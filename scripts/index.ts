@@ -15,7 +15,7 @@ if(!bStop) throw new Error("Stop button not found");
 
 const height: number = Math.floor(window.innerHeight / 30);
 const width: number = Math.floor(window.innerWidth / 30);
-// 0 = blank space, 1 = goal, 2 = start, 3 = wall
+// 0 = blank space, 1 = goal, 2 = start, 3 = wall, 4 = explored
 let field: number[][] = [];
 
 let table = "";
@@ -265,6 +265,7 @@ async function solve() {
             return null;
         }
 
+        field[curnode.state[0]][curnode.state[1]] = 4;
         document.getElementById(`C${curnode.state[0]}-${curnode.state[1]}`)!.className = "explored";
 
         explored.push(curnode.state);
