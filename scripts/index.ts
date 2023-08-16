@@ -238,6 +238,8 @@ async function solve() {
         frontier = new QueueFrontier();
     } else if((<HTMLInputElement>menuPathfinding).value == "dfs") {
         frontier = new StackFrontier();
+    } else if((<HTMLInputElement>menuPathfinding).value == "gbfs") {
+        frontier = new GreedyFrontier(goal);
     }
     
     frontier.add(new Nodes(start, null, null));

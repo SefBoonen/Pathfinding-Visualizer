@@ -1,8 +1,10 @@
 class GreedyFrontier {
     frontier: Nodes[];
+    goal: number[];
 
-    constructor() {
+    constructor(goal: number[]) {
         this.frontier = [];
+        this.goal = goal;
     }
 
     add(node: Nodes) {
