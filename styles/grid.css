@@ -8,6 +8,11 @@
     border: solid 1px rgba(38, 39, 49, 0.1);
 }
 
+.found {
+    background-color: #eafa068c;
+    border: solid 1px rgba(38, 39, 49, 0);
+}
+
 .startcell {
     background-color: rgb(48, 49, 52);
     border: solid 1px #00ff00;

@@ -65,7 +65,6 @@ container.addEventListener("mousedown", (e) => {
 document.addEventListener("mouseup", (e) => {
     if(e.button == 0) {
         placeWalls = false;
-        console.log("mouseup")
     } else if (e.button == 2) {
         removeWalls = false;
     }
@@ -266,6 +265,12 @@ async function solve() {
 
         if(JSON.stringify(curnode.state) == JSON.stringify(goal)) {
             setButtonsDisabled(false);
+            while(curnode.parent != null) {
+                list.push(curnode.state);
+                document.getElementById(`C${curnode.state[0]}-${curnode.state[1]}`)!.className = "found";
+                curnode = curnode.parent;
+            }
+            document.getElementById(`C${curnode.state[0]}-${curnode.state[1]}`)!.className = "found";
             return null;
         }
 
