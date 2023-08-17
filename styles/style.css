@@ -1,11 +1,20 @@
-td{
-    background-color: rgb(32, 33, 36);
-    padding: 0;
-    border: solid 1px rgb(38, 39, 49);
+html {
+    height: 100%;
 }
 
-td:hover {
-    background-color: #b1ccbd80 !important;
+body {
+    flex-direction: column;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    background-color: #F5F5F5;
+}
+
+.selectionbar {
+    background-color: rgb(32, 33, 36);
+    padding: 10px 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
 button {
@@ -15,6 +24,19 @@ button {
     border: 1px solid #3c4043;
     height: 40px;
     font-size: 14px;
+}
+
+button:hover {
+    background-color: rgb(48, 49, 52);
+}
+
+button:disabled, button[disabled]{
+    color: rgb(47, 47, 48);
+    background-color: rgb(32, 33, 36);
+}
+
+.activated-button {
+    background-color: rgb(57, 68, 87) !important;
 }
 
 select {
@@ -28,44 +50,11 @@ select:hover {
     background-color: rgb(48, 49, 52);
 }
 
-span {
-    margin: 0 14px;
-}
-
-button:hover {
-    background-color: rgb(48, 49, 52);
-}
-
-.selectionbar {
-    background-color: rgb(32, 33, 36);
-    padding: 10px 10px;
-    display: flex;
-    justify-content: space-between;
-}
-
-body {
-    flex-direction: column;
-    margin: 0;
-    height: 100%;
-    display: flex;
-    background-color: #F5F5F5;
-}
-
-table {
-    border-spacing: 0;
-    height: 100%;
-}
-
-html {
-    height: 100%;
-}
-
-button:disabled, button[disabled]{
-    color: rgb(47, 47, 48);
-    background-color: rgb(32, 33, 36);
-}
-
 select:disabled, select[disabled]{
     color: rgb(47, 47, 48);
     background-color: rgb(32, 33, 36);
+}
+
+span {
+    margin: 0 14px;
 }
