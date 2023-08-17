@@ -67,7 +67,6 @@ container.addEventListener("mousedown", (e) => {
 document.addEventListener("mouseup", (e) => {
     if(e.button == 0) {
         placeWalls = false;
-        console.log("mouseup")
     } else if (e.button == 2) {
         removeWalls = false;
     }
