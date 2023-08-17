@@ -19,12 +19,12 @@
 
 .startcell {
     background-color: rgb(48, 49, 52);
-    border: solid var(--border-size) #00ff00;
+    border: solid var(--border-size) #00ff00 !important;
 }
 
 .finishcell{
     background-color: rgb(48, 49, 52);
-    border: solid var(--border-size) yellow;
+    border: solid var(--border-size) yellow !important;
 }
 
 .wall {

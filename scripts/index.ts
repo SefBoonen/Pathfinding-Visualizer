@@ -267,10 +267,9 @@ async function solve() {
 
         if(JSON.stringify(curnode.state) == JSON.stringify(goal)) {
             setButtonsDisabled(false);
-            curnode = curnode.parent;
             while(curnode.parent != null) {
                 list.push(curnode.state);
-                document.getElementById(`C${curnode.state[0]}-${curnode.state[1]}`)!.className = "found";
+                document.getElementById(`C${curnode.state[0]}-${curnode.state[1]}`)!.classList.add("found");
                 curnode = curnode.parent;
             }
             return null;
@@ -278,7 +277,7 @@ async function solve() {
 
         field[curnode.state[0]][curnode.state[1]] = 4;
         if(curnode.parent != null) {
-            document.getElementById(`C${curnode.state[0]}-${curnode.state[1]}`)!.className = "explored";
+            document.getElementById(`C${curnode.state[0]}-${curnode.state[1]}`)!.classList.add("explored");
         }
 
         explored.push(curnode.state);
