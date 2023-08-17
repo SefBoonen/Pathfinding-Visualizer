@@ -1,4 +1,4 @@
-class StackFrontier {
+class Frontier {
     frontier: Nodes[];
 
     constructor() {
@@ -23,10 +23,6 @@ class StackFrontier {
     }
 
     remove() {
-        if(!this.frontier.length) {
-            return undefined;
-        } else {
-            return this.frontier.pop();
-        }
+        throw new Error("Remove method not implemented");
     }
 }
