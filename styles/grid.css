@@ -1,31 +1,35 @@
+:root {
+    --border-size: 1px;
+}
+
 .explored {
     background-color: #3b9aed;
-    border: solid 1px rgba(38, 39, 49, 0.2);
+    border: solid var(--border-size) rgba(38, 39, 49, 0.2);
 }
 
 .notfound {
     background-color: #FF0000;
-    border: solid 1px rgba(38, 39, 49, 0.1);
+    border: solid var(--border-size) rgba(38, 39, 49, 0.1);
 }
 
 .found {
     background-color: #eafa068c;
-    border: solid 1px rgba(38, 39, 49, 0);
+    border: solid var(--border-size) rgba(38, 39, 49, 0);
 }
 
 .startcell {
     background-color: rgb(48, 49, 52);
-    border: solid 1px #00ff00;
+    border: solid var(--border-size) #00ff00;
 }
 
 .finishcell{
     background-color: rgb(48, 49, 52);
-    border: solid 1px yellow;
+    border: solid var(--border-size) yellow;
 }
 
 .wall {
     background-color: #FFFFFF;
-    border: solid 1px rgba(38, 39, 49, 0);
+    border: solid var(--border-size) rgba(38, 39, 49, 0);
 }
 
 table {
@@ -36,7 +40,7 @@ table {
 td{
     background-color: rgb(32, 33, 36);
     padding: 0;
-    border: solid 1px rgb(38, 39, 49);
+    border: solid var(--border-size) rgb(38, 39, 49);
 }
 
 td:hover {
