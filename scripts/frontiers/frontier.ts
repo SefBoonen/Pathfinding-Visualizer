@@ -23,6 +23,6 @@ class Frontier {
     }
 
     remove() {
-        throw new Error("remove not implemeneted");
+        throw new Error("Remove method not implemented");
     }
 }
