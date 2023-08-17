@@ -12,6 +12,8 @@ const bAddWalls = document.getElementById("addwalls");
 if(!bAddWalls) throw new Error("Add walls button not found");
 const bReset = document.getElementById("reset");
 if(!bReset) throw new Error("Reset button not found");
+const bGenMaze = document.getElementById("mazegen");
+if(!bGenMaze) throw new Error("Maze generation button not found");
 
 const height: number = Math.floor(window.innerHeight / 30);
 const width: number = Math.floor(window.innerWidth / 30);
@@ -112,6 +114,10 @@ container.addEventListener("click", (e) => {
         start = clickPos;
         document.getElementById(`C${start[0]}-${start[1]}`)!.className = "startcell";
     }
+});
+
+bGenMaze.addEventListener("click", () => {
+    
 });
 
 bReset.addEventListener("click", () => {
