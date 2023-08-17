@@ -29,6 +29,9 @@ if (!bAddWalls)
 const bReset = document.getElementById("reset");
 if (!bReset)
     throw new Error("Reset button not found");
+const bGenMaze = document.getElementById("mazegen");
+if (!bGenMaze)
+    throw new Error("Maze generation button not found");
 const height = Math.floor(window.innerHeight / 30);
 const width = Math.floor(window.innerWidth / 30);
 // 0 = blank space, 1 = goal, 2 = start, 3 = wall, 4 = explored
@@ -73,7 +76,6 @@ container.addEventListener("mousedown", (e) => {
 document.addEventListener("mouseup", (e) => {
     if (e.button == 0) {
         placeWalls = false;
-        console.log("mouseup");
     }
     else if (e.button == 2) {
         removeWalls = false;
@@ -114,6 +116,8 @@ container.addEventListener("click", (e) => {
         start = clickPos;
         document.getElementById(`C${start[0]}-${start[1]}`).className = "startcell";
     }
+});
+bGenMaze.addEventListener("click", () => {
 });
 bReset.addEventListener("click", () => {
     stopBool = true;
