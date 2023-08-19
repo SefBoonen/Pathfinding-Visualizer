@@ -222,22 +222,22 @@ bGenMaze.addEventListener("click", () => {
 function neighbours(position) {
     let moves = [];
     if (position[1] - 1 >= 0) {
-        if (field[position[0]][position[1] - 1] != 3) {
+        if (field[position[0]][position[1] - 1] == 0) {
             moves.push([position[0], position[1] - 1]);
         }
     }
     if (position[1] + 1 < width) {
-        if (field[position[0]][position[1] + 1] != 3) {
+        if (field[position[0]][position[1] + 1] == 0) {
             moves.push([position[0], position[1] + 1]);
         }
     }
     if (position[0] + 1 < height) {
-        if (field[position[0] + 1][position[1]] != 3) {
+        if (field[position[0] + 1][position[1]] == 0) {
             moves.push([position[0] + 1, position[1]]);
         }
     }
     if (position[0] - 1 >= 0) {
-        if (field[position[0] - 1][position[1]] != 3) {
+        if (field[position[0] - 1][position[1]] == 0) {
             moves.push([position[0] - 1, position[1]]);
         }
     }
@@ -382,27 +382,28 @@ function genMaze() {
                 setButtonsDisabled(false);
                 return null;
             }
-            console.log(curnode.action);
-            console.log(curnode.state);
-            console.log(curnode.action - curnode.state);
-            //Moved in x direction
-            if (Math.abs(curnode.action[1]) - Math.abs(curnode.state[1]) == 1) {
-                field[curnode.state[0] + 1][curnode.state[1]] = 3;
-                field[curnode.state[0] - 1][curnode.state[1]] = 3;
-                document.getElementById(`C${curnode.state[0] + 1}-${curnode.state[1]}`).className = "wall";
-                document.getElementById(`C${curnode.state[0] - 1}-${curnode.state[1]}`).className = "wall";
-            }
-            //Moved in y direction
-            else if (Math.abs(curnode.action[0]) - Math.abs(curnode.state[0]) == 1) {
-                field[curnode.state[0]][curnode.state[1] - 1] = 3;
-                field[curnode.state[0]][curnode.state[1] + 1] = 3;
-                document.getElementById(`C${curnode.state[0]}-${curnode.state[1] - 1}`).className = "wall";
-                document.getElementById(`C${curnode.state[0]}-${curnode.state[1] + 1}`).className = "wall";
-            }
+            // //Moved in x direction
+            // if(Math.abs(curnode.action[1]) - Math.abs(curnode.state[1]) == 1) {
+            //     field[curnode.state[0] + 1][curnode.state[1]] = 3;
+            //     field[curnode.state[0] - 1][curnode.state[1]] = 3;
+            //     document.getElementById(`C${curnode.state[0] + 1}-${curnode.state[1]}`)!.className = "wall";
+            //     document.getElementById(`C${curnode.state[0] - 1}-${curnode.state[1]}`)!.className = "wall";
+            // } 
+            // //Moved in y direction
+            // else if(Math.abs(curnode.action[0]) - Math.abs(curnode.state[0]) == 1) {
+            //     field[curnode.state[0]][curnode.state[1] - 1] = 3;
+            //     field[curnode.state[0]][curnode.state[1] + 1] = 3;
+            //     document.getElementById(`C${curnode.state[0]}-${curnode.state[1] - 1}`)!.className = "wall";
+            //     document.getElementById(`C${curnode.state[0]}-${curnode.state[1] + 1}`)!.className = "wall";
+            // }
             field[curnode.state[0]][curnode.state[1]] = 4;
             document.getElementById(`C${curnode.state[0]}-${curnode.state[1]}`).className = "explored";
             explored.push(curnode.state);
             let actions = neighbours(curnode.state);
+            for (let i = 0; i < actions.length - 1; i++) {
+                field[actions[i][0]][actions[i][1]] = 3;
+                document.getElementById(`C${actions[i][0]}-${actions[i][1]}`).className = "wall";
+            }
             yield wait(0);
             for (let i = 0; i < actions.length; i++) {
                 if (!arrContains(explored, actions[i]) && !frontier.containsState(actions[i])) {
