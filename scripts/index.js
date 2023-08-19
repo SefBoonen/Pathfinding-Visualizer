@@ -216,6 +216,9 @@ document.addEventListener("DOMContentLoaded", () => {
 bSolve.addEventListener("click", () => {
     solve();
 });
+bGenMaze.addEventListener("click", () => {
+    genMaze();
+});
 function neighbours(position) {
     let moves = [];
     if (position[1] - 1 >= 0) {
@@ -353,4 +356,57 @@ function randomiseArray(array) {
         ];
     }
     return array;
+}
+function genMaze() {
+    return __awaiter(this, void 0, void 0, function* () {
+        setButtonsDisabled(true);
+        let frontier = new StackFrontier();
+        frontier.add(new Nodes(start, null, null));
+        let list = [];
+        let explored = [];
+        while (true) {
+            if (stopBool) {
+                clearExplored();
+                addFS();
+                stopBool = false;
+                setButtonsDisabled(false);
+                return;
+            }
+            if (frontier.empty()) {
+                turnExploredRed();
+                setButtonsDisabled(false);
+                return null;
+            }
+            let curnode = frontier.remove();
+            if (JSON.stringify(curnode.state) == JSON.stringify(goal)) {
+                setButtonsDisabled(false);
+                return null;
+            }
+            //Moved in x direction
+            if (JSON.stringify(curnode.action - curnode.state) == JSON.stringify([0, 1]) || JSON.stringify(curnode.action - curnode.state) == JSON.stringify([0, -1])) {
+                field[curnode.state[0]][curnode.state[1]] = 3;
+                field[curnode.state[0]][curnode.state[1]] = 3;
+                document.getElementById(`C${curnode.state[0]}-${curnode.state[1] + 1}`).className = "wall";
+                document.getElementById(`C${curnode.state[0]}-${curnode.state[1] - 1}`).className = "wall";
+            }
+            //Moved in y direction
+            else if (JSON.stringify(curnode.action - curnode.state) == JSON.stringify([1, 0]) || JSON.stringify(curnode.action - curnode.state) == JSON.stringify([-1, 0])) {
+                field[curnode.state[0]][curnode.state[1]] = 3;
+                field[curnode.state[0]][curnode.state[1]] = 3;
+                document.getElementById(`C${curnode.state[0] - 1}-${curnode.state[1]}`).className = "wall";
+                document.getElementById(`C${curnode.state[0] + 1}-${curnode.state[1]}`).className = "wall";
+            }
+            field[curnode.state[0]][curnode.state[1]] = 4;
+            document.getElementById(`C${curnode.state[0]}-${curnode.state[1]}`).className = "explored";
+            explored.push(curnode.state);
+            let actions = neighbours(curnode.state);
+            yield wait(0);
+            for (let i = 0; i < actions.length; i++) {
+                if (!arrContains(explored, actions[i]) && !frontier.containsState(actions[i])) {
+                    let child = new Nodes(actions[i], curnode, curnode.state);
+                    frontier.add(child);
+                }
+            }
+        }
+    });
 }
