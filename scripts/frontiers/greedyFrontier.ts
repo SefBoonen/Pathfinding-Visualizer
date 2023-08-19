@@ -20,7 +20,7 @@ class GreedyFrontier extends Frontier {
                 ) {
                     lowestManhattanDistance = manhattanDistance(
                         this.frontier[i].state,
-                        this.goal,
+                        this.goal
                     );
                     lowest = this.frontier[i];
                     lowestIndex = i;

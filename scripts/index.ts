@@ -52,14 +52,14 @@ container.addEventListener("mousedown", (e) => {
         if (addWalls && field[clickPos[0]][clickPos[1]] == 0) {
             field[clickPos[0]][clickPos[1]] = 3;
             document.getElementById(
-                `C${clickPos[0]}-${clickPos[1]}`,
+                `C${clickPos[0]}-${clickPos[1]}`
             )!.className = "wall";
         }
     } else if (e.buttons == 2) {
         removeWalls = true;
         if (field[clickPos[0]][clickPos[1]] == 3 && addWalls) {
             document.getElementById(
-                `C${clickPos[0]}-${clickPos[1]}`,
+                `C${clickPos[0]}-${clickPos[1]}`
             )!.className = "";
             field[clickPos[0]][clickPos[1]] = 0;
         }
@@ -87,11 +87,11 @@ container.addEventListener("mouseover", (e) => {
         if (placeWalls && field[clickPos[0]][clickPos[1]] == 0) {
             field[clickPos[0]][clickPos[1]] = 3;
             document.getElementById(
-                `C${clickPos[0]}-${clickPos[1]}`,
+                `C${clickPos[0]}-${clickPos[1]}`
             )!.className = "wall";
         } else if (removeWalls && field[clickPos[0]][clickPos[1]] == 3) {
             document.getElementById(
-                `C${clickPos[0]}-${clickPos[1]}`,
+                `C${clickPos[0]}-${clickPos[1]}`
             )!.className = "";
             field[clickPos[0]][clickPos[1]] = 0;
         }
@@ -280,7 +280,7 @@ async function solve() {
 
         field[curnode.state[0]][curnode.state[1]] = 4;
         document.getElementById(
-            `C${curnode.state[0]}-${curnode.state[1]}`,
+            `C${curnode.state[0]}-${curnode.state[1]}`
         )!.className = "explored";
 
         explored.push(curnode.state);
