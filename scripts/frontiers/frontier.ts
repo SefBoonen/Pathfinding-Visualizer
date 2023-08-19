@@ -1,28 +1,30 @@
 class Frontier {
-    frontier: Nodes[];
+    frontier: Nodes[]
 
     constructor() {
-        this.frontier = [];
+        this.frontier = []
     }
 
     add(node: Nodes) {
-        this.frontier.push(node);
+        this.frontier.push(node)
     }
 
     containsState(state: number[]) {
-        for(let i = 0; i < this.frontier.length; i++) {
-            if(JSON.stringify(this.frontier[i].state) == JSON.stringify(state)) {
-                return true;
+        for (let i = 0; i < this.frontier.length; i++) {
+            if (
+                JSON.stringify(this.frontier[i].state) == JSON.stringify(state)
+            ) {
+                return true
             }
         }
-        return false;
+        return false
     }
 
     empty() {
-        return this.frontier.length == 0;
+        return this.frontier.length == 0
     }
 
     remove() {
-        throw new Error("Remove method not implemented");
+        throw new Error("Remove method not implemented")
     }
 }

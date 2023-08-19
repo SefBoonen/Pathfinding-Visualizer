@@ -1,14 +1,27 @@
 {
-  "name": "pathfinding-visualizer",
-  "version": "1.0.0",
-  "description": "Live demo: https://sefboonen.github.io/Pathfinding-Visualizer/",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "typescript": "^5.1.6"
-  }
+    "name": "pathfinding-visualizer",
+    "version": "1.0.0",
+    "description": "Live demo: https://sefboonen.github.io/Pathfinding-Visualizer/",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "format": "npx prettier --write ."
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "husky": "^8.0.3",
+        "pretty-quick": "^3.1.3",
+        "typescript": "^5.1.6",
+        "prettier": "^3.0.2"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "pretty-quick --staged"
+        }
+    },
+    "prettier": {
+        "tabWidth": 4,
+        "semi": false
+    }
 }

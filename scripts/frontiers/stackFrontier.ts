@@ -1,14 +1,13 @@
-class StackFrontier extends Frontier{
-
+class StackFrontier extends Frontier {
     constructor() {
-        super();
+        super()
     }
 
     remove() {
-        if(!this.frontier.length) {
-            return undefined;
+        if (!this.frontier.length) {
+            return undefined
         } else {
-            return this.frontier.pop();
+            return this.frontier.pop()
         }
     }
 }
