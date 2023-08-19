@@ -22,6 +22,6 @@
     },
     "prettier": {
         "tabWidth": 4,
-        "semi": false
+        "semi": true
     }
 }
