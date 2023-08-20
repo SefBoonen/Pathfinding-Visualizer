@@ -1,4 +1,7 @@
 import { Nodes } from "./nodes";
+import { GreedyFrontier } from "./frontiers/greedyFrontier";
+import { QueueFrontier } from "./frontiers/queueFrontier";
+import { StackFrontier } from "./frontiers/stackFrontier";
 
 const container = document.getElementById("container");
 const bSolve = document.getElementById("solve");

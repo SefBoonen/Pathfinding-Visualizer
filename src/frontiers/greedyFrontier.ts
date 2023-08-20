@@ -1,3 +1,7 @@
+import { Frontier } from "./frontier";
+import { manhattanDistance } from "../index";
+import { Nodes } from "../nodes";
+
 class GreedyFrontier extends Frontier {
     goal: number[];
 
@@ -31,3 +35,5 @@ class GreedyFrontier extends Frontier {
         }
     }
 }
+
+export { GreedyFrontier };
