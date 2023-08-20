@@ -13,7 +13,6 @@ if (!bSetStart) throw new Error("Set start button not found");
 if (!bAddWalls) throw new Error("Add walls button not found");
 if (!bReset) throw new Error("Reset button not found");
 
-
 const height: number = Math.floor(window.innerHeight / 30);
 const width: number = Math.floor(window.innerWidth / 30);
 // 0 = blank space, 1 = goal, 2 = start, 3 = wall, 4 = explored
@@ -276,9 +275,11 @@ async function solve() {
 
         if (JSON.stringify(curnode.state) == JSON.stringify(goal)) {
             setButtonsDisabled(false);
-            while(curnode.parent != null) {
+            while (curnode.parent != null) {
                 list.push(curnode.state);
-                document.getElementById(`C${curnode.state[0]}-${curnode.state[1]}`)!.classList.add("found");
+                document
+                    .getElementById(`C${curnode.state[0]}-${curnode.state[1]}`)!
+                    .classList.add("found");
                 curnode = curnode.parent;
             }
             return null;

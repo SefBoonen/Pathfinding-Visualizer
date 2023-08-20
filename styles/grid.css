@@ -12,6 +12,10 @@
     border: solid 1px rgba(38, 39, 49, 0.1);
 }
 
+.found {
+    background-color: #b9d611;
+}
+
 .startcell {
     background-color: rgb(48, 49, 52);
     border: solid var(--border-size) #00ff00 !important;
