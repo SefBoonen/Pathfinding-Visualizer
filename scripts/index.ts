@@ -1,17 +1,18 @@
 const container = document.getElementById("container");
-if (!container) throw new Error("Container not found");
 const bSolve = document.getElementById("solve");
-if (!bSolve) throw new Error("Solve button not found");
 const menuPathfinding = document.getElementById("pathfinding-algorithm");
-if (!menuPathfinding) throw new Error("Pathfinding menu not found");
 const bSetGoal = document.getElementById("setgoal");
-if (!bSetGoal) throw new Error("Set goal button not found");
 const bSetStart = document.getElementById("setstart");
-if (!bSetStart) throw new Error("Set start button not found");
 const bAddWalls = document.getElementById("addwalls");
-if (!bAddWalls) throw new Error("Add walls button not found");
 const bReset = document.getElementById("reset");
+if (!container) throw new Error("Container not found");
+if (!bSolve) throw new Error("Solve button not found");
+if (!menuPathfinding) throw new Error("Pathfinding menu not found");
+if (!bSetGoal) throw new Error("Set goal button not found");
+if (!bSetStart) throw new Error("Set start button not found");
+if (!bAddWalls) throw new Error("Add walls button not found");
 if (!bReset) throw new Error("Reset button not found");
+
 
 const height: number = Math.floor(window.innerHeight / 30);
 const width: number = Math.floor(window.innerWidth / 30);
