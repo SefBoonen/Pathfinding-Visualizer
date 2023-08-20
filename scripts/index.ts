@@ -285,10 +285,13 @@ async function solve() {
             return null;
         }
 
-        field[curnode.state[0]][curnode.state[1]] = 4;
-        document.getElementById(
-            `C${curnode.state[0]}-${curnode.state[1]}`
-        )!.className = "explored";
+        if(field[curnode.state[0]][curnode.state[1]] == 0) {
+            field[curnode.state[0]][curnode.state[1]] = 4;
+            document.getElementById(
+                `C${curnode.state[0]}-${curnode.state[1]}`
+            )!.className = "explored";
+        }
+
 
         explored.push(curnode.state);
 
