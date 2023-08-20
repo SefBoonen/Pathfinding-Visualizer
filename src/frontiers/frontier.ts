@@ -1,3 +1,5 @@
+import { Nodes } from "../nodes";
+
 class Frontier {
     frontier: Nodes[];
 
@@ -28,3 +30,5 @@ class Frontier {
         throw new Error("Remove method not implemented");
     }
 }
+
+export { Frontier };

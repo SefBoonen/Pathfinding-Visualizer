@@ -1,3 +1,5 @@
+import { Frontier } from "./frontier";
+
 class QueueFrontier extends Frontier {
     constructor() {
         super();
@@ -11,3 +13,5 @@ class QueueFrontier extends Frontier {
         }
     }
 }
+
+export { QueueFrontier };

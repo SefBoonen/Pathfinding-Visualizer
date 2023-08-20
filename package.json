@@ -2,7 +2,7 @@
     "name": "pathfinding-visualizer",
     "version": "1.0.0",
     "description": "Live demo: https://sefboonen.github.io/Pathfinding-Visualizer/",
-    "main": "index.js",
+    "private": true,
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "format": "npx prettier --write ."

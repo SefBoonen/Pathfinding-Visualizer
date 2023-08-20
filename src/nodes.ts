@@ -13,3 +13,5 @@ class Nodes {
         this.action = action;
     }
 }
+
+export { Nodes };

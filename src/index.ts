@@ -1,3 +1,5 @@
+import { Nodes } from "./nodes";
+
 const container = document.getElementById("container");
 const bSolve = document.getElementById("solve");
 const menuPathfinding = document.getElementById("pathfinding-algorithm");
@@ -285,13 +287,12 @@ async function solve() {
             return null;
         }
 
-        if(field[curnode.state[0]][curnode.state[1]] == 0) {
+        if (field[curnode.state[0]][curnode.state[1]] == 0) {
             field[curnode.state[0]][curnode.state[1]] = 4;
             document.getElementById(
                 `C${curnode.state[0]}-${curnode.state[1]}`
             )!.className = "explored";
         }
-
 
         explored.push(curnode.state);
 
@@ -377,3 +378,5 @@ function clearNotFound() {
         notfound[i].classList.remove("notfound");
     }
 }
+
+export { manhattanDistance };
