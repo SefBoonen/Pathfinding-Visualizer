@@ -10,8 +10,10 @@ class Frontier {
     }
 
     containsState(state: number[]) {
-        for(let i = 0; i < this.frontier.length; i++) {
-            if(JSON.stringify(this.frontier[i].state) == JSON.stringify(state)) {
+        for (let i = 0; i < this.frontier.length; i++) {
+            if (
+                JSON.stringify(this.frontier[i].state) == JSON.stringify(state)
+            ) {
                 return true;
             }
         }

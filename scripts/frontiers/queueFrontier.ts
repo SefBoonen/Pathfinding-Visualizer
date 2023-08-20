@@ -1,11 +1,10 @@
-class QueueFrontier extends Frontier{
-
+class QueueFrontier extends Frontier {
     constructor() {
         super();
     }
-    
+
     remove() {
-        if(!this.frontier.length) {
+        if (!this.frontier.length) {
             return undefined;
         } else {
             return this.frontier.shift();

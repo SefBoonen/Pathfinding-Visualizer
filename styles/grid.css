@@ -8,13 +8,8 @@
 }
 
 .notfound {
-    background-color: #FF0000;
-    border: solid var(--border-size) rgba(38, 39, 49, 0.1);
-}
-
-.found {
-    background-color: #eafa068c;
-    border: solid var(--border-size) rgba(38, 39, 49, 0);
+    background-color: #ff0000;
+    border: solid 1px rgba(38, 39, 49, 0.1);
 }
 
 .startcell {
@@ -22,14 +17,14 @@
     border: solid var(--border-size) #00ff00 !important;
 }
 
-.finishcell{
+.finishcell {
     background-color: rgb(48, 49, 52);
     border: solid var(--border-size) yellow !important;
 }
 
 .wall {
-    background-color: #FFFFFF;
-    border: solid var(--border-size) rgba(38, 39, 49, 0);
+    background-color: #ffffff;
+    border: solid 1px rgba(38, 39, 49, 0);
 }
 
 table {
@@ -37,7 +32,7 @@ table {
     height: 100%;
 }
 
-td{
+td {
     background-color: rgb(32, 33, 36);
     padding: 0;
     border: solid var(--border-size) rgb(38, 39, 49);

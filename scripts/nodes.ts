@@ -1,9 +1,13 @@
 class Nodes {
-    state: any;
+    state: number[];
     parent: Nodes | null;
-    action: any;
+    action: number[] | null;
 
-    constructor(state: any, parent: Nodes | null, action: any) {
+    constructor(
+        state: number[],
+        parent: Nodes | null,
+        action: number[] | null
+    ) {
         this.state = state;
         this.parent = parent;
         this.action = action;
