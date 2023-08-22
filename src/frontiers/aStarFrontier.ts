@@ -1,7 +1,7 @@
 import { Frontier } from "./frontier";
 import { Nodes } from "../nodes";
 
-class QueueFrontier extends Frontier {
+class AStarFrontier extends Frontier {
     constructor() {
         super();
     }
@@ -20,4 +20,4 @@ class QueueFrontier extends Frontier {
     }
 }
 
-export { QueueFrontier };
+export { AStarFrontier };

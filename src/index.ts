@@ -2,6 +2,7 @@ import { Nodes } from "./nodes";
 import { GreedyFrontier } from "./frontiers/greedyFrontier";
 import { QueueFrontier } from "./frontiers/queueFrontier";
 import { StackFrontier } from "./frontiers/stackFrontier";
+import { AStarFrontier } from "./frontiers/aStarFrontier";
 
 const container = document.getElementById("container");
 const bSolve = document.getElementById("solve");
@@ -255,6 +256,8 @@ async function solve() {
         frontier = new StackFrontier();
     } else if ((<HTMLInputElement>menuPathfinding).value == "gbfs") {
         frontier = new GreedyFrontier(goal);
+    } else if ((<HTMLInputElement>menuPathfinding).value == "astar") {
+        frontier = new AStarFrontier();
     }
 
     frontier.add(new Nodes(start, null, null));
