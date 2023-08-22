@@ -1,4 +1,5 @@
 import { Frontier } from "./frontier";
+import { Nodes } from "../nodes";
 
 class QueueFrontier extends Frontier {
     constructor() {
@@ -7,6 +8,15 @@ class QueueFrontier extends Frontier {
 
     remove() {
         
+    }
+
+    countParents(node: Nodes) {
+        let count = 0;
+        while(node.parent != null) {
+            count++;
+            node = node.parent;
+        }
+        return count;
     }
 }
 
