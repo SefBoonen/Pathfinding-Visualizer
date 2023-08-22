@@ -8,7 +8,9 @@ class AStarFrontier extends Frontier {
     }
 
     remove() {
-        
+        if(this.empty()) {
+            return undefined;
+        }
     }
 
     countParents(node: Nodes) {
