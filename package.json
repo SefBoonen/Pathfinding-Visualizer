@@ -7,7 +7,7 @@
     "description": "Live demo: https://sefboonen.github.io/Pathfinding-Visualizer/",
     "private": true,
     "scripts": {
-        "build": "webpack --mode=development",
+        "build": "webpack mode=production",
         "test": "echo \"Error: no test specified\" && exit 1",
         "format": "npx prettier --write .",
         "predeploy": "npm run build",
