@@ -1,15 +1,22 @@
 {
     "name": "pathfinding-visualizer",
     "version": "1.0.0",
+    "repository": {
+        "url": "git+https://github.com/SefBoonen/Pathfinding-Visualizer.git"
+    },
     "description": "Live demo: https://sefboonen.github.io/Pathfinding-Visualizer/",
     "private": true,
     "scripts": {
+        "build": "webpack --mode=development",
         "test": "echo \"Error: no test specified\" && exit 1",
-        "format": "npx prettier --write ."
+        "format": "npx prettier --write .",
+        "predeploy": "npm run build",
+        "deploy": "gh-pages -d dist"
     },
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "gh-pages": "^6.0.0",
         "husky": "^8.0.3",
         "prettier": "^3.0.2",
         "pretty-quick": "^3.1.3",
