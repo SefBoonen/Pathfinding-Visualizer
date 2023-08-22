@@ -1,5 +1,6 @@
 import { Frontier } from "./frontier";
 import { Nodes } from "../nodes";
+import { manhattanDistance } from "../index";
 
 class AStarFrontier extends Frontier {
     constructor() {
