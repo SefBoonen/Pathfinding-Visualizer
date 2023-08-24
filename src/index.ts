@@ -257,7 +257,7 @@ async function solve() {
     } else if ((<HTMLInputElement>menuPathfinding).value == "gbfs") {
         frontier = new GreedyFrontier(goal);
     } else if ((<HTMLInputElement>menuPathfinding).value == "astar") {
-        frontier = new AStarFrontier();
+        frontier = new AStarFrontier(goal);
     }
 
     frontier.add(new Nodes(start, null, null));
@@ -328,7 +328,7 @@ function arrContains(array: any[], element: any): boolean {
 }
 
 function wait(ms: number) {
-    return new Promise((resolve) => setTimeout(resolve, ms));
+    return new Promise((resolve: any) => setTimeout(resolve, ms));
 }
 
 function setButtonsDisabled(bool: boolean) {
