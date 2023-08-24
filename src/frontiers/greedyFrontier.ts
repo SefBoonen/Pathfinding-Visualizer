@@ -11,7 +11,7 @@ class GreedyFrontier extends Frontier {
     }
 
     remove() {
-        if (!this.frontier.length) {
+        if (this.empty()) {
             return undefined;
         } else {
             let lowestIndex: number = -1;
