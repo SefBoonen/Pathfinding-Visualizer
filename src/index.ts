@@ -432,19 +432,19 @@ async function genMaze() {
 
         let curnode: any = frontier.remove();
 
-        if(JSON.stringify(curnode.state) == JSON.stringify(goal)) {
-            setButtonsDisabled(false);
-            return null;
+        // if(JSON.stringify(curnode.state) == JSON.stringify(goal)) {
+        //     setButtonsDisabled(false);
+        //     return null;
+        // }
+
+        let newWalls = neighbours(curnode.state);
+
+        for(let i = 0; i < newWalls.length - 2; i++) {
+            field[newWalls[i][0]][newWalls[i][1]] = 3;
+            document.getElementById(`C${newWalls[i][0]}-${newWalls[i][1]}`)!.className = "wall";
         }
 
-        // //Moved in x direction
-        // if(Math.abs(curnode.action[1]) - Math.abs(curnode.state[1]) == 1) {
-        //     field[curnode.state[0] + 1][curnode.state[1]] = 3;
-        //     field[curnode.state[0] - 1][curnode.state[1]] = 3;
-        //     document.getElementById(`C${curnode.state[0] + 1}-${curnode.state[1]}`)!.className = "wall";
-        //     document.getElementById(`C${curnode.state[0] - 1}-${curnode.state[1]}`)!.className = "wall";
-        // } 
-        // //Moved in y direction
+        //Moved in y direction
         // else if(Math.abs(curnode.action[0]) - Math.abs(curnode.state[0]) == 1) {
         //     field[curnode.state[0]][curnode.state[1] - 1] = 3;
         //     field[curnode.state[0]][curnode.state[1] + 1] = 3;
@@ -459,10 +459,10 @@ async function genMaze() {
 
         let actions = neighbours(curnode.state);
 
-        for(let i = 0; i < actions.length - 1; i++) {
-            field[actions[i][0]][actions[i][1]] = 3;
-            document.getElementById(`C${actions[i][0]}-${actions[i][1]}`)!.className = "wall";
-        }
+        // for(let i = 0; i < actions.length - 1; i++) {
+        //     field[actions[i][0]][actions[i][1]] = 3;
+        //     document.getElementById(`C${actions[i][0]}-${actions[i][1]}`)!.className = "wall";
+        // }
 
         await wait(0);
 
