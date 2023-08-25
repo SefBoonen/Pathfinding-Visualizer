@@ -7,7 +7,7 @@ body {
     margin: 0;
     height: 100%;
     display: flex;
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
 }
 
 .selectionbar {
@@ -19,7 +19,7 @@ body {
 
 button {
     background-color: rgb(32, 33, 36);
-    color: #FFFFFF;
+    color: #ffffff;
     border-radius: 20px;
     border: 1px solid #3c4043;
     height: 40px;
@@ -30,7 +30,8 @@ button:hover {
     background-color: rgb(48, 49, 52);
 }
 
-button:disabled, button[disabled]{
+button:disabled,
+button[disabled] {
     color: rgb(47, 47, 48);
     background-color: rgb(32, 33, 36);
 }
@@ -50,7 +51,8 @@ select:hover {
     background-color: rgb(48, 49, 52);
 }
 
-select:disabled, select[disabled]{
+select:disabled,
+select[disabled] {
     color: rgb(47, 47, 48);
     background-color: rgb(32, 33, 36);
 }

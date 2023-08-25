@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-    <html lang="en">
+<!doctype html>
+<html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Pathfinding Visualizer</title>
-        <link rel="stylesheet" href="styles/style.css">
-        <link rel="stylesheet" href="styles/grid.css">
-        <script src="scripts/nodes.js" async defer></script>
-        <script src="scripts/frontiers/frontier.js" async defer></script>
-        <script src="scripts/frontiers/queueFrontier.js" async defer></script>
-        <script src="scripts/frontiers/stackFrontier.js" async defer></script>
-        <script src="scripts/frontiers/greedyFrontier.js" async defer></script>
-        <script src="scripts/index.js" defer></script>
+        <link rel="stylesheet" href="styles/style.css" />
+        <link rel="stylesheet" href="styles/grid.css" />
+        <script src="main.js" defer></script>
     </head>
     <body>
         <div class="selectionbar">
@@ -28,6 +23,7 @@
                 <option value="dfs">Depth-first search</option>
                 <option value="bfs">Breadth-first search</option>
                 <option value="gbfs">Greedy best first search</option>
+                <option value="astar">A* search</option>
             </select>
             <button id="solve">
                 <span>Solve</span>
@@ -40,8 +36,7 @@
             </button>
         </div>
         <table>
-            <tbody id="container">
-            </tbody>
+            <tbody id="container"></tbody>
         </table>
     </body>
 </html>

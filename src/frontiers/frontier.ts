@@ -1,3 +1,5 @@
+import { Nodes } from "../nodes";
+
 class Frontier {
     frontier: Nodes[];
 
@@ -10,8 +12,10 @@ class Frontier {
     }
 
     containsState(state: number[]) {
-        for(let i = 0; i < this.frontier.length; i++) {
-            if(JSON.stringify(this.frontier[i].state) == JSON.stringify(state)) {
+        for (let i = 0; i < this.frontier.length; i++) {
+            if (
+                JSON.stringify(this.frontier[i].state) == JSON.stringify(state)
+            ) {
                 return true;
             }
         }
@@ -26,3 +30,5 @@ class Frontier {
         throw new Error("Remove method not implemented");
     }
 }
+
+export { Frontier };
