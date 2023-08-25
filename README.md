@@ -7,3 +7,4 @@ Live demo: https://sefboonen.github.io/Pathfinding-Visualizer/
 -   Depth-first search
 -   Breadth-first search
 -   Greedy best first search
+-   A* search algorithm
