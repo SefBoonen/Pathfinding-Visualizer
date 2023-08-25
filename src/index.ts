@@ -234,22 +234,22 @@ function neighbours(position: number[]) {
     let moves: number[][] = [];
 
     if(position[1] - 1 >= 0) {
-        if(field[position[0]][position[1] - 1] == 0) {
+        if(field[position[0]][position[1] - 1] != 3 && field[position[0]][position[1] - 1] != 4) {
             moves.push([position[0], position[1] - 1]);
         }
     }
     if(position[1] + 1 < width) {
-        if(field[position[0]][position[1] + 1] == 0) {
+        if(field[position[0]][position[1] + 1] != 3 && field[position[0]][position[1] + 1] != 4) {
             moves.push([position[0], position[1] + 1]);
         }
     }
     if(position[0] + 1 < height) {
-        if(field[position[0] + 1][position[1]] == 0) {
+        if(field[position[0] + 1][position[1]] != 3 && field[position[0] + 1][position[1]] != 4) {
             moves.push([position[0] + 1, position[1]]);
         }
     }
     if(position[0] - 1 >= 0) {
-        if(field[position[0] - 1][position[1]] == 0) {
+        if(field[position[0] - 1][position[1]] != 3 && field[position[0] - 1][position[1]] != 4) {
             moves.push([position[0] - 1, position[1]]);
         }
     }
