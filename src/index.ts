@@ -23,8 +23,8 @@ if (!bSetStart) throw new Error("Set start button not found");
 if (!bAddWalls) throw new Error("Add walls button not found");
 if (!bReset) throw new Error("Reset button not found");
 
-const height: number = 5;
-const width: number = 5;
+const height: number = 2;
+const width: number = 3;
 // 0 = blank space, 1 = goal, 2 = start, 3 = wall, 4 = explored
 let field: number[][] = [];
 
@@ -277,7 +277,8 @@ function neighbours(position: number[]) {
         }
     }
 
-    return randomiseArray(moves);
+    // return randomiseArray(moves);
+    return moves;
 }
 
 async function solve() {
@@ -501,13 +502,13 @@ async function genMaze() {
                 if(curnode.state[1] - 1 >= 0) {
                     if(curnode.state[0] + 1 < height) field[curnode.state[0] + 1][curnode.state[1] - 1] = 3;
                     if(curnode.state[0] - 1 >= 0) field[curnode.state[0] - 1][curnode.state[1] - 1] = 3;
-                    console.log(field);
                     // explored.push([curnode.state[0] + 1, curnode.state[1] - 1]);
                     // explored.push([curnode.state[0] - 1, curnode.state[1] - 1]);
                 }
                 // console.log("right")
             }
         }
+        // console.log(field);
 
         field[curnode.state[0]][curnode.state[1]] = 4;
         document.getElementById(`C${curnode.state[0]}-${curnode.state[1]}`)!.className = "explored";
@@ -515,7 +516,6 @@ async function genMaze() {
         explored.push(curnode.state);
 
         let actions = neighbours(curnode.state);
-        console.log(actions);
 
         // for(let i = 0; i < actions.length - 1; i++) {
         //     field[actions[i][0]][actions[i][1]] = 3;
@@ -530,6 +530,8 @@ async function genMaze() {
                 frontier.add(child);
             }
         }
+        console.log(`actions ${actions}`);
+        console.log(JSON.stringify(frontier.frontier));
     }
 }
 export { manhattanDistance };
