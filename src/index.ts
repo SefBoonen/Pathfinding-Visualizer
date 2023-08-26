@@ -234,7 +234,7 @@ bRandomFill.addEventListener("click", () => {
         }
     }
 
-    for(let i = 0; i < Math.floor(candidates.length * fillPerc); i++) {
+    for(let i = 0; i < Math.floor((height * width) * fillPerc); i++) {
         let random = Math.floor(Math.random() * (candidates.length + 1));
         field[candidates[random][0]][candidates[random][1]] = 3;
         document.getElementById(
