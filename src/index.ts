@@ -466,8 +466,7 @@ async function genMaze() {
         //     field[newWalls[i][0]][newWalls[i][1]] = 3;
         //     document.getElementById(`C${newWalls[i][0]}-${newWalls[i][1]}`)!.className = "wall";
         // }
-        if(field[100][100]) console.log("works");
-        
+   
         // Moved up
         if(curnode.parent != null) {
             if(curnode.action[0] - curnode.state[0] == 1) {
@@ -502,6 +501,8 @@ async function genMaze() {
                 if(curnode.state[1] - 1 >= 0) {
                     if(curnode.state[0] + 1 < height) field[curnode.state[0] + 1][curnode.state[1] - 1] = 3;
                     if(curnode.state[0] - 1 >= 0) field[curnode.state[0] - 1][curnode.state[1] - 1] = 3;
+                    explored.push([curnode.state[0] + 1, curnode.state[1] - 1]);
+                    explored.push([curnode.state[0] - 1, curnode.state[1] - 1]);
                 }
                 // console.log("right")
             }
@@ -519,7 +520,7 @@ async function genMaze() {
         //     document.getElementById(`C${actions[i][0]}-${actions[i][1]}`)!.className = "wall";
         // }
 
-        await wait(1000);
+        await wait(0);
 
         for(let i = 0; i < actions.length; i++) {
             if(!arrContains(explored, actions[i]) && !frontier.containsState(actions[i])) {
