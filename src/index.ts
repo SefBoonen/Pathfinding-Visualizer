@@ -23,8 +23,8 @@ if (!bSetStart) throw new Error("Set start button not found");
 if (!bAddWalls) throw new Error("Add walls button not found");
 if (!bReset) throw new Error("Reset button not found");
 
-const height: number = Math.floor(window.innerHeight / 30);
-const width: number = Math.floor(window.innerWidth / 30);
+const height: number = 5;
+const width: number = 5;
 // 0 = blank space, 1 = goal, 2 = start, 3 = wall, 4 = explored
 let field: number[][] = [];
 
@@ -257,22 +257,22 @@ function neighbours(position: number[]) {
     let moves: number[][] = [];
 
     if(position[1] - 1 >= 0) {
-        if(field[position[0]][position[1] - 1] != 3 && field[position[0]][position[1] - 1] != 4) {
+        if(field[position[0]][position[1] - 1] == 0) {
             moves.push([position[0], position[1] - 1]);
         }
     }
     if(position[1] + 1 < width) {
-        if(field[position[0]][position[1] + 1] != 3 && field[position[0]][position[1] + 1] != 4) {
+        if(field[position[0]][position[1] + 1] == 0) {
             moves.push([position[0], position[1] + 1]);
         }
     }
     if(position[0] + 1 < height) {
-        if(field[position[0] + 1][position[1]] != 3 && field[position[0] + 1][position[1]] != 4) {
+        if(field[position[0] + 1][position[1]] == 0) {
             moves.push([position[0] + 1, position[1]]);
         }
     }
     if(position[0] - 1 >= 0) {
-        if(field[position[0] - 1][position[1]] != 3 && field[position[0] - 1][position[1]] != 4) {
+        if(field[position[0] - 1][position[1]] == 0) {
             moves.push([position[0] - 1, position[1]]);
         }
     }
@@ -501,8 +501,9 @@ async function genMaze() {
                 if(curnode.state[1] - 1 >= 0) {
                     if(curnode.state[0] + 1 < height) field[curnode.state[0] + 1][curnode.state[1] - 1] = 3;
                     if(curnode.state[0] - 1 >= 0) field[curnode.state[0] - 1][curnode.state[1] - 1] = 3;
-                    explored.push([curnode.state[0] + 1, curnode.state[1] - 1]);
-                    explored.push([curnode.state[0] - 1, curnode.state[1] - 1]);
+                    console.log(field);
+                    // explored.push([curnode.state[0] + 1, curnode.state[1] - 1]);
+                    // explored.push([curnode.state[0] - 1, curnode.state[1] - 1]);
                 }
                 // console.log("right")
             }
@@ -514,13 +515,14 @@ async function genMaze() {
         explored.push(curnode.state);
 
         let actions = neighbours(curnode.state);
+        console.log(actions);
 
         // for(let i = 0; i < actions.length - 1; i++) {
         //     field[actions[i][0]][actions[i][1]] = 3;
         //     document.getElementById(`C${actions[i][0]}-${actions[i][1]}`)!.className = "wall";
         // }
 
-        await wait(0);
+        await wait(2000);
 
         for(let i = 0; i < actions.length; i++) {
             if(!arrContains(explored, actions[i]) && !frontier.containsState(actions[i])) {
