@@ -23,8 +23,8 @@ if (!bSetStart) throw new Error("Set start button not found");
 if (!bAddWalls) throw new Error("Add walls button not found");
 if (!bReset) throw new Error("Reset button not found");
 
-const height: number = 2;
-const width: number = 3;
+const height: number = 30;
+const width: number = 60;
 // 0 = blank space, 1 = goal, 2 = start, 3 = wall, 4 = explored
 let field: number[][] = [];
 
@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (i == goal[0] && j == goal[1]) {
                 field[i].push(1);
             } else if (i == start[0] && j == start[1]) {
-                field[i].push(2);
+                field[i].push(0);
             } else {
                 field[i].push(0);
             }
@@ -277,8 +277,7 @@ function neighbours(position: number[]) {
         }
     }
 
-    // return randomiseArray(moves);
-    return moves;
+    return randomiseArray(moves);
 }
 
 async function solve() {
@@ -456,6 +455,11 @@ async function genMaze() {
 
         let curnode: any = frontier.remove();
 
+        console.log(field[curnode.state[0]][curnode.state[1]]);
+        while(field[curnode.state[0]][curnode.state[1]] != 0) {
+            curnode = frontier.remove();
+        }
+
         // if(JSON.stringify(curnode.state) == JSON.stringify(goal)) {
         //     setButtonsDisabled(false);
         //     return null;
@@ -522,7 +526,7 @@ async function genMaze() {
         //     document.getElementById(`C${actions[i][0]}-${actions[i][1]}`)!.className = "wall";
         // }
 
-        await wait(2000);
+        await wait(0);
 
         for(let i = 0; i < actions.length; i++) {
             if(!arrContains(explored, actions[i]) && !frontier.containsState(actions[i])) {
