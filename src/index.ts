@@ -445,24 +445,36 @@ async function genMaze() {
         // }
         
         // Moved up
-        if(curnode.action[0] - curnode.state[0] == 1) {
-            field[curnode.state[0]][curnode.state[1] - 1] = 3;
-            field[curnode.state[0]][curnode.state[1] + 1] = 3;
-        }
-        // Moved down
-        else if(curnode.action[0] - curnode.state[0] == -1) {
-            field[curnode.state[0]][curnode.state[1] - 1] = 3;
-            field[curnode.state[0]][curnode.state[1] + 1] = 3;
-        }
-        // Moved left
-        else if(curnode.action[1] - curnode.state[1] == 1) {
-            field[curnode.state[0]][curnode.state[1] - 1] = 3;
-            field[curnode.state[0]][curnode.state[1] + 1] = 3;
-        }
-        // Moved right
-        else if(curnode.action[1] - curnode.state[1] == -1) {
-            field[curnode.state[0]][curnode.state[1] - 1] = 3;
-            field[curnode.state[0]][curnode.state[1] + 1] = 3;
+        if(curnode.parent != null) {
+            if(curnode.action[0] - curnode.state[0] == 1) {
+                // field[curnode.state[0] - 1][curnode.state[1]] = 3;
+                field[curnode.state[0] + 1][curnode.state[1] + 1] = 3;
+                field[curnode.state[0] + 1][curnode.state[1] - 1] = 3;
+                console.log("up")
+            }
+            // Moved down
+            else if(curnode.action[0] - curnode.state[0] == -1) {
+                // field[curnode.state[0] + 1][curnode.state[1]] = 3;
+                field[curnode.state[0] - 1][curnode.state[1] + 1] = 3;
+                field[curnode.state[0] - 1][curnode.state[1] - 1] = 3;
+                console.log("down")
+            }
+            // Moved left
+            else if(curnode.action[1] - curnode.state[1] == 1) {
+                // field[curnode.state[0]][curnode.state[1] + 1] = 3;
+                field[curnode.state[0] + 1][curnode.state[1] + 1] = 3;
+                field[curnode.state[0] - 1][curnode.state[1] + 1] = 3;
+                console.log("left")
+            }
+            // Moved right
+            else if(curnode.action[1] - curnode.state[1] == -1) {
+                // field[curnode.state[0]][curnode.state[1] - 1] = 3;
+                field[curnode.state[0] + 1][curnode.state[1] - 1] = 3;
+                document.getElementById(`C${curnode.state[0] + 1}-${curnode.state[1] - 1}`)!.className = "wall";
+                field[curnode.state[0] - 1][curnode.state[1] - 1] = 3;
+                document.getElementById(`C${curnode.state[0] - 1}-${curnode.state[1] - 1}`)!.className = "wall";
+                console.log("right")
+            }
         }
 
         field[curnode.state[0]][curnode.state[1]] = 4;
@@ -477,7 +489,7 @@ async function genMaze() {
         //     document.getElementById(`C${actions[i][0]}-${actions[i][1]}`)!.className = "wall";
         // }
 
-        await wait(0);
+        await wait(1000);
 
         for(let i = 0; i < actions.length; i++) {
             if(!arrContains(explored, actions[i]) && !frontier.containsState(actions[i])) {
