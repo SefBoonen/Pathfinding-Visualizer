@@ -466,37 +466,44 @@ async function genMaze() {
         //     field[newWalls[i][0]][newWalls[i][1]] = 3;
         //     document.getElementById(`C${newWalls[i][0]}-${newWalls[i][1]}`)!.className = "wall";
         // }
+        if(field[100][100]) console.log("works");
         
         // Moved up
         if(curnode.parent != null) {
             if(curnode.action[0] - curnode.state[0] == 1) {
                 // field[curnode.state[0] - 1][curnode.state[1]] = 3;
-                field[curnode.state[0] + 1][curnode.state[1] + 1] = 3;
-                field[curnode.state[0] + 1][curnode.state[1] - 1] = 3;
-                console.log("up")
+                if(curnode.state[0] + 1 < height) {
+                    if(curnode.state[1] + 1 < width) field[curnode.state[0] + 1][curnode.state[1] + 1] = 3;
+                    if(curnode.state[1] - 1 >= 0) field[curnode.state[0] + 1][curnode.state[1] - 1] = 3;
+                }
+                // console.log("up")
             }
             // Moved down
             else if(curnode.action[0] - curnode.state[0] == -1) {
                 // field[curnode.state[0] + 1][curnode.state[1]] = 3;
-                field[curnode.state[0] - 1][curnode.state[1] + 1] = 3;
-                field[curnode.state[0] - 1][curnode.state[1] - 1] = 3;
-                console.log("down")
+                if(curnode.state[0] - 1 >= 0 ) {
+                    if(curnode.state[1] + 1 < width) field[curnode.state[0] - 1][curnode.state[1] + 1] = 3;
+                    if(curnode.state[1] - 1 >= 0) field[curnode.state[0] - 1][curnode.state[1] - 1] = 3;
+                }
+                // console.log("down")
             }
             // Moved left
             else if(curnode.action[1] - curnode.state[1] == 1) {
                 // field[curnode.state[0]][curnode.state[1] + 1] = 3;
-                field[curnode.state[0] + 1][curnode.state[1] + 1] = 3;
-                field[curnode.state[0] - 1][curnode.state[1] + 1] = 3;
-                console.log("left")
+                if(curnode.state[1] + 1 < width) {
+                    if(curnode.state[0] + 1 < height) field[curnode.state[0] + 1][curnode.state[1] + 1] = 3;
+                    if(curnode.state[0] - 1 >= 0) field[curnode.state[0] - 1][curnode.state[1] + 1] = 3;
+                }
+                // console.log("left")
             }
             // Moved right
             else if(curnode.action[1] - curnode.state[1] == -1) {
                 // field[curnode.state[0]][curnode.state[1] - 1] = 3;
-                field[curnode.state[0] + 1][curnode.state[1] - 1] = 3;
-                document.getElementById(`C${curnode.state[0] + 1}-${curnode.state[1] - 1}`)!.className = "wall";
-                field[curnode.state[0] - 1][curnode.state[1] - 1] = 3;
-                document.getElementById(`C${curnode.state[0] - 1}-${curnode.state[1] - 1}`)!.className = "wall";
-                console.log("right")
+                if(curnode.state[1] - 1 >= 0) {
+                    if(curnode.state[0] + 1 < height) field[curnode.state[0] + 1][curnode.state[1] - 1] = 3;
+                    if(curnode.state[0] - 1 >= 0) field[curnode.state[0] - 1][curnode.state[1] - 1] = 3;
+                }
+                // console.log("right")
             }
         }
 
