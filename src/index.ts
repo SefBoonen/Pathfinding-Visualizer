@@ -437,20 +437,33 @@ async function genMaze() {
         //     return null;
         // }
 
-        let newWalls = neighbours(curnode.state);
+        // let newWalls = neighbours(curnode.state);
 
-        for(let i = 0; i < newWalls.length - 2; i++) {
-            field[newWalls[i][0]][newWalls[i][1]] = 3;
-            document.getElementById(`C${newWalls[i][0]}-${newWalls[i][1]}`)!.className = "wall";
-        }
-
-        //Moved in y direction
-        // else if(Math.abs(curnode.action[0]) - Math.abs(curnode.state[0]) == 1) {
-        //     field[curnode.state[0]][curnode.state[1] - 1] = 3;
-        //     field[curnode.state[0]][curnode.state[1] + 1] = 3;
-        //     document.getElementById(`C${curnode.state[0]}-${curnode.state[1] - 1}`)!.className = "wall";
-        //     document.getElementById(`C${curnode.state[0]}-${curnode.state[1] + 1}`)!.className = "wall";
+        // for(let i = 0; i < newWalls.length - 2; i++) {
+        //     field[newWalls[i][0]][newWalls[i][1]] = 3;
+        //     document.getElementById(`C${newWalls[i][0]}-${newWalls[i][1]}`)!.className = "wall";
         // }
+        
+        // Moved up
+        if(curnode.action[0] - curnode.state[0] == 1) {
+            field[curnode.state[0]][curnode.state[1] - 1] = 3;
+            field[curnode.state[0]][curnode.state[1] + 1] = 3;
+        }
+        // Moved down
+        else if(curnode.action[0] - curnode.state[0] == -1) {
+            field[curnode.state[0]][curnode.state[1] - 1] = 3;
+            field[curnode.state[0]][curnode.state[1] + 1] = 3;
+        }
+        // Moved left
+        else if(curnode.action[1] - curnode.state[1] == 1) {
+            field[curnode.state[0]][curnode.state[1] - 1] = 3;
+            field[curnode.state[0]][curnode.state[1] + 1] = 3;
+        }
+        // Moved right
+        else if(curnode.action[1] - curnode.state[1] == -1) {
+            field[curnode.state[0]][curnode.state[1] - 1] = 3;
+            field[curnode.state[0]][curnode.state[1] + 1] = 3;
+        }
 
         field[curnode.state[0]][curnode.state[1]] = 4;
         document.getElementById(`C${curnode.state[0]}-${curnode.state[1]}`)!.className = "explored";
