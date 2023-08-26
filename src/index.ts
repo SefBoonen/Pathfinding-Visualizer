@@ -12,7 +12,9 @@ const bSetStart = document.getElementById("setstart");
 const bAddWalls = document.getElementById("addwalls");
 const bReset = document.getElementById("reset");
 const bGenMaze = document.getElementById("mazegen");
+const bRandomFill = document.getElementById("randomfill");
 if(!bGenMaze) throw new Error("Maze generation button not found");
+if (!bRandomFill) throw new Error("Randomfill button not found");
 if (!container) throw new Error("Container not found");
 if (!bSolve) throw new Error("Solve button not found");
 if (!menuPathfinding) throw new Error("Pathfinding menu not found");
@@ -228,6 +230,27 @@ bSolve.addEventListener("click", () => {
 
 bGenMaze.addEventListener("click", () => {
     genMaze();
+});
+
+bRandomFill.addEventListener("click", () => {
+    let candidates = [];
+    let fillPerc = 0.1;
+
+    for(let i = 0; i < field.length; i++) {
+        for(let j = 0; j < field[i].length; j++) {
+            if(field[i][j] == 0) {
+                candidates.push([i, j]);
+            }
+        }
+    }
+
+    for(let i = 0; i < Math.floor((height * width) * fillPerc); i++) {
+        let random = Math.floor(Math.random() * (candidates.length + 1));
+        field[candidates[random][0]][candidates[random][1]] = 3;
+        document.getElementById(
+            `C${candidates[random][0]}-${candidates[random][1]}`
+        )!.className = "wall";
+    }
 });
 
 function neighbours(position: number[]) {
