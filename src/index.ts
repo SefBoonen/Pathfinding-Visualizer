@@ -23,8 +23,8 @@ if (!bSetStart) throw new Error("Set start button not found");
 if (!bAddWalls) throw new Error("Add walls button not found");
 if (!bReset) throw new Error("Reset button not found");
 
-const height: number = (Math.ceil((window.innerHeight / 25) / 3.0) * 3) + 2;
-const width: number = (Math.ceil((window.innerWidth / 25) / 3.0) * 3) + 2;
+const height: number = (Math.ceil((Math.floor(window.innerHeight) / 25) / 2.0) * 2) + 1;
+const width: number = (Math.ceil((Math.floor(window.innerWidth / 25)) / 2.0) * 2) + 1;
 // 0 = blank space, 1 = goal, 2 = start, 3 = wall, 4 = explored
 let field: number[][] = [];
 
@@ -432,6 +432,7 @@ function randomiseArray(array: any[]) {
 }
 
 async function genMaze() {
+    console.log(width);
     for(let i = 0; i < width; i++) {
         field[0][i] = 3;
         document.getElementById(
@@ -453,6 +454,17 @@ async function genMaze() {
             `C${i}-${width - 1}`
         )!.className = "wall";
     }
+
+    for(let i = 2; i < width - 1; i += 2) {
+        for(let j = 2; j < height - 1; j += 2) {
+            field[j][i] = 3;
+            document.getElementById(
+                `C${j}-${i}`
+            )!.className = "wall";
+        }
+    }
+
+
     // setButtonsDisabled(true);
     // let frontier = new StackFrontier();
 
