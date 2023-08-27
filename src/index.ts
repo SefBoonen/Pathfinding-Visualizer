@@ -23,8 +23,8 @@ if (!bSetStart) throw new Error("Set start button not found");
 if (!bAddWalls) throw new Error("Add walls button not found");
 if (!bReset) throw new Error("Reset button not found");
 
-const height: number = 30;
-const width: number = 60;
+const height: number = (Math.ceil((window.innerHeight - 2) / 3.0) * 3) / 25;
+const width: number = (Math.ceil((window.innerWidth - 2) / 3.0) * 3) / 25;
 // 0 = blank space, 1 = goal, 2 = start, 3 = wall, 4 = explored
 let field: number[][] = [];
 
@@ -432,58 +432,58 @@ function randomiseArray(array: any[]) {
 }
 
 async function genMaze() {
-    setButtonsDisabled(true);
-    let frontier = new StackFrontier();
+    // setButtonsDisabled(true);
+    // let frontier = new StackFrontier();
 
-    frontier.add(new Nodes(start, null, start));
+    // frontier.add(new Nodes(start, null, start));
 
-    let explored: number[][] = [];
+    // let explored: number[][] = [];
 
-    while (true) {
-        if (stopBool) {
-            clearExplored();
-            addFS();
-            stopBool = false;
-            setButtonsDisabled(false);
-            return;
-        }
-        if (frontier.empty()) {
-            turnExploredRed();
-            setButtonsDisabled(false);
-            return null;
-        }
+    // while (true) {
+    //     if (stopBool) {
+    //         clearExplored();
+    //         addFS();
+    //         stopBool = false;
+    //         setButtonsDisabled(false);
+    //         return;
+    //     }
+    //     if (frontier.empty()) {
+    //         turnExploredRed();
+    //         setButtonsDisabled(false);
+    //         return null;
+    //     }
 
-        let curnode: any = frontier.remove();
+    //     let curnode: any = frontier.remove();
 
-        console.log(field[curnode.state[0]][curnode.state[1]]);
+    //     console.log(field[curnode.state[0]][curnode.state[1]]);
 
-        if(JSON.stringify(curnode.state) == JSON.stringify(goal)) {
-            setButtonsDisabled(false);
-            return null;
-        }
+    //     if(JSON.stringify(curnode.state) == JSON.stringify(goal)) {
+    //         setButtonsDisabled(false);
+    //         return null;
+    //     }
 
-        field[curnode.state[0]][curnode.state[1]] = 4;
-        document.getElementById(
-            `C${curnode.state[0]}-${curnode.state[1]}`
-        )!.className = "explored";
+    //     field[curnode.state[0]][curnode.state[1]] = 4;
+    //     document.getElementById(
+    //         `C${curnode.state[0]}-${curnode.state[1]}`
+    //     )!.className = "explored";
 
-        explored.push(curnode.state);
+    //     explored.push(curnode.state);
 
-        let actions = neighbours(curnode.state);
+    //     let actions = neighbours(curnode.state);
 
-        await wait(0);
+    //     await wait(0);
 
-        for (let i = 0; i < actions.length; i++) {
-            if (
-                !arrContains(explored, actions[i]) &&
-                !frontier.containsState(actions[i])
-            ) {
-                let child = new Nodes(actions[i], curnode, curnode.state);
-                frontier.add(child);
-            }
-        }
-        console.log(`actions ${actions}`);
-        console.log(JSON.stringify(frontier.frontier));
-    }
+    //     for (let i = 0; i < actions.length; i++) {
+    //         if (
+    //             !arrContains(explored, actions[i]) &&
+    //             !frontier.containsState(actions[i])
+    //         ) {
+    //             let child = new Nodes(actions[i], curnode, curnode.state);
+    //             frontier.add(child);
+    //         }
+    //     }
+    //     console.log(`actions ${actions}`);
+    //     console.log(JSON.stringify(frontier.frontier));
+    // }
 }
 export { manhattanDistance };
