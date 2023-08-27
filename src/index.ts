@@ -23,8 +23,8 @@ if (!bSetStart) throw new Error("Set start button not found");
 if (!bAddWalls) throw new Error("Add walls button not found");
 if (!bReset) throw new Error("Reset button not found");
 
-const height: number = (Math.ceil((window.innerHeight - 2) / 3.0) * 3) / 3;
-const width: number = (Math.ceil((window.innerWidth - 2) / 3.0) * 3) / 3;
+const height: number = (Math.ceil((window.innerHeight / 25) / 3.0) * 3) + 2;
+const width: number = (Math.ceil((window.innerWidth / 25) / 3.0) * 3) + 2;
 // 0 = blank space, 1 = goal, 2 = start, 3 = wall, 4 = explored
 let field: number[][] = [];
 
