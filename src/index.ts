@@ -437,12 +437,10 @@ async function genMaze() {
         document.getElementById(
             `C${0}-${i}`
         )!.className = "wall";
-        console.log(height);
-        console.log(field);
-        field[height][i] = 3;
-        // document.getElementById(
-        //     `C${height - 1}-${i}`
-        // )!.className = "wall";
+        field[height - 1][i] = 3;
+        document.getElementById(
+            `C${height - 1}-${i}`
+        )!.className = "wall";
     }
 
     // for(let i = 0; i < height; i++) {
