@@ -443,9 +443,16 @@ async function genMaze() {
         )!.className = "wall";
     }
 
-    // for(let i = 0; i < height; i++) {
-
-    // }
+    for(let i = 0; i < height; i++) {
+        field[i][0] = 3;
+        document.getElementById(
+            `C${i}-${0}`
+        )!.className = "wall";
+        field[i][width - 1] = 3;
+        document.getElementById(
+            `C${i}-${width - 1}`
+        )!.className = "wall";
+    }
     // setButtonsDisabled(true);
     // let frontier = new StackFrontier();
 
