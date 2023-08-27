@@ -30,8 +30,8 @@ let field: number[][] = [];
 
 let table = "";
 
-let goal = [Math.floor(height / 2), Math.floor(width * 0.75)];
-let start = [Math.floor(height / 2), Math.floor(width * 0.25)];
+let goal = [height - 2, width - 2];
+let start = [1, 1];
 
 let setGoal = false;
 let setStart = false;
