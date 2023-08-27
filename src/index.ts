@@ -519,4 +519,32 @@ async function genMaze() {
     //     console.log(JSON.stringify(frontier.frontier));
     // }
 }
+
+function neighboursMazeGen(position: number[]) {
+    let moves: number[][] = [];
+
+    if (position[1] - 1 >= 0) {
+        if (field[position[0]][position[1] - 1] == 0) {
+            moves.push([position[0], position[1] - 1]);
+        }
+    }
+    if (position[1] + 1 < width) {
+        if (field[position[0]][position[1] + 1] == 0) {
+            moves.push([position[0], position[1] + 1]);
+        }
+    }
+    if (position[0] + 1 < height) {
+        if (field[position[0] + 1][position[1]] == 0) {
+            moves.push([position[0] + 1, position[1]]);
+        }
+    }
+    if (position[0] - 1 >= 0) {
+        if (field[position[0] - 1][position[1]] == 0) {
+            moves.push([position[0] - 1, position[1]]);
+        }
+    }
+
+    return randomiseArray(moves);
+}
+
 export { manhattanDistance };
