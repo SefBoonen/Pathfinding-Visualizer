@@ -437,7 +437,6 @@ async function genMaze() {
 
     frontier.add(new Nodes(start, null, start));
 
-    let list = [];
     let explored: number[][] = [];
 
     while (true) {
@@ -457,106 +456,11 @@ async function genMaze() {
         let curnode: any = frontier.remove();
 
         console.log(field[curnode.state[0]][curnode.state[1]]);
-        while (checkSquare(curnode.state)) {
-            curnode = frontier.remove();
+
+        if(JSON.stringify(curnode.state) == JSON.stringify(goal)) {
+            setButtonsDisabled(false);
+            return null;
         }
-
-        // if(JSON.stringify(curnode.state) == JSON.stringify(goal)) {
-        //     setButtonsDisabled(false);
-        //     return null;
-        // }
-
-        // let newWalls = neighbours(curnode.state);
-
-        // for(let i = 0; i < newWalls.length - 2; i++) {
-        //     field[newWalls[i][0]][newWalls[i][1]] = 3;
-        //     document.getElementById(`C${newWalls[i][0]}-${newWalls[i][1]}`)!.className = "wall";
-        // }
-
-        // Moved up
-        // if (curnode.parent != null) {
-        //     if (curnode.action[0] - curnode.state[0] == 1) {
-        //         // field[curnode.state[0] - 1][curnode.state[1]] = 3;
-        //         if (curnode.state[0] + 1 < height) {
-        //             if (curnode.state[1] + 1 < width) {
-        //                 field[curnode.state[0] + 1][curnode.state[1] + 1] = 3;
-        //                 document.getElementById(
-        //                     `C${curnode.state[0] + 1}-${curnode.state[1] + 1}`
-        //                 )!.className = "wall";
-        //             }
-
-        //             if (curnode.state[1] - 1 >= 0) {
-        //                 field[curnode.state[0] + 1][curnode.state[1] - 1] = 3;
-        //                 document.getElementById(
-        //                     `C${curnode.state[0] + 1}-${curnode.state[1] - 1}`
-        //                 )!.className = "wall";
-        //             }
-        //         }
-        //         // console.log("up")
-        //     }
-        //     // Moved down
-        //     else if (curnode.action[0] - curnode.state[0] == -1) {
-        //         // field[curnode.state[0] + 1][curnode.state[1]] = 3;
-        //         if (curnode.state[0] - 1 >= 0) {
-        //             if (curnode.state[1] + 1 < width) {
-        //                 field[curnode.state[0] - 1][curnode.state[1] + 1] = 3;
-        //                 document.getElementById(
-        //                     `C${curnode.state[0] - 1}-${curnode.state[1] + 1}`
-        //                 )!.className = "wall";
-        //             }
-
-        //             if (curnode.state[1] - 1 >= 0) {
-        //                 field[curnode.state[0] - 1][curnode.state[1] - 1] = 3;
-        //                 document.getElementById(
-        //                     `C${curnode.state[0] - 1}-${curnode.state[1] - 1}`
-        //                 )!.className = "wall";
-        //             }
-        //         }
-        //         // console.log("down")
-        //     }
-        //     // Moved left
-        //     else if (curnode.action[1] - curnode.state[1] == 1) {
-        //         // field[curnode.state[0]][curnode.state[1] + 1] = 3;
-        //         if (curnode.state[1] + 1 < width) {
-        //             if (curnode.state[0] + 1 < height) {
-        //                 field[curnode.state[0] + 1][curnode.state[1] + 1] = 3;
-        //                 document.getElementById(
-        //                     `C${curnode.state[0] + 1}-${curnode.state[1] + 1}`
-        //                 )!.className = "wall";
-        //             }
-        //             if (curnode.state[0] - 1 >= 0) {
-        //                 field[curnode.state[0] - 1][curnode.state[1] + 1] = 3;
-        //                 document.getElementById(
-        //                     `C${curnode.state[0] - 1}-${curnode.state[1] + 1}`
-        //                 )!.className = "wall";
-        //             }
-        //         }
-        //         // console.log("left")
-        //     }
-        //     // Moved right
-        //     else if (curnode.action[1] - curnode.state[1] == -1) {
-        //         // field[curnode.state[0]][curnode.state[1] - 1] = 3;
-        //         if (curnode.state[1] - 1 >= 0) {
-        //             if (curnode.state[0] + 1 < height) {
-        //                 field[curnode.state[0] + 1][curnode.state[1] - 1] = 3;
-        //                 document.getElementById(
-        //                     `C${curnode.state[0] + 1}-${curnode.state[1] - 1}`
-        //                 )!.className = "wall";
-        //             }
-
-        //             if (curnode.state[0] - 1 >= 0) {
-        //                 field[curnode.state[0] - 1][curnode.state[1] - 1] = 3;
-        //                 document.getElementById(
-        //                     `C${curnode.state[0] - 1}-${curnode.state[1] - 1}`
-        //                 )!.className = "wall";
-        //             }
-        //             // explored.push([curnode.state[0] + 1, curnode.state[1] - 1]);
-        //             // explored.push([curnode.state[0] - 1, curnode.state[1] - 1]);
-        //         }
-        //         // console.log("right")
-        //     }
-        // }
-        // console.log(field);
 
         field[curnode.state[0]][curnode.state[1]] = 4;
         document.getElementById(
@@ -566,11 +470,6 @@ async function genMaze() {
         explored.push(curnode.state);
 
         let actions = neighbours(curnode.state);
-
-        // for(let i = 0; i < actions.length - 1; i++) {
-        //     field[actions[i][0]][actions[i][1]] = 3;
-        //     document.getElementById(`C${actions[i][0]}-${actions[i][1]}`)!.className = "wall";
-        // }
 
         await wait(0);
 
@@ -588,31 +487,3 @@ async function genMaze() {
     }
 }
 export { manhattanDistance };
-
-function checkSquare(pos: number[]) {
-    //above
-    if(field[pos[0] - 1][pos[1]] != 0) {
-        //topleft
-        if(field[pos[0]][pos[1] - 1] != 0 && field[pos[0] - 1][pos[1] - 1] != 0) {
-            return true;
-        }
-        //topright
-        if(field[pos[0] - 1][pos[1] + 1] != 0 && field[pos[0]][pos[1] + 1] != 0) {
-            return true;
-        }
-    }
-
-    //down
-    if(field[pos[0] + 1][pos[1]] != 0) {
-        //bottomleft
-        if(field[pos[0]][pos[1] - 1] != 0 && field[pos[0] + 1][pos[1] - 1] != 0) {
-            return true;
-        }
-        //bottomright
-        if(field[pos[0]][pos[1] + 1] != 0 && field[pos[0] + 1][pos[1] + 1] != 0) {
-            return true;
-        }
-    }
-
-    return false;
-}
