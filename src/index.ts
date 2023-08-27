@@ -13,7 +13,7 @@ const bAddWalls = document.getElementById("addwalls");
 const bReset = document.getElementById("reset");
 const bGenMaze = document.getElementById("mazegen");
 const bRandomFill = document.getElementById("randomfill");
-if(!bGenMaze) throw new Error("Maze generation button not found");
+if (!bGenMaze) throw new Error("Maze generation button not found");
 if (!bRandomFill) throw new Error("Randomfill button not found");
 if (!container) throw new Error("Container not found");
 if (!bSolve) throw new Error("Solve button not found");
@@ -130,9 +130,7 @@ container.addEventListener("click", (e) => {
     }
 });
 
-bGenMaze.addEventListener("click", () => {
-    
-});
+bGenMaze.addEventListener("click", () => {});
 
 bReset.addEventListener("click", () => {
     stopBool = true;
@@ -236,15 +234,15 @@ bRandomFill.addEventListener("click", () => {
     let candidates = [];
     let fillPerc = 0.1;
 
-    for(let i = 0; i < field.length; i++) {
-        for(let j = 0; j < field[i].length; j++) {
-            if(field[i][j] == 0) {
+    for (let i = 0; i < field.length; i++) {
+        for (let j = 0; j < field[i].length; j++) {
+            if (field[i][j] == 0) {
                 candidates.push([i, j]);
             }
         }
     }
 
-    for(let i = 0; i < Math.floor((height * width) * fillPerc); i++) {
+    for (let i = 0; i < Math.floor(height * width * fillPerc); i++) {
         let random = Math.floor(Math.random() * (candidates.length + 1));
         field[candidates[random][0]][candidates[random][1]] = 3;
         document.getElementById(
@@ -256,23 +254,23 @@ bRandomFill.addEventListener("click", () => {
 function neighbours(position: number[]) {
     let moves: number[][] = [];
 
-    if(position[1] - 1 >= 0) {
-        if(field[position[0]][position[1] - 1] == 0) {
+    if (position[1] - 1 >= 0) {
+        if (field[position[0]][position[1] - 1] == 0) {
             moves.push([position[0], position[1] - 1]);
         }
     }
-    if(position[1] + 1 < width) {
-        if(field[position[0]][position[1] + 1] == 0) {
+    if (position[1] + 1 < width) {
+        if (field[position[0]][position[1] + 1] == 0) {
             moves.push([position[0], position[1] + 1]);
         }
     }
-    if(position[0] + 1 < height) {
-        if(field[position[0] + 1][position[1]] == 0) {
+    if (position[0] + 1 < height) {
+        if (field[position[0] + 1][position[1]] == 0) {
             moves.push([position[0] + 1, position[1]]);
         }
     }
-    if(position[0] - 1 >= 0) {
-        if(field[position[0] - 1][position[1]] == 0) {
+    if (position[0] - 1 >= 0) {
+        if (field[position[0] - 1][position[1]] == 0) {
             moves.push([position[0] - 1, position[1]]);
         }
     }
@@ -419,13 +417,16 @@ function clearNotFound() {
 }
 
 function randomiseArray(array: any[]) {
-    let currentIndex = array.length, randomIndex;
-    while(currentIndex != 0) {
+    let currentIndex = array.length,
+        randomIndex;
+    while (currentIndex != 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex--;
-    
+
         [array[currentIndex], array[randomIndex]] = [
-          array[randomIndex], array[currentIndex]];
+            array[randomIndex],
+            array[currentIndex],
+        ];
     }
     return array;
 }
@@ -433,21 +434,21 @@ function randomiseArray(array: any[]) {
 async function genMaze() {
     setButtonsDisabled(true);
     let frontier = new StackFrontier();
-    
+
     frontier.add(new Nodes(start, null, start));
-    
+
     let list = [];
     let explored: number[][] = [];
 
-    while(true) {
-        if(stopBool) {
+    while (true) {
+        if (stopBool) {
             clearExplored();
             addFS();
             stopBool = false;
             setButtonsDisabled(false);
             return;
         }
-        if(frontier.empty()) {
+        if (frontier.empty()) {
             turnExploredRed();
             setButtonsDisabled(false);
             return null;
@@ -456,7 +457,7 @@ async function genMaze() {
         let curnode: any = frontier.remove();
 
         console.log(field[curnode.state[0]][curnode.state[1]]);
-        while(field[curnode.state[0]][curnode.state[1]] != 0) {
+        while (checkSquare(curnode.state)) {
             curnode = frontier.remove();
         }
 
@@ -471,51 +472,96 @@ async function genMaze() {
         //     field[newWalls[i][0]][newWalls[i][1]] = 3;
         //     document.getElementById(`C${newWalls[i][0]}-${newWalls[i][1]}`)!.className = "wall";
         // }
-   
+
         // Moved up
-        if(curnode.parent != null) {
-            if(curnode.action[0] - curnode.state[0] == 1) {
-                // field[curnode.state[0] - 1][curnode.state[1]] = 3;
-                if(curnode.state[0] + 1 < height) {
-                    if(curnode.state[1] + 1 < width) field[curnode.state[0] + 1][curnode.state[1] + 1] = 3;
-                    if(curnode.state[1] - 1 >= 0) field[curnode.state[0] + 1][curnode.state[1] - 1] = 3;
-                }
-                // console.log("up")
-            }
-            // Moved down
-            else if(curnode.action[0] - curnode.state[0] == -1) {
-                // field[curnode.state[0] + 1][curnode.state[1]] = 3;
-                if(curnode.state[0] - 1 >= 0 ) {
-                    if(curnode.state[1] + 1 < width) field[curnode.state[0] - 1][curnode.state[1] + 1] = 3;
-                    if(curnode.state[1] - 1 >= 0) field[curnode.state[0] - 1][curnode.state[1] - 1] = 3;
-                }
-                // console.log("down")
-            }
-            // Moved left
-            else if(curnode.action[1] - curnode.state[1] == 1) {
-                // field[curnode.state[0]][curnode.state[1] + 1] = 3;
-                if(curnode.state[1] + 1 < width) {
-                    if(curnode.state[0] + 1 < height) field[curnode.state[0] + 1][curnode.state[1] + 1] = 3;
-                    if(curnode.state[0] - 1 >= 0) field[curnode.state[0] - 1][curnode.state[1] + 1] = 3;
-                }
-                // console.log("left")
-            }
-            // Moved right
-            else if(curnode.action[1] - curnode.state[1] == -1) {
-                // field[curnode.state[0]][curnode.state[1] - 1] = 3;
-                if(curnode.state[1] - 1 >= 0) {
-                    if(curnode.state[0] + 1 < height) field[curnode.state[0] + 1][curnode.state[1] - 1] = 3;
-                    if(curnode.state[0] - 1 >= 0) field[curnode.state[0] - 1][curnode.state[1] - 1] = 3;
-                    // explored.push([curnode.state[0] + 1, curnode.state[1] - 1]);
-                    // explored.push([curnode.state[0] - 1, curnode.state[1] - 1]);
-                }
-                // console.log("right")
-            }
-        }
+        // if (curnode.parent != null) {
+        //     if (curnode.action[0] - curnode.state[0] == 1) {
+        //         // field[curnode.state[0] - 1][curnode.state[1]] = 3;
+        //         if (curnode.state[0] + 1 < height) {
+        //             if (curnode.state[1] + 1 < width) {
+        //                 field[curnode.state[0] + 1][curnode.state[1] + 1] = 3;
+        //                 document.getElementById(
+        //                     `C${curnode.state[0] + 1}-${curnode.state[1] + 1}`
+        //                 )!.className = "wall";
+        //             }
+
+        //             if (curnode.state[1] - 1 >= 0) {
+        //                 field[curnode.state[0] + 1][curnode.state[1] - 1] = 3;
+        //                 document.getElementById(
+        //                     `C${curnode.state[0] + 1}-${curnode.state[1] - 1}`
+        //                 )!.className = "wall";
+        //             }
+        //         }
+        //         // console.log("up")
+        //     }
+        //     // Moved down
+        //     else if (curnode.action[0] - curnode.state[0] == -1) {
+        //         // field[curnode.state[0] + 1][curnode.state[1]] = 3;
+        //         if (curnode.state[0] - 1 >= 0) {
+        //             if (curnode.state[1] + 1 < width) {
+        //                 field[curnode.state[0] - 1][curnode.state[1] + 1] = 3;
+        //                 document.getElementById(
+        //                     `C${curnode.state[0] - 1}-${curnode.state[1] + 1}`
+        //                 )!.className = "wall";
+        //             }
+
+        //             if (curnode.state[1] - 1 >= 0) {
+        //                 field[curnode.state[0] - 1][curnode.state[1] - 1] = 3;
+        //                 document.getElementById(
+        //                     `C${curnode.state[0] - 1}-${curnode.state[1] - 1}`
+        //                 )!.className = "wall";
+        //             }
+        //         }
+        //         // console.log("down")
+        //     }
+        //     // Moved left
+        //     else if (curnode.action[1] - curnode.state[1] == 1) {
+        //         // field[curnode.state[0]][curnode.state[1] + 1] = 3;
+        //         if (curnode.state[1] + 1 < width) {
+        //             if (curnode.state[0] + 1 < height) {
+        //                 field[curnode.state[0] + 1][curnode.state[1] + 1] = 3;
+        //                 document.getElementById(
+        //                     `C${curnode.state[0] + 1}-${curnode.state[1] + 1}`
+        //                 )!.className = "wall";
+        //             }
+        //             if (curnode.state[0] - 1 >= 0) {
+        //                 field[curnode.state[0] - 1][curnode.state[1] + 1] = 3;
+        //                 document.getElementById(
+        //                     `C${curnode.state[0] - 1}-${curnode.state[1] + 1}`
+        //                 )!.className = "wall";
+        //             }
+        //         }
+        //         // console.log("left")
+        //     }
+        //     // Moved right
+        //     else if (curnode.action[1] - curnode.state[1] == -1) {
+        //         // field[curnode.state[0]][curnode.state[1] - 1] = 3;
+        //         if (curnode.state[1] - 1 >= 0) {
+        //             if (curnode.state[0] + 1 < height) {
+        //                 field[curnode.state[0] + 1][curnode.state[1] - 1] = 3;
+        //                 document.getElementById(
+        //                     `C${curnode.state[0] + 1}-${curnode.state[1] - 1}`
+        //                 )!.className = "wall";
+        //             }
+
+        //             if (curnode.state[0] - 1 >= 0) {
+        //                 field[curnode.state[0] - 1][curnode.state[1] - 1] = 3;
+        //                 document.getElementById(
+        //                     `C${curnode.state[0] - 1}-${curnode.state[1] - 1}`
+        //                 )!.className = "wall";
+        //             }
+        //             // explored.push([curnode.state[0] + 1, curnode.state[1] - 1]);
+        //             // explored.push([curnode.state[0] - 1, curnode.state[1] - 1]);
+        //         }
+        //         // console.log("right")
+        //     }
+        // }
         // console.log(field);
 
         field[curnode.state[0]][curnode.state[1]] = 4;
-        document.getElementById(`C${curnode.state[0]}-${curnode.state[1]}`)!.className = "explored";
+        document.getElementById(
+            `C${curnode.state[0]}-${curnode.state[1]}`
+        )!.className = "explored";
 
         explored.push(curnode.state);
 
@@ -528,8 +574,11 @@ async function genMaze() {
 
         await wait(0);
 
-        for(let i = 0; i < actions.length; i++) {
-            if(!arrContains(explored, actions[i]) && !frontier.containsState(actions[i])) {
+        for (let i = 0; i < actions.length; i++) {
+            if (
+                !arrContains(explored, actions[i]) &&
+                !frontier.containsState(actions[i])
+            ) {
                 let child = new Nodes(actions[i], curnode, curnode.state);
                 frontier.add(child);
             }
@@ -539,3 +588,31 @@ async function genMaze() {
     }
 }
 export { manhattanDistance };
+
+function checkSquare(pos: number[]) {
+    //above
+    if(field[pos[0] - 1][pos[1]] != 0) {
+        //topleft
+        if(field[pos[0]][pos[1] - 1] != 0 && field[pos[0] - 1][pos[1] - 1] != 0) {
+            return true;
+        }
+        //topright
+        if(field[pos[0] - 1][pos[1] + 1] != 0 && field[pos[0]][pos[1] + 1] != 0) {
+            return true;
+        }
+    }
+
+    //down
+    if(field[pos[0] + 1][pos[1]] != 0) {
+        //bottomleft
+        if(field[pos[0]][pos[1] - 1] != 0 && field[pos[0] + 1][pos[1] - 1] != 0) {
+            return true;
+        }
+        //bottomright
+        if(field[pos[0]][pos[1] + 1] != 0 && field[pos[0] + 1][pos[1] + 1] != 0) {
+            return true;
+        }
+    }
+
+    return false;
+}
