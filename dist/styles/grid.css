@@ -2,6 +2,11 @@
     --border-size: 1px;
 }
 
+.considered {
+    background-color: #89abc9;
+    border: solid var(--border-size) rgba(38, 39, 49, 0.2);
+}
+
 .explored {
     background-color: #3b9aed;
     border: solid var(--border-size) rgba(38, 39, 49, 0.2);
