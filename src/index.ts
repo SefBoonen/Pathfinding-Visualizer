@@ -498,35 +498,35 @@ async function genMaze() {
 
         let curnode: any = frontier.remove();
 
-        if(JSON.stringify(curnode.state) == JSON.stringify(goal)) {
-            setButtonsDisabled(false);
-            return null;
-        }
+        // if(JSON.stringify(curnode.state) == JSON.stringify(goal)) {
+        //     setButtonsDisabled(false);
+        //     return null;
+        // }
 
         if (curnode.parent != null) {
             // Moved up
             if (curnode.action[0] - curnode.state[0] == 2) {
-                field[curnode.state[0] - 1][curnode.state[1]] = 0;
+                field[curnode.state[0] + 1][curnode.state[1]] = 0;
                 document.getElementById(
-                    `C${curnode.state[0] - 1}-${curnode.state[1]}`
+                    `C${curnode.state[0] + 1}-${curnode.state[1]}`
                 )!.className = "";
                 // console.log("up")
             }
             // Moved down
             else if (curnode.action[0] - curnode.state[0] == -2) {
                 // field[curnode.state[0] + 1][curnode.state[1]] = 3;
-                field[curnode.state[0] + 1][curnode.state[1]] = 0;
+                field[curnode.state[0] - 1][curnode.state[1]] = 0;
                 document.getElementById(
-                    `C${curnode.state[0] + 1}-${curnode.state[1]}`
+                    `C${curnode.state[0] - 1}-${curnode.state[1]}`
                 )!.className = "";
                 // console.log("down")
             }
             // Moved left
             else if (curnode.action[1] - curnode.state[1] == 2) {
                 // field[curnode.state[0]][curnode.state[1] + 1] = 3;
-                field[curnode.state[0]][curnode.state[1] - 1] = 0;
+                field[curnode.state[0]][curnode.state[1] + 1] = 0;
                 document.getElementById(
-                    `C${curnode.state[0]}-${curnode.state[1] - 1}`
+                    `C${curnode.state[0]}-${curnode.state[1] + 1}`
                 )!.className = "";
                 // console.log("left")
             }
@@ -534,9 +534,9 @@ async function genMaze() {
             else if (curnode.action[1] - curnode.state[1] == -2) {
                 // console.log("right")
                 // field[curnode.state[0]][curnode.state[1] - 1] = 3;
-                field[curnode.state[0]][curnode.state[1] + 1] = 0;
+                field[curnode.state[0]][curnode.state[1] - 1] = 0;
                 document.getElementById(
-                    `C${curnode.state[0]}-${curnode.state[1] + 1}`
+                    `C${curnode.state[0]}-${curnode.state[1] - 1}`
                 )!.className = "";
                 // console.log("right")
             }
@@ -572,22 +572,22 @@ function neighboursMazeGen(position: number[]) {
     let moves: number[][] = [];
 
     if (position[1] - 2 >= 0) {
-        if (field[position[0]][position[1] - 2] == 0) {
+        if (field[position[0]][position[1] - 2] == 0 || field[position[0]][position[1] - 2] == 1) {
             moves.push([position[0], position[1] - 2]);
         }
     }
     if (position[1] + 2 < width) {
-        if (field[position[0]][position[1] + 2] == 0) {
+        if (field[position[0]][position[1] + 2] == 0 || field[position[0]][position[1] + 2] == 1) {
             moves.push([position[0], position[1] + 2]);
         }
     }
     if (position[0] + 2 < height) {
-        if (field[position[0] + 2][position[1]] == 0) {
+        if (field[position[0] + 2][position[1]] == 0 || field[position[0] + 2][position[1]] == 1) {
             moves.push([position[0] + 2, position[1]]);
         }
     }
     if (position[0] - 2 >= 0) {
-        if (field[position[0] - 2][position[1]] == 0) {
+        if (field[position[0] - 2][position[1]] == 0 || field[position[0] - 2][position[1]] == 1) {
             moves.push([position[0] - 2, position[1]]);
         }
     }
