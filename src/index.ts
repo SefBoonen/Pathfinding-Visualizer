@@ -11,6 +11,10 @@ const bSetGoal = document.getElementById("setgoal");
 const bSetStart = document.getElementById("setstart");
 const bAddWalls = document.getElementById("addwalls");
 const bReset = document.getElementById("reset");
+const bGenMaze = document.getElementById("mazegen");
+const bRandomFill = document.getElementById("randomfill");
+if (!bGenMaze) throw new Error("Maze generation button not found");
+if (!bRandomFill) throw new Error("Randomfill button not found");
 if (!container) throw new Error("Container not found");
 if (!bSolve) throw new Error("Solve button not found");
 if (!menuPathfinding) throw new Error("Pathfinding menu not found");
@@ -19,15 +23,15 @@ if (!bSetStart) throw new Error("Set start button not found");
 if (!bAddWalls) throw new Error("Add walls button not found");
 if (!bReset) throw new Error("Reset button not found");
 
-const height: number = Math.floor(window.innerHeight / 30);
-const width: number = Math.floor(window.innerWidth / 30);
+const height: number = (Math.ceil((Math.floor(window.innerHeight) / 25) / 2.0) * 2) + 1;
+const width: number = (Math.ceil((Math.floor(window.innerWidth / 25)) / 2.0) * 2) + 1;
 // 0 = blank space, 1 = goal, 2 = start, 3 = wall, 4 = explored
 let field: number[][] = [];
 
 let table = "";
 
-let goal = [Math.floor(height / 2), Math.floor(width * 0.75)];
-let start = [Math.floor(height / 2), Math.floor(width * 0.25)];
+let goal = [height - 2, width - 2];
+let start = [1, 1];
 
 let setGoal = false;
 let setStart = false;
@@ -126,6 +130,8 @@ container.addEventListener("click", (e) => {
     }
 });
 
+bGenMaze.addEventListener("click", () => {});
+
 bReset.addEventListener("click", () => {
     stopBool = true;
     clearExplored();
@@ -201,7 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (i == goal[0] && j == goal[1]) {
                 field[i].push(1);
             } else if (i == start[0] && j == start[1]) {
-                field[i].push(2);
+                field[i].push(0);
             } else {
                 field[i].push(0);
             }
@@ -218,6 +224,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
 bSolve.addEventListener("click", () => {
     solve();
+});
+
+bGenMaze.addEventListener("click", () => {
+    genMaze();
+});
+
+bRandomFill.addEventListener("click", () => {
+    let candidates = [];
+    let fillPerc = 0.1;
+
+    for (let i = 0; i < field.length; i++) {
+        for (let j = 0; j < field[i].length; j++) {
+            if (field[i][j] == 0) {
+                candidates.push([i, j]);
+            }
+        }
+    }
+
+    for (let i = 0; i < Math.floor(height * width * fillPerc); i++) {
+        let random = Math.floor(Math.random() * (candidates.length + 1));
+        field[candidates[random][0]][candidates[random][1]] = 3;
+        document.getElementById(
+            `C${candidates[random][0]}-${candidates[random][1]}`
+        )!.className = "wall";
+    }
 });
 
 function neighbours(position: number[]) {
@@ -244,7 +275,7 @@ function neighbours(position: number[]) {
         }
     }
 
-    return moves;
+    return randomiseArray(moves);
 }
 
 async function solve() {
@@ -383,6 +414,163 @@ function clearNotFound() {
     for (let i = 0; i < notfound.length; i++) {
         notfound[i].classList.remove("notfound");
     }
+}
+
+function randomiseArray(array: any[]) {
+    let currentIndex = array.length,
+        randomIndex;
+    while (currentIndex != 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex],
+            array[currentIndex],
+        ];
+    }
+    return array;
+}
+
+async function genMaze() {
+    //border top and bottom
+    for(let i = 0; i < width; i++) {
+        field[0][i] = 3;
+        document.getElementById(
+            `C${0}-${i}`
+        )!.className = "wall";
+        field[height - 1][i] = 3;
+        document.getElementById(
+            `C${height - 1}-${i}`
+        )!.className = "wall";
+    }
+
+    //border left and right
+    for(let i = 0; i < height; i++) {
+        field[i][0] = 3;
+        document.getElementById(
+            `C${i}-${0}`
+        )!.className = "wall";
+        field[i][width - 1] = 3;
+        document.getElementById(
+            `C${i}-${width - 1}`
+        )!.className = "wall";
+    }
+
+    //make grid
+    for(let i = 2; i < width - 1; i += 2) {
+        for(let j = 1; j < height - 1; j++) {
+            field[j][i] = 3;
+            document.getElementById(
+                `C${j}-${i}`
+            )!.className = "wall";
+        }
+    }
+    for(let i = 2; i < height - 1; i += 2) {
+        for(let j = 1; j < width - 1; j++) {
+            field[i][j] = 3;
+            document.getElementById(
+                `C${i}-${j}`
+            )!.className = "wall";
+        }
+    }
+
+    setButtonsDisabled(true);
+    
+    let frontier = new StackFrontier();
+    frontier.add(new Nodes(start, null, start));
+
+    let explored: number[][] = [];
+
+    while (true) {
+        if (stopBool) {
+            clearExplored();
+            addFS();
+            stopBool = false;
+            setButtonsDisabled(false);
+            return;
+        }
+        if (frontier.empty()) {
+            turnExploredRed();
+            setButtonsDisabled(false);
+            return null;
+        }
+
+        let curnode: any = frontier.remove();
+
+        if (curnode.parent != null) {
+            // Moved up
+            if (curnode.action[0] - curnode.state[0] == 2) {
+                field[curnode.state[0] + 1][curnode.state[1]] = 0;
+                document.getElementById(
+                    `C${curnode.state[0] + 1}-${curnode.state[1]}`
+                )!.className = "";
+            }
+            // Moved down
+            else if (curnode.action[0] - curnode.state[0] == -2) {
+                field[curnode.state[0] - 1][curnode.state[1]] = 0;
+                document.getElementById(
+                    `C${curnode.state[0] - 1}-${curnode.state[1]}`
+                )!.className = "";
+            }
+            // Moved left
+            else if (curnode.action[1] - curnode.state[1] == 2) {
+                field[curnode.state[0]][curnode.state[1] + 1] = 0;
+                document.getElementById(
+                    `C${curnode.state[0]}-${curnode.state[1] + 1}`
+                )!.className = "";
+            }
+            // Moved right
+            else if (curnode.action[1] - curnode.state[1] == -2) {
+                field[curnode.state[0]][curnode.state[1] - 1] = 0;
+                document.getElementById(
+                    `C${curnode.state[0]}-${curnode.state[1] - 1}`
+                )!.className = "";
+            }
+        }
+
+        explored.push(curnode.state);
+
+        let actions = neighboursMazeGen(curnode.state);
+
+        await wait(0);
+
+        for (let i = 0; i < actions.length; i++) {
+            if (
+                !arrContains(explored, actions[i]) &&
+                !frontier.containsState(actions[i])
+            ) {
+                let child = new Nodes(actions[i], curnode, curnode.state);
+                frontier.add(child);
+            }
+        }
+    }
+}
+
+function neighboursMazeGen(position: number[]) {
+    let moves: number[][] = [];
+
+    if (position[1] - 2 >= 0) {
+        if (field[position[0]][position[1] - 2] == 0 || field[position[0]][position[1] - 2] == 1) {
+            moves.push([position[0], position[1] - 2]);
+        }
+    }
+    if (position[1] + 2 < width) {
+        if (field[position[0]][position[1] + 2] == 0 || field[position[0]][position[1] + 2] == 1) {
+            moves.push([position[0], position[1] + 2]);
+        }
+    }
+    if (position[0] + 2 < height) {
+        if (field[position[0] + 2][position[1]] == 0 || field[position[0] + 2][position[1]] == 1) {
+            moves.push([position[0] + 2, position[1]]);
+        }
+    }
+    if (position[0] - 2 >= 0) {
+        if (field[position[0] - 2][position[1]] == 0 || field[position[0] - 2][position[1]] == 1) {
+            moves.push([position[0] - 2, position[1]]);
+        }
+    }
+
+    return randomiseArray(moves);
 }
 
 export { manhattanDistance };
