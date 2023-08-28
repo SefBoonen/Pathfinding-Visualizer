@@ -458,10 +458,19 @@ async function genMaze() {
 
     //make grid
     for(let i = 2; i < width - 1; i += 2) {
-        for(let j = 2; j < height - 1; j += 2) {
+        for(let j = 1; j < height - 1; j++) {
             field[j][i] = 3;
             document.getElementById(
                 `C${j}-${i}`
+            )!.className = "wall";
+        }
+    }
+    
+    for(let i = 2; i < height - 1; i += 2) {
+        for(let j = 1; j < width - 1; j++) {
+            field[i][j] = 3;
+            document.getElementById(
+                `C${i}-${j}`
             )!.className = "wall";
         }
     }
@@ -493,6 +502,92 @@ async function genMaze() {
             setButtonsDisabled(false);
             return null;
         }
+
+        // Moved up
+        if (curnode.parent != null) {
+            if (curnode.action[0] - curnode.state[0] == 2) {
+                // field[curnode.state[0] - 1][curnode.state[1]] = 3;
+                if (curnode.state[0] + 1 < height) {
+                    if (curnode.state[1] + 1 < width) {
+                        field[curnode.state[0] + 1][curnode.state[1] + 1] = 3;
+                        document.getElementById(
+                            `C${curnode.state[0] + 1}-${curnode.state[1] + 1}`
+                        )!.className = "wall";
+                    }
+
+                    if (curnode.state[1] - 1 >= 0) {
+                        field[curnode.state[0] + 1][curnode.state[1] - 1] = 3;
+                        document.getElementById(
+                            `C${curnode.state[0] + 1}-${curnode.state[1] - 1}`
+                        )!.className = "wall";
+                    }
+                }
+                // console.log("up")
+            }
+            // Moved down
+            else if (curnode.action[0] - curnode.state[0] == -2) {
+                // field[curnode.state[0] + 1][curnode.state[1]] = 3;
+                if (curnode.state[0] - 1 >= 0) {
+                    if (curnode.state[1] + 1 < width) {
+                        field[curnode.state[0] - 1][curnode.state[1] + 1] = 3;
+                        document.getElementById(
+                            `C${curnode.state[0] - 1}-${curnode.state[1] + 1}`
+                        )!.className = "wall";
+                    }
+
+                    if (curnode.state[1] - 1 >= 0) {
+                        field[curnode.state[0] - 1][curnode.state[1] - 1] = 3;
+                        document.getElementById(
+                            `C${curnode.state[0] - 1}-${curnode.state[1] - 1}`
+                        )!.className = "wall";
+                    }
+                }
+                // console.log("down")
+            }
+            // Moved left
+            else if (curnode.action[1] - curnode.state[1] == 2) {
+                // field[curnode.state[0]][curnode.state[1] + 1] = 3;
+                if (curnode.state[1] + 1 < width) {
+                    if (curnode.state[0] + 1 < height) {
+                        field[curnode.state[0] + 1][curnode.state[1] + 1] = 3;
+                        document.getElementById(
+                            `C${curnode.state[0] + 1}-${curnode.state[1] + 1}`
+                        )!.className = "wall";
+                    }
+                    if (curnode.state[0] - 1 >= 0) {
+                        field[curnode.state[0] - 1][curnode.state[1] + 1] = 3;
+                        document.getElementById(
+                            `C${curnode.state[0] - 1}-${curnode.state[1] + 1}`
+                        )!.className = "wall";
+                    }
+                }
+                // console.log("left")
+            }
+            // Moved right
+            else if (curnode.action[1] - curnode.state[1] == -2) {
+                // console.log("right")
+                // field[curnode.state[0]][curnode.state[1] - 1] = 3;
+                if (curnode.state[1] - 1 >= 0) {
+                    if (curnode.state[0] + 1 < height) {
+                        field[curnode.state[0] + 1][curnode.state[1] - 1] = 3;
+                        document.getElementById(
+                            `C${curnode.state[0] + 1}-${curnode.state[1] - 1}`
+                        )!.className = "wall";
+                    }
+
+                    if (curnode.state[0] - 1 >= 0) {
+                        field[curnode.state[0] - 1][curnode.state[1] - 1] = 3;
+                        document.getElementById(
+                            `C${curnode.state[0] - 1}-${curnode.state[1] - 1}`
+                        )!.className = "wall";
+                    }
+                    // explored.push([curnode.state[0] + 1, curnode.state[1] - 1]);
+                    // explored.push([curnode.state[0] - 1, curnode.state[1] - 1]);
+                }
+                // console.log("right")
+            }
+        }
+        // console.log(field);
 
         // field[curnode.state[0]][curnode.state[1]] = 4;
         // document.getElementById(
