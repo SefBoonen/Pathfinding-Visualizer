@@ -432,7 +432,7 @@ function randomiseArray(array: any[]) {
 }
 
 async function genMaze() {
-    console.log(width);
+    //border top and bottom
     for(let i = 0; i < width; i++) {
         field[0][i] = 3;
         document.getElementById(
@@ -444,6 +444,7 @@ async function genMaze() {
         )!.className = "wall";
     }
 
+    //border left and right
     for(let i = 0; i < height; i++) {
         field[i][0] = 3;
         document.getElementById(
@@ -455,6 +456,7 @@ async function genMaze() {
         )!.className = "wall";
     }
 
+    //make grid
     for(let i = 2; i < width - 1; i += 2) {
         for(let j = 2; j < height - 1; j += 2) {
             field[j][i] = 3;
@@ -464,10 +466,9 @@ async function genMaze() {
         }
     }
 
-
     setButtonsDisabled(true);
+    
     let frontier = new StackFrontier();
-
     frontier.add(new Nodes(start, null, start));
 
     let explored: number[][] = [];
@@ -513,8 +514,8 @@ async function genMaze() {
                 frontier.add(child);
             }
         }
-        console.log(`actions ${actions}`);
-        console.log(JSON.stringify(frontier.frontier));
+        // console.log(`actions ${actions}`);
+        // console.log(JSON.stringify(frontier.frontier));
     }
 }
 
