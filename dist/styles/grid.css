@@ -7,6 +7,11 @@
     to {background-color: #3b9aed;}
 }
 
+@keyframes found {
+    from {background-color: #3b9aed;}
+    to {background-color: #b9d611;}
+}
+
 .explored {
     background-color: #3b9aed;
     border: solid var(--border-size) rgba(38, 39, 49, 0.2);
@@ -21,6 +26,8 @@
 
 .found {
     background-color: #b9d611;
+    animation-name: found;
+    animation-duration: 2s;
 }
 
 .startcell {
