@@ -465,7 +465,6 @@ async function genMaze() {
             )!.className = "wall";
         }
     }
-    
     for(let i = 2; i < height - 1; i += 2) {
         for(let j = 1; j < width - 1; j++) {
             field[i][j] = 3;
@@ -498,11 +497,6 @@ async function genMaze() {
 
         let curnode: any = frontier.remove();
 
-        // if(JSON.stringify(curnode.state) == JSON.stringify(goal)) {
-        //     setButtonsDisabled(false);
-        //     return null;
-        // }
-
         if (curnode.parent != null) {
             // Moved up
             if (curnode.action[0] - curnode.state[0] == 2) {
@@ -510,43 +504,29 @@ async function genMaze() {
                 document.getElementById(
                     `C${curnode.state[0] + 1}-${curnode.state[1]}`
                 )!.className = "";
-                // console.log("up")
             }
             // Moved down
             else if (curnode.action[0] - curnode.state[0] == -2) {
-                // field[curnode.state[0] + 1][curnode.state[1]] = 3;
                 field[curnode.state[0] - 1][curnode.state[1]] = 0;
                 document.getElementById(
                     `C${curnode.state[0] - 1}-${curnode.state[1]}`
                 )!.className = "";
-                // console.log("down")
             }
             // Moved left
             else if (curnode.action[1] - curnode.state[1] == 2) {
-                // field[curnode.state[0]][curnode.state[1] + 1] = 3;
                 field[curnode.state[0]][curnode.state[1] + 1] = 0;
                 document.getElementById(
                     `C${curnode.state[0]}-${curnode.state[1] + 1}`
                 )!.className = "";
-                // console.log("left")
             }
             // Moved right
             else if (curnode.action[1] - curnode.state[1] == -2) {
-                // console.log("right")
-                // field[curnode.state[0]][curnode.state[1] - 1] = 3;
                 field[curnode.state[0]][curnode.state[1] - 1] = 0;
                 document.getElementById(
                     `C${curnode.state[0]}-${curnode.state[1] - 1}`
                 )!.className = "";
-                // console.log("right")
             }
         }
-        // console.log(field);
-
-        // field[curnode.state[0]][curnode.state[1]] = 4;
-        // document.getElementById(
-        //     `C${curnode.state[0]}-${curnode.state[1]}`
-        // )!.className = "explored";
 
         explored.push(curnode.state);
 
@@ -563,8 +543,6 @@ async function genMaze() {
                 frontier.add(child);
             }
         }
-        // console.log(`actions ${actions}`);
-        // console.log(JSON.stringify(frontier.frontier));
     }
 }
 
