@@ -503,87 +503,41 @@ async function genMaze() {
             return null;
         }
 
-        // Moved up
         if (curnode.parent != null) {
+            // Moved up
             if (curnode.action[0] - curnode.state[0] == 2) {
-                // field[curnode.state[0] - 1][curnode.state[1]] = 3;
-                if (curnode.state[0] + 1 < height) {
-                    if (curnode.state[1] + 1 < width) {
-                        field[curnode.state[0] + 1][curnode.state[1] + 1] = 3;
-                        document.getElementById(
-                            `C${curnode.state[0] + 1}-${curnode.state[1] + 1}`
-                        )!.className = "wall";
-                    }
-
-                    if (curnode.state[1] - 1 >= 0) {
-                        field[curnode.state[0] + 1][curnode.state[1] - 1] = 3;
-                        document.getElementById(
-                            `C${curnode.state[0] + 1}-${curnode.state[1] - 1}`
-                        )!.className = "wall";
-                    }
-                }
+                field[curnode.state[0] - 1][curnode.state[1]] = 0;
+                document.getElementById(
+                    `C${curnode.state[0] - 1}-${curnode.state[1]}`
+                )!.className = "";
                 // console.log("up")
             }
             // Moved down
             else if (curnode.action[0] - curnode.state[0] == -2) {
                 // field[curnode.state[0] + 1][curnode.state[1]] = 3;
-                if (curnode.state[0] - 1 >= 0) {
-                    if (curnode.state[1] + 1 < width) {
-                        field[curnode.state[0] - 1][curnode.state[1] + 1] = 3;
-                        document.getElementById(
-                            `C${curnode.state[0] - 1}-${curnode.state[1] + 1}`
-                        )!.className = "wall";
-                    }
-
-                    if (curnode.state[1] - 1 >= 0) {
-                        field[curnode.state[0] - 1][curnode.state[1] - 1] = 3;
-                        document.getElementById(
-                            `C${curnode.state[0] - 1}-${curnode.state[1] - 1}`
-                        )!.className = "wall";
-                    }
-                }
+                field[curnode.state[0] + 1][curnode.state[1]] = 0;
+                document.getElementById(
+                    `C${curnode.state[0] + 1}-${curnode.state[1]}`
+                )!.className = "";
                 // console.log("down")
             }
             // Moved left
             else if (curnode.action[1] - curnode.state[1] == 2) {
                 // field[curnode.state[0]][curnode.state[1] + 1] = 3;
-                if (curnode.state[1] + 1 < width) {
-                    if (curnode.state[0] + 1 < height) {
-                        field[curnode.state[0] + 1][curnode.state[1] + 1] = 3;
-                        document.getElementById(
-                            `C${curnode.state[0] + 1}-${curnode.state[1] + 1}`
-                        )!.className = "wall";
-                    }
-                    if (curnode.state[0] - 1 >= 0) {
-                        field[curnode.state[0] - 1][curnode.state[1] + 1] = 3;
-                        document.getElementById(
-                            `C${curnode.state[0] - 1}-${curnode.state[1] + 1}`
-                        )!.className = "wall";
-                    }
-                }
+                field[curnode.state[0]][curnode.state[1] - 1] = 0;
+                document.getElementById(
+                    `C${curnode.state[0]}-${curnode.state[1] - 1}`
+                )!.className = "";
                 // console.log("left")
             }
             // Moved right
             else if (curnode.action[1] - curnode.state[1] == -2) {
                 // console.log("right")
                 // field[curnode.state[0]][curnode.state[1] - 1] = 3;
-                if (curnode.state[1] - 1 >= 0) {
-                    if (curnode.state[0] + 1 < height) {
-                        field[curnode.state[0] + 1][curnode.state[1] - 1] = 3;
-                        document.getElementById(
-                            `C${curnode.state[0] + 1}-${curnode.state[1] - 1}`
-                        )!.className = "wall";
-                    }
-
-                    if (curnode.state[0] - 1 >= 0) {
-                        field[curnode.state[0] - 1][curnode.state[1] - 1] = 3;
-                        document.getElementById(
-                            `C${curnode.state[0] - 1}-${curnode.state[1] - 1}`
-                        )!.className = "wall";
-                    }
-                    // explored.push([curnode.state[0] + 1, curnode.state[1] - 1]);
-                    // explored.push([curnode.state[0] - 1, curnode.state[1] - 1]);
-                }
+                field[curnode.state[0]][curnode.state[1] + 1] = 0;
+                document.getElementById(
+                    `C${curnode.state[0]}-${curnode.state[1] + 1}`
+                )!.className = "";
                 // console.log("right")
             }
         }
