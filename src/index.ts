@@ -432,41 +432,17 @@ function randomiseArray(array: any[]) {
 }
 
 async function genMaze() {
-    //border top and bottom
-    for(let i = 0; i < width; i++) {
-        field[0][i] = 3;
-        document.getElementById(
-            `C${0}-${i}`
-        )!.className = "wall";
-        field[height - 1][i] = 3;
-        document.getElementById(
-            `C${height - 1}-${i}`
-        )!.className = "wall";
-    }
-
-    //border left and right
-    for(let i = 0; i < height; i++) {
-        field[i][0] = 3;
-        document.getElementById(
-            `C${i}-${0}`
-        )!.className = "wall";
-        field[i][width - 1] = 3;
-        document.getElementById(
-            `C${i}-${width - 1}`
-        )!.className = "wall";
-    }
-
     //make grid
-    for(let i = 2; i < width - 1; i += 2) {
-        for(let j = 1; j < height - 1; j++) {
+    for(let i = 0; i < width; i += 2) {
+        for(let j = 0; j < height; j++) {
             field[j][i] = 3;
             document.getElementById(
                 `C${j}-${i}`
             )!.className = "wall";
         }
     }
-    for(let i = 2; i < height - 1; i += 2) {
-        for(let j = 1; j < width - 1; j++) {
+    for(let i = 0; i < height; i += 2) {
+        for(let j = 0; j < width; j++) {
             field[i][j] = 3;
             document.getElementById(
                 `C${i}-${j}`
