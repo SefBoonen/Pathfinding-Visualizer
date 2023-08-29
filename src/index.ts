@@ -465,10 +465,25 @@ async function genMaze() {
             setButtonsDisabled(false);
             return;
         }
-        if (frontier.empty()) {
-            turnExploredRed();
-            setButtonsDisabled(false);
-            return null;
+        while (frontier.empty()) {
+            if(explored.length) {
+                let coords = <number[]>explored.shift();
+                let moves = neighboursMazeGen(coords);
+                for (let i = 0; i < moves.length; i++) {
+                    if (
+                        !arrContains(explored, moves[i]) &&
+                        !frontier.containsState(moves[i])
+                    ) {
+                        let child = new Nodes(moves[i], null, coords);
+                        frontier.add(child);
+                        break;
+                    }
+                }
+            } else {
+                turnExploredRed();
+                setButtonsDisabled(false);
+                return null;
+            }
         }
 
         let curnode: any = frontier.remove();
@@ -517,6 +532,7 @@ async function genMaze() {
             ) {
                 let child = new Nodes(actions[i], curnode, curnode.state);
                 frontier.add(child);
+                break;
             }
         }
     }
