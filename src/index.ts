@@ -293,7 +293,6 @@ async function solve() {
 
     frontier.add(new Nodes(start, null, null));
 
-    let list = [];
     let explored: number[][] = [];
 
     while (true) {
@@ -315,7 +314,6 @@ async function solve() {
         if (JSON.stringify(curnode.state) == JSON.stringify(goal)) {
             setButtonsDisabled(false);
             while (curnode.parent != null) {
-                list.push(curnode.state);
                 document
                     .getElementById(`C${curnode.state[0]}-${curnode.state[1]}`)!
                     .classList.add("found");
