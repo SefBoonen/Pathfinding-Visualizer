@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (i == goal[0] && j == goal[1]) {
                 field[i].push(1);
             } else if (i == start[0] && j == start[1]) {
-                field[i].push(0);
+                field[i].push(2);
             } else {
                 field[i].push(0);
             }
@@ -313,11 +313,10 @@ async function solve() {
 
         if (JSON.stringify(curnode.state) == JSON.stringify(goal)) {
             setButtonsDisabled(false);
-            while (curnode.parent != null) {
+            for (curnode = curnode.parent; curnode.parent != null; curnode = curnode.parent) {
                 document
                     .getElementById(`C${curnode.state[0]}-${curnode.state[1]}`)!
                     .classList.add("found");
-                curnode = curnode.parent;
             }
             return null;
         }
