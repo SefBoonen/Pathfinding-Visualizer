@@ -465,6 +465,7 @@ async function genMaze() {
         }
 
         if (frontier.empty()) {
+            
             for (let i = 0; i < explored.length; i++) {
                 let moves = neighboursMazeGen(explored[i]);
 
