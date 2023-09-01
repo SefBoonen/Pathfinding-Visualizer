@@ -7,9 +7,29 @@
     border: solid var(--border-size) rgba(38, 39, 49, 0.2);
 }
 
+@keyframes explore {
+    from {
+        background-color: rgb(32, 33, 36);
+    }
+    to {
+        background-color: #3b9aed;
+    }
+}
+
+@keyframes found {
+    from {
+        background-color: #3b9aed;
+    }
+    to {
+        background-color: #b9d611;
+    }
+}
+
 .explored {
     background-color: #3b9aed;
     border: solid var(--border-size) rgba(38, 39, 49, 0.2);
+    animation-name: explore;
+    animation-duration: 2s;
 }
 
 .notfound {
@@ -19,6 +39,8 @@
 
 .found {
     background-color: #b9d611;
+    animation-name: found;
+    animation-duration: 2s;
 }
 
 .startcell {
@@ -32,7 +54,7 @@
 }
 
 .wall {
-    background-color: #ffffff;
+    background: white;
     border: solid 1px rgba(38, 39, 49, 0);
 }
 

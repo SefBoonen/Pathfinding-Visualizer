@@ -23,8 +23,10 @@ if (!bSetStart) throw new Error("Set start button not found");
 if (!bAddWalls) throw new Error("Add walls button not found");
 if (!bReset) throw new Error("Reset button not found");
 
-const height: number = (Math.ceil((Math.floor(window.innerHeight) / 25) / 2.0) * 2) + 1;
-const width: number = (Math.ceil((Math.floor(window.innerWidth / 25)) / 2.0) * 2) + 1;
+const height: number =
+    Math.ceil(Math.floor(window.innerHeight) / 25 / 2.0) * 2 + 1;
+const width: number =
+    Math.ceil(Math.floor(window.innerWidth / 25) / 2.0) * 2 + 1;
 // 0 = blank space, 1 = goal, 2 = start, 3 = wall, 4 = explored
 let field: number[][] = [];
 
@@ -207,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (i == goal[0] && j == goal[1]) {
                 field[i].push(1);
             } else if (i == start[0] && j == start[1]) {
-                field[i].push(0);
+                field[i].push(2);
             } else {
                 field[i].push(0);
             }
@@ -293,7 +295,6 @@ async function solve() {
 
     frontier.add(new Nodes(start, null, null));
 
-    let list = [];
     let explored: number[][] = [];
 
     while (true) {
@@ -314,12 +315,10 @@ async function solve() {
 
         if (JSON.stringify(curnode.state) == JSON.stringify(goal)) {
             setButtonsDisabled(false);
-            while (curnode.parent != null) {
-                list.push(curnode.state);
+            for (curnode = curnode.parent; curnode.parent != null; curnode = curnode.parent) {
                 document
                     .getElementById(`C${curnode.state[0]}-${curnode.state[1]}`)!
                     .classList.add("found");
-                curnode = curnode.parent;
             }
             return null;
         }
@@ -435,54 +434,27 @@ function randomiseArray(array: any[]) {
 }
 
 async function genMaze() {
-    //border top and bottom
-    for(let i = 0; i < width; i++) {
-        field[0][i] = 3;
-        document.getElementById(
-            `C${0}-${i}`
-        )!.className = "wall";
-        field[height - 1][i] = 3;
-        document.getElementById(
-            `C${height - 1}-${i}`
-        )!.className = "wall";
-    }
-
-    //border left and right
-    for(let i = 0; i < height; i++) {
-        field[i][0] = 3;
-        document.getElementById(
-            `C${i}-${0}`
-        )!.className = "wall";
-        field[i][width - 1] = 3;
-        document.getElementById(
-            `C${i}-${width - 1}`
-        )!.className = "wall";
-    }
-
     //make grid
-    for(let i = 2; i < width - 1; i += 2) {
-        for(let j = 1; j < height - 1; j++) {
+    for (let i = 0; i < width; i += 2) {
+        for (let j = 0; j < height; j++) {
             field[j][i] = 3;
-            document.getElementById(
-                `C${j}-${i}`
-            )!.className = "wall";
+            document.getElementById(`C${j}-${i}`)!.className = "wall";
         }
     }
-    for(let i = 2; i < height - 1; i += 2) {
-        for(let j = 1; j < width - 1; j++) {
+    for (let i = 0; i < height; i += 2) {
+        for (let j = 0; j < width; j++) {
             field[i][j] = 3;
-            document.getElementById(
-                `C${i}-${j}`
-            )!.className = "wall";
+            document.getElementById(`C${i}-${j}`)!.className = "wall";
         }
     }
 
     setButtonsDisabled(true);
-    
+
     let frontier = new StackFrontier();
     frontier.add(new Nodes(start, null, start));
 
     let explored: number[][] = [];
+    let analysed: Nodes[] = [];
 
     while (true) {
         if (stopBool) {
@@ -492,10 +464,30 @@ async function genMaze() {
             setButtonsDisabled(false);
             return;
         }
+
         if (frontier.empty()) {
-            turnExploredRed();
-            setButtonsDisabled(false);
-            return null;
+            
+            loop: for (let i = 0; i < analysed.length; i++) {
+                let moves = neighboursMazeGen(analysed[i].state);
+
+                if (moves.length) {
+                    for(let j = 0; j < moves.length; j++) {
+                        if(!arrContains(explored, moves[j])) {
+                            let child = new Nodes(moves[j], analysed[i], analysed[i].state);
+                            frontier.add(child);
+                            break loop;
+                        }
+                    }
+                } else {
+                    analysed.splice(i, 1);
+                }
+            }
+
+            if (frontier.empty()) {
+                turnExploredRed();
+                setButtonsDisabled(false);
+                return null;
+            }
         }
 
         let curnode: any = frontier.remove();
@@ -532,6 +524,7 @@ async function genMaze() {
         }
 
         explored.push(curnode.state);
+        analysed.push(curnode);
 
         let actions = neighboursMazeGen(curnode.state);
 
@@ -544,6 +537,7 @@ async function genMaze() {
             ) {
                 let child = new Nodes(actions[i], curnode, curnode.state);
                 frontier.add(child);
+                break;
             }
         }
     }
@@ -553,22 +547,34 @@ function neighboursMazeGen(position: number[]) {
     let moves: number[][] = [];
 
     if (position[1] - 2 >= 0) {
-        if (field[position[0]][position[1] - 2] == 0 || field[position[0]][position[1] - 2] == 1) {
+        if (
+            field[position[0]][position[1] - 2] == 0 ||
+            field[position[0]][position[1] - 2] == 1
+        ) {
             moves.push([position[0], position[1] - 2]);
         }
     }
     if (position[1] + 2 < width) {
-        if (field[position[0]][position[1] + 2] == 0 || field[position[0]][position[1] + 2] == 1) {
+        if (
+            field[position[0]][position[1] + 2] == 0 ||
+            field[position[0]][position[1] + 2] == 1
+        ) {
             moves.push([position[0], position[1] + 2]);
         }
     }
     if (position[0] + 2 < height) {
-        if (field[position[0] + 2][position[1]] == 0 || field[position[0] + 2][position[1]] == 1) {
+        if (
+            field[position[0] + 2][position[1]] == 0 ||
+            field[position[0] + 2][position[1]] == 1
+        ) {
             moves.push([position[0] + 2, position[1]]);
         }
     }
     if (position[0] - 2 >= 0) {
-        if (field[position[0] - 2][position[1]] == 0 || field[position[0] - 2][position[1]] == 1) {
+        if (
+            field[position[0] - 2][position[1]] == 0 ||
+            field[position[0] - 2][position[1]] == 1
+        ) {
             moves.push([position[0] - 2, position[1]]);
         }
     }
