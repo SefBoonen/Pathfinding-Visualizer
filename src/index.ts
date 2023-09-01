@@ -368,10 +368,14 @@ function setButtonsDisabled(bool: boolean) {
     (<HTMLButtonElement>bSetStart).disabled = bool;
     (<HTMLButtonElement>bSetGoal).disabled = bool;
     (<HTMLButtonElement>menuPathfinding).disabled = bool;
+    (<HTMLButtonElement>bGenMaze).disabled = bool;
+    (<HTMLButtonElement>bRandomFill).disabled = bool;
     setGoal = false;
     setStart = false;
     bSetGoal!.className = "";
     bSetStart!.className = "";
+    bGenMaze!.className = "";
+    bRandomFill!.className = "";
 }
 
 // function clearExplored() {
