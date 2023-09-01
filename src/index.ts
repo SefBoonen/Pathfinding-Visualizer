@@ -314,6 +314,10 @@ async function solve() {
 
         let curnode: any = frontier.remove();
 
+        document
+        .getElementById(`C${curnode.state[0]}-${curnode.state[1]}`)!
+        .className = ;
+
         if (JSON.stringify(curnode.state) == JSON.stringify(goal)) {
             setButtonsDisabled(false);
             for (curnode = curnode.parent; curnode.parent != null; curnode = curnode.parent) {

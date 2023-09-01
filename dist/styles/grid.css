@@ -7,6 +7,11 @@
     border: solid var(--border-size) rgba(49, 48, 38, 0.2);
 }
 
+.current {
+    background-color: #48ff00;
+    border: solid var(--border-size) rgba(49, 48, 38, 0.2);
+}
+
 @keyframes found {
     from {
         background-color: #3b9aed;
