@@ -454,6 +454,7 @@ async function genMaze() {
     frontier.add(new Nodes(start, null, start));
 
     let explored: number[][] = [];
+    let analysed: Nodes[] = [];
 
     while (true) {
         if (stopBool) {
@@ -466,15 +467,19 @@ async function genMaze() {
 
         if (frontier.empty()) {
             
-            for (let i = 0; i < explored.length; i++) {
-                let moves = neighboursMazeGen(explored[i]);
+            loop: for (let i = 0; i < analysed.length; i++) {
+                let moves = neighboursMazeGen(analysed[i].state);
 
                 if (moves.length) {
-                    let child = new Nodes(moves[i], null, explored[i]);
-                    frontier.add(child);
-                    break;
+                    for(let j = 0; j < moves.length; j++) {
+                        if(!arrContains(explored, moves[j])) {
+                            let child = new Nodes(moves[j], analysed[i], analysed[i].state);
+                            frontier.add(child);
+                            break loop;
+                        }
+                    }
                 } else {
-                    explored.splice(i, 1);
+                    analysed.splice(i, 1);
                 }
 
                 // let coords = <number[]>explored.shift();
@@ -532,6 +537,7 @@ async function genMaze() {
         }
 
         explored.push(curnode.state);
+        analysed.push(curnode);
 
         let actions = neighboursMazeGen(curnode.state);
 
