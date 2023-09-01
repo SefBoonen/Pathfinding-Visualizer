@@ -481,19 +481,6 @@ async function genMaze() {
                 } else {
                     analysed.splice(i, 1);
                 }
-
-                // let coords = <number[]>explored.shift();
-                // let moves = neighboursMazeGen(coords);
-                // for (let i = 0; i < moves.length; i++) {
-                //     if (
-                //         !arrContains(explored, moves[i]) &&
-                //         !frontier.containsState(moves[i])
-                //     ) {
-                //         let child = new Nodes(moves[i], null, coords);
-                //         frontier.add(child);
-                //         break;
-                //     }
-                // }
             }
 
             if (frontier.empty()) {
