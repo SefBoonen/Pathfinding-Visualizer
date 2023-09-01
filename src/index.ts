@@ -586,6 +586,8 @@ function resetBoard() {
     for (let i = 0; i < height; i++) {
         field.push([]);
         for (let j = 0; j < width; j++) {
+            document.getElementById(`C${i}-${j}`)!.className =
+            "";
             if (i == goal[0] && j == goal[1]) {
                 field[i].push(1);
             } else if (i == start[0] && j == start[1]) {
