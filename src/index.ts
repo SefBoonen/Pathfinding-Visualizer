@@ -136,9 +136,7 @@ bGenMaze.addEventListener("click", () => {});
 
 bReset.addEventListener("click", () => {
     stopBool = true;
-    clearExplored();
-    addFS();
-    clearNotFound();
+    resetBoard();
 });
 
 bSetStart.addEventListener("click", () => {
@@ -299,8 +297,7 @@ async function solve() {
 
     while (true) {
         if (stopBool) {
-            clearExplored();
-            addFS();
+            resetBoard();
             stopBool = false;
             setButtonsDisabled(false);
             return;
@@ -377,28 +374,28 @@ function setButtonsDisabled(bool: boolean) {
     bSetStart!.className = "";
 }
 
-function clearExplored() {
-    let explored = document.querySelectorAll(".explored");
+// function clearExplored() {
+//     let explored = document.querySelectorAll(".explored");
 
-    for (let i = 0; i < explored.length; i++) {
-        explored[i].classList.remove("explored");
-    }
-    for (let i = 0; i < field.length; i++) {
-        for (let j = 0; j < field[i].length; j++) {
-            if (field[i][j] == 4) {
-                field[i][j] = 0;
-            }
-        }
-    }
-}
+//     for (let i = 0; i < explored.length; i++) {
+//         explored[i].classList.remove("explored");
+//     }
+//     for (let i = 0; i < field.length; i++) {
+//         for (let j = 0; j < field[i].length; j++) {
+//             if (field[i][j] == 4) {
+//                 field[i][j] = 0;
+//             }
+//         }
+//     }
+// }
 
-function addFS() {
-    field[start[0]][start[1]] = 2;
-    field[goal[0]][goal[1]] = 1;
-    document.getElementById(`C${start[0]}-${start[1]}`)!.className =
-        "startcell";
-    document.getElementById(`C${goal[0]}-${goal[1]}`)!.className = "finishcell";
-}
+// function addFS() {
+//     field[start[0]][start[1]] = 2;
+//     field[goal[0]][goal[1]] = 1;
+//     document.getElementById(`C${start[0]}-${start[1]}`)!.className =
+//         "startcell";
+//     document.getElementById(`C${goal[0]}-${goal[1]}`)!.className = "finishcell";
+// }
 
 function manhattanDistance(point1: number[], point2: number[]): number {
     return Math.abs(point1[0] - point2[0]) + Math.abs(point1[1] - point2[1]);
@@ -412,13 +409,13 @@ function turnExploredRed() {
     }
 }
 
-function clearNotFound() {
-    let notfound = document.querySelectorAll(".notfound");
+// function clearNotFound() {
+//     let notfound = document.querySelectorAll(".notfound");
 
-    for (let i = 0; i < notfound.length; i++) {
-        notfound[i].classList.remove("notfound");
-    }
-}
+//     for (let i = 0; i < notfound.length; i++) {
+//         notfound[i].classList.remove("notfound");
+//     }
+// }
 
 function randomiseArray(array: any[]) {
     let currentIndex = array.length,
@@ -460,8 +457,7 @@ async function genMaze() {
 
     while (true) {
         if (stopBool) {
-            clearExplored();
-            addFS();
+            resetBoard();
             stopBool = false;
             setButtonsDisabled(false);
             return;
@@ -582,6 +578,27 @@ function neighboursMazeGen(position: number[]) {
     }
 
     return randomiseArray(moves);
+}
+
+function resetBoard() {
+    field = [];
+
+    for (let i = 0; i < height; i++) {
+        field.push([]);
+        for (let j = 0; j < width; j++) {
+            if (i == goal[0] && j == goal[1]) {
+                field[i].push(1);
+            } else if (i == start[0] && j == start[1]) {
+                field[i].push(2);
+            } else {
+                field[i].push(0);
+            }
+        }
+    }
+
+    document.getElementById(`C${start[0]}-${start[1]}`)!.className =
+        "startcell";
+    document.getElementById(`C${goal[0]}-${goal[1]}`)!.className = "finishcell";
 }
 
 export { manhattanDistance };
