@@ -29,7 +29,7 @@
     background-color: #3b9aed;
     border: solid var(--border-size) rgba(38, 39, 49, 0.2);
     animation-name: explore;
-    animation-duration: 2s;
+    animation-duration: 1s;
 }
 
 .notfound {
