@@ -341,9 +341,11 @@ async function solve() {
                 !arrContains(explored, actions[i]) &&
                 !frontier.containsState(actions[i])
             ) {
-                document.getElementById(
-                    `C${actions[i][0]}-${actions[i][1]}`
-                )!.className = "considered";
+                if(field[actions[i][0]][actions[i][1]] == 0) {
+                    document.getElementById(
+                        `C${actions[i][0]}-${actions[i][1]}`
+                    )!.className = "considered";
+                }
                 let child = new Nodes(actions[i], curnode, curnode.state);
                 frontier.add(child);
             }
