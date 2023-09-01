@@ -121,12 +121,16 @@ container.addEventListener("click", (e) => {
 
     if (setGoal && field[clickPos[0]][clickPos[1]] == 0) {
         document.getElementById(`C${goal[0]}-${goal[1]}`)!.className = "";
+        field[goal[0]][goal[1]] = 0;
         goal = clickPos;
+        field[goal[0]][goal[1]] = 1;
         document.getElementById(`C${goal[0]}-${goal[1]}`)!.className =
             "finishcell";
     } else if (setStart && field[clickPos[0]][clickPos[1]] == 0) {
         document.getElementById(`C${start[0]}-${start[1]}`)!.className = "";
+        field[start[0]][start[1]] = 0;
         start = clickPos;
+        field[start[0]][start[1]] = 2;
         document.getElementById(`C${start[0]}-${start[1]}`)!.className =
             "startcell";
     }
