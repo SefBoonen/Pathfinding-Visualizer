@@ -284,6 +284,7 @@ function neighbours(position: number[]) {
 
 async function solve() {
     setButtonsDisabled(true);
+
     let frontier = new QueueFrontier();
     if ((<HTMLInputElement>menuPathfinding).value == "bfs") {
         frontier = new QueueFrontier();
@@ -314,13 +315,21 @@ async function solve() {
 
         let curnode: any = frontier.remove();
 
-        document
-        .getElementById(`C${curnode.state[0]}-${curnode.state[1]}`)!
-        .className = ;
+        if (field[curnode.state[0]][curnode.state[1]] == 0) {
+            document.getElementById(
+                `C${curnode.state[0]}-${curnode.state[1]}`
+            )!.className = "current";
+        }
+
+        await wait(0);
 
         if (JSON.stringify(curnode.state) == JSON.stringify(goal)) {
             setButtonsDisabled(false);
-            for (curnode = curnode.parent; curnode.parent != null; curnode = curnode.parent) {
+            for (
+                curnode = curnode.parent;
+                curnode.parent != null;
+                curnode = curnode.parent
+            ) {
                 document
                     .getElementById(`C${curnode.state[0]}-${curnode.state[1]}`)!
                     .classList.add("found");
@@ -339,14 +348,12 @@ async function solve() {
 
         let actions = neighbours(curnode.state);
 
-        await wait(0);
-
         for (let i = 0; i < actions.length; i++) {
             if (
                 !arrContains(explored, actions[i]) &&
                 !frontier.containsState(actions[i])
             ) {
-                if(field[actions[i][0]][actions[i][1]] == 0) {
+                if (field[actions[i][0]][actions[i][1]] == 0) {
                     document.getElementById(
                         `C${actions[i][0]}-${actions[i][1]}`
                     )!.className = "considered";
@@ -446,14 +453,17 @@ async function genMaze() {
         }
 
         if (frontier.empty()) {
-            
             loop: for (let i = 0; i < analysed.length; i++) {
                 let moves = neighboursMazeGen(analysed[i].state);
 
                 if (moves.length) {
-                    for(let j = 0; j < moves.length; j++) {
-                        if(!arrContains(explored, moves[j])) {
-                            let child = new Nodes(moves[j], analysed[i], analysed[i].state);
+                    for (let j = 0; j < moves.length; j++) {
+                        if (!arrContains(explored, moves[j])) {
+                            let child = new Nodes(
+                                moves[j],
+                                analysed[i],
+                                analysed[i].state
+                            );
                             frontier.add(child);
                             break loop;
                         }
@@ -568,8 +578,7 @@ function resetBoard() {
     for (let i = 0; i < height; i++) {
         field.push([]);
         for (let j = 0; j < width; j++) {
-            document.getElementById(`C${i}-${j}`)!.className =
-            "";
+            document.getElementById(`C${i}-${j}`)!.className = "";
             if (i == goal[0] && j == goal[1]) {
                 field[i].push(1);
             } else if (i == start[0] && j == start[1]) {
