@@ -5,9 +5,10 @@
 @keyframes explore {
     from {
         background-color: rgb(32, 33, 36);
+        transform: scale(1);
     }
     to {
-        background-color: #3b9aed;
+        transform: scale(0);
     }
 }
 
