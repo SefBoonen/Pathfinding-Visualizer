@@ -2,13 +2,14 @@
     --border-size: 1px;
 }
 
-@keyframes explore {
-    from {
-        background-color: rgb(32, 33, 36);
-    }
-    to {
-        background-color: #3b9aed;
-    }
+.considered {
+    background-color: #22435f;
+    border: solid var(--border-size) rgba(49, 48, 38, 0.2);
+}
+
+.current {
+    background-color: #48ff00;
+    border: solid var(--border-size) rgba(49, 48, 38, 0.2);
 }
 
 @keyframes found {
@@ -23,8 +24,6 @@
 .explored {
     background-color: #3b9aed;
     border: solid var(--border-size) rgba(38, 39, 49, 0.2);
-    animation-name: explore;
-    animation-duration: 2s;
 }
 
 .notfound {

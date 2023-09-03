@@ -7,7 +7,7 @@ body {
     margin: 0;
     height: 100%;
     display: flex;
-    background-color: #3b9aed;
+    background-color: rgb(32, 33, 36);
 }
 
 .selectionbar {
