@@ -226,15 +226,15 @@ bRandomFill.addEventListener("click", () => {
     let candidates = [];
     let fillPerc = 0.1;
 
-    for(let i = 0; i < field.length; i++) {
-        for(let j = 0; j < field[i].length; j++) {
-            if(field[i][j] == 0) {
+    for (let i = 0; i < field.length; i++) {
+        for (let j = 0; j < field[i].length; j++) {
+            if (field[i][j] == 0) {
                 candidates.push([i, j]);
             }
         }
     }
 
-    for(let i = 0; i < Math.floor((height * width) * fillPerc); i++) {
+    for (let i = 0; i < Math.floor(height * width * fillPerc); i++) {
         let random = Math.floor(Math.random() * (candidates.length + 1));
         field[candidates[random][0]][candidates[random][1]] = 3;
         document.getElementById(
