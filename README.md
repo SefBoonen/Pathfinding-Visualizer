@@ -12,3 +12,5 @@ Live demo: https://sefboonen.github.io/Pathfinding-Visualizer/
 
 
 
+
+# Build steps
