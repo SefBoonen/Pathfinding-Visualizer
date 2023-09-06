@@ -8,5 +8,9 @@ Live demo: https://sefboonen.github.io/Pathfinding-Visualizer/
 -   Breadth-first search
 -   Greedy best first search
 -   A* search algorithm
+-   Maze generations with random DFS
+
+
+
 
 # Build steps
