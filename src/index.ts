@@ -421,6 +421,8 @@ function randomiseArray(array: any[]) {
 }
 
 async function genMaze() {
+    goal = [height - 2, width - 2];
+    start = [1, 1];
     resetBoard();
     //make grid
     for (let i = 0; i < width; i += 2) {
