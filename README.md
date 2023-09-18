@@ -2,7 +2,7 @@ Live demo: https://sefboonen.github.io/Pathfinding-Visualizer/
 
 # Pathfinding-Visualizer
 
-
+Pathfinding visualizer is a pathfinding visualizer made with typescript.
 
 # Current algorithms
 
@@ -13,3 +13,9 @@ Live demo: https://sefboonen.github.io/Pathfinding-Visualizer/
 -   Maze generations with random DFS
 
 # Build steps
+
+First of all install all the dependencies using
+```npm install```
+
+After that to build the project use webpack with the command
+```npx webpack```
