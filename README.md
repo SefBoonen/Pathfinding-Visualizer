@@ -2,7 +2,7 @@ Live demo: https://sefboonen.github.io/Pathfinding-Visualizer/
 
 # Pathfinding-Visualizer
 
-Pathfinding visualizer is a pathfinding visualizer made with typescript.
+Pathfinding visualizer is a visualization tool for various pathfinding algorithms made with typescript.
 
 # Current algorithms
 
