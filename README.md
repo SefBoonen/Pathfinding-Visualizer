@@ -15,7 +15,9 @@ Pathfinding visualizer is a pathfinding visualizer made with typescript.
 # Build steps
 
 First of all install all the dependencies using
+
 ```npm install```
 
 After that to build the project use webpack with the command
+
 ```npx webpack```
